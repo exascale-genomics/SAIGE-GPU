@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Installation
+title: Install
 ---
 
 We will show how to get SAIGE-GPU running on the cloud (GCP).
