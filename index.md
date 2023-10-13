@@ -1,5 +1,6 @@
 ---
-layout: home 
+layout: home
+title: Home
 ---
 
 # SAIGE-GPU
