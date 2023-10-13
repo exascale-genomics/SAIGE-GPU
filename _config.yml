@@ -7,3 +7,6 @@ description: "SAIGE-GPU for fast full-GRM GWAS."
 
 # Build settings
 remote_theme: jekyll/minima
+
+include:
+  - _documentation
