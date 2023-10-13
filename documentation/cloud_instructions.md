@@ -1,5 +1,5 @@
 ---
-layout: pages
+layout: page
 title: Install on Cloud
 ---
 
