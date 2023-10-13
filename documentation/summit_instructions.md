@@ -1,6 +1,6 @@
 ---
 layout: pages
-title: Install
+title: Install on HPC
 ---
 
 We will be installing SAIGE-GPU from the GitHub repository.
