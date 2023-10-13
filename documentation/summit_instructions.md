@@ -7,7 +7,7 @@ We will be installing SAIGE-GPU from the GitHub repository.
 
 ## Installation on OLCF ORNL Summit
 
-The (OLCF ORNL Summit HPC)[https://docs.olcf.ornl.gov/systems/summit_user_guide.html] was used to develope the SAIGE-GPU software.
+The OLCF ORNL [Summit]([https://link-url-here.org](https://docs.olcf.ornl.gov/systems/summit_user_guide.html) HPC was used to develop the SAIGE-GPU software.
 
 ```
 module load cuda/11.0.2
