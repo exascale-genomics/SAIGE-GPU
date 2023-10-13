@@ -1,7 +1,7 @@
 # Site settings
 title: SAIGE-GPU
-author: Alex Rodriguez, Tarak Nandi
-  name: Alex Rodriguez
+author:
+  name: Alex Rodriguez, Tarak Nandi
   email: a.rodriguez@anl.gov
 description: "SAIGE-GPU for fast full-GRM GWAS."
 
