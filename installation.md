@@ -2,148 +2,108 @@
 
 ## Dependencies
 
-The quickest way to get started on a new docsify site is by using the template provided below.
+The dependencies listed below are modules used to install SAIGE from source code in the [ORNL OLCF Summit HPC](https://docs.olcf.ornl.gov/systems/summit_user_guide.html).
 
-1. Create an `index.html` file that contains the following HTML markup. This markup contains everything needed for [docsify](https://docsify.js.org/), docsify-themeable, recommended [plugins](https://docsify.js.org/#/plugins), auto light/dark themes, and placeholders for your docsify configuration and custom theme styles.
+```
+module load cuda/11.0.2
+module load python/2.7.15-anaconda2-5.3.0
+module load r/4.0.5
+module load cmake
+module load openblas
+module load spectrum-mpi/10.4.0.3-20210112
+module load libxml2
+module load gcc/11.1.0
+```
 
-   ?> CDN availability includes [jsdelivr](https://www.jsdelivr.com/package/npm/docsify-themeable) (shown below), [unpkg](https://unpkg.com/browse/docsify-themeable/), and other CDN services that auto-publish npm packages.
+There are several R libraries needed to be installed:
 
-   ```html
-   <!DOCTYPE html>
-   <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
-      <meta name="description" content="">
-      <title></title>
+```
+R
+>install.packages(c())
 
-      <!-- Themes (light + dark) -->
-      <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
-      <link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+```
 
-      <!-- Custom Styles -->
-      <style>
-        :root {
-          /* --theme-hue: 325; */
-        }
-      </style>
-   </head>
-   <body>
-      <div id="app"></div>
+## Install and quick test on HPC from Source Code
 
-      <script>
-        // Docsify Configuration
-        window.$docsify = {
-          // ..
-        };
-      </script>
+```export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
+R_LIB=/path/to/your/R_lib
+R CMD INSTALL SAIGE --library=$R_LIB
+```
 
-      <!-- Required -->
-      <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+We used a synthetic genotype dataset representing the AFR population based from the 1000 Genome project.
+The synthetic data used had 150,000 individuals. The genotype file has 100,000 variants present.
+This data was built following the instructions [here](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/COXHAP).
 
-      <!-- Recommended -->
-      <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-   </body>
-   </html>
-   ```
+The data was downloaded and pruned to be able to build the BED and BGEN files needed to run SAIGE-GPU.
 
-   !> Note the `@` version number lock in the URLs above. This prevents breaking changes in future releases from affecting your project and is therefore the safest method of loading dependencies from a CDN. When a new major version is released, you will need to manually update your CDN URLs by changing the version number after the @ symbol.
+We used 6 GPUs to distribute the full GRM evenly. Step 1 completed within 8 minutes.
+Similarly, we submitted the same dataset through the CPU version of SAIGE and the job completed in 47 minutes.
 
-1. Fill in the empty tags in the HTML template
-   - For non-English sites update the [`<html lang="en">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) tag with the appropriate two-letter [language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-   - Add a description to the `<meta name="description">` tag
-   - Add a title to the `<title>` tag
-   - Add [custom styles](customization) to the `<style>` tag
-   - Configure [docsify options](https://docsify.js.org/#/configuration) using the `window.$docsify` object
-1. Create a new `README.md` markdown file in the same directory as your `index.html` file. This new file will serve as your [homepage](https://docsify.js.org/#/configuration?id=homepage).
+The following file was used to submit to the HPC:
 
-## Install on HPC from Source Code
+```
+#!/bin/bash
+#BSUB -nnodes 1
+#BSUB -W 4:00
+#BSUB -q batch-hm
+#BSUB -P MED112
+#BSUB -o s1.synt_data.gpu.haoyu.cate_var.stdout
+#BSUB -e s1.synt_data.gpu.haoyu.cate_var.stderr
+#BSUB -J s1.synt_data
+#BSUB -alloc_flags nvme
 
-Existing site owners may prefer to modify their existing `index.html` file using the following steps:
+module load python/2.7.15-anaconda2-5.3.0
+module load r/4.0.5
+module load gcc/9.1.0
+module load cmake
+module load openblas
+module load cuda/11.0.2
+module load spectrum-mpi/10.4.0.3-20210112
 
-!> Note the `@` version number lock in the URLs below. This prevents breaking changes in future releases from affecting your project and is therefore the safest method of loading dependencies from a CDN. When a new major version is released, you will need to manually update your CDN URLs by changing the version number after the @ symbol.
+path_to_saige="/gpfs/alpine/proj-shared/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/"
+TMPDIR="/path/to/output"
 
-1. Replace the docsify theme with a docsify-themeable theme from the [Themes](themes) section:
+jsrun -n6 -a1 -c1 -g1 Rscript $path_to_saige/step1_fitNULLGLMM.R \
+   --plinkFile=$path_to_saige/100k_arrays \
+   --phenoFile=$path_to_saige/phenotypes.tsv \
+   --invNormalize=FALSE \
+   --phenoCol=case \
+   --covarColList=sex_at_birth_Male,age,PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10 \
+   --qCovarColList=sex_at_birth_Male \
+   --sampleIDColinphenoFile=IID \
+   --traitType=binary \
+   --outputPrefix=$TMPDIR/GPU_step1_output \
+   --minMAFforGRM 0.01 \
+   --LOCO FALSE \
+   --IsOverwriteVarianceRatioFile=TRUE \
+   --nThreads=1; gsutil -m cp $TMPDIR/GPU_step1_output* $OUT_DIR
+```
 
-   ```html
-   <!-- Theme: Simple -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
-   ```
+## Run on HPC Systems Using Singularity Container
 
-   For automatic light/dark mode support based on the user's operating system preference, specify a light and dark theme with appropriate `media` attribute:
+It is not necessary to build SAIGE-GPU from source code. Instead you can pull the latest Docker container and run a small example from the SAIGE package itself:
 
-   ```html
-   <!-- Theme: Simple (light + dark) -->
-   <link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
-   <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
-   ```
+```
+singularity build saige-doe.sif docker://tnnandi/saige-doe:2
 
-1. Add the docsify-themeable plugin after docsify.js:
+singularity exec --bind /SAIGE_container/SAIGE-DOE/extdata saige_1.1.9.sif /SAIGE_container/SAIGE-DOE/extdata/step1_fitNULLGLMM.R \
+   --plinkFile=$ARRAYS_DIR/100k_arrays \
+   --phenoFile=$INPUT_DIR/phenotypes.tsv \
+   --invNormalize=FALSE \
+   --phenoCol=case \
+   --covarColList=sex_at_birth_Male,age,PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10 \
+   --qCovarColList=sex_at_birth_Male \
+   --sampleIDColinphenoFile=IID \
+   --traitType=binary \
+   --outputPrefix=$TMPDIR/GPU_step1_output \
+   --minMAFforGRM 0.01 \
+   --LOCO FALSE \
+   --IsOverwriteVarianceRatioFile=TRUE \
+   --nThreads=1; gsutil -m cp $TMPDIR/GPU_step1_output* $OUT_DIR/
+```
 
-   ```html
-   <!-- docsify -->
-   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
-   <!-- docsify-themeable -->
-   <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
-   ```
-
-1. Review the [Customization](customization) section and set theme properties as needed. For example:
-
-   ```html
-   <style>
-     :root {
-       --theme-hue: 325;
-     }
-   </style>
-   ```
-
-1. Review the docsify-themeable [options](options) section and configure as needed. For example:
-
-   ```html
-   <script>
-     window.$docsify = {
-         // ...
-         themeable: {
-             readyTransition : true, // default
-             responsiveTables: true  // default
-         }
-     }
-   </script>
-   ```
 
 ## Install on Google Cloud Platform
 
-Previewing your site locally requires serving your files from a web server.
-
-The docsify [Quick Start](//docsify.js.org/#/quickstart) guide recommends [docsify-cli](//github.com/QingWei-Li/docsify-cli) for previewing your site:
-
-```bash
-# Install docsify-cli globally
-npm install -g docsify-cli
-
-# Change to site directory
-cd /path/to/site
-
-# Serve current directory
-docsify serve
-
-# Serve ./docs directory
-docsify serve docs
-```
-
-[Node](https://nodejs.org/) and [Python](https://www.python.org/) users can launch a simple web server from the directory containing their `index.html`:
-
-```bash
-# Change to site directory
-cd /path/to/site
-
-# Node
-npx http-server
-
-# Python (v3)
-python -m http.server
-```
+I will place instructions on how to run on GCP shortly...
