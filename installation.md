@@ -25,19 +25,15 @@ R
 
 ## Install and quick test on HPC from Source Code
 
-```export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
+```
+git clone git://path.to.git
+cd SAIGE-GPU
+export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
 R_LIB=/path/to/your/R_lib
 R CMD INSTALL SAIGE --library=$R_LIB
 ```
 
-We used a synthetic genotype dataset representing the AFR population based from the 1000 Genome project.
-The synthetic data used had 150,000 individuals. The genotype file has 100,000 variants present.
-This data was built following the instructions [here](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/COXHAP).
-
-The data was downloaded and pruned to be able to build the BED and BGEN files needed to run SAIGE-GPU.
-
-We used 6 GPUs to distribute the full GRM evenly. Step 1 completed within 8 minutes.
-Similarly, we submitted the same dataset through the CPU version of SAIGE and the job completed in 47 minutes.
+You can submit a quick test job on a GPU machine. For the test you only need 1 GPU available of minimum 16 Gigabytes of memory.
 
 The following file was used to submit to the HPC:
 
