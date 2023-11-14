@@ -7,8 +7,8 @@
 - **SAIGE Step 1 Optimizations**<br>
   The optimizations effectively harnessed the speed of GPU matrix computation and parallelization, resulting in a significant reduction in analysis time. 
 
-- **Build Null model using the full GRM**<br>
-  A full Genotype Relationship Matrix (GRM) provides a more accurate representation of genetic relatedness, offering substantial benefits for downstream analysis, including heritability estimation and genetic correlation. Our results clearly indicate the advantages of using GPUs for calculating the GRM, as it significantly reduces computation time.  
+- **Fit Null model using the full GRM**<br>
+  Fitting a null model to establish the relationship between a set of SNPs and the phenotypes. A full Genotype Relationship Matrix (GRM) provides a more accurate representation of genetic relatedness, offering substantial benefits for downstream analysis, including heritability estimation and genetic correlation. Our results clearly indicate the advantages of using GPUs for calculating the GRM, as it significantly reduces computation time.  
 
 - **Docker Container**<br>
   We have made available a Docker container and tested its usage on UKBB and All of Us datasets on Google Cloud Platform (GCP)
