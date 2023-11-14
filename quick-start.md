@@ -1,6 +1,6 @@
 # Quick Start
 
-## New site
+## Dependencies
 
 The quickest way to get started on a new docsify site is by using the template provided below.
 
@@ -60,7 +60,7 @@ The quickest way to get started on a new docsify site is by using the template p
    - Configure [docsify options](https://docsify.js.org/#/configuration) using the `window.$docsify` object
 1. Create a new `README.md` markdown file in the same directory as your `index.html` file. This new file will serve as your [homepage](https://docsify.js.org/#/configuration?id=homepage).
 
-## Existing site
+## Install on HPC
 
 Existing site owners may prefer to modify their existing `index.html` file using the following steps:
 
@@ -115,7 +115,7 @@ Existing site owners may prefer to modify their existing `index.html` file using
    </script>
    ```
 
-## Local Preview
+## Install on Google Cloud Platfomr
 
 Previewing your site locally requires serving your files from a web server.
 
