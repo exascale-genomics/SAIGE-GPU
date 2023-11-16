@@ -1,0 +1,1 @@
+../../cget/pkg/statgen__savvy/install/share/savvy/savvy-config.cmake

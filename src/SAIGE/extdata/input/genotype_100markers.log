@@ -1,0 +1,21 @@
+PLINK v2.00a3LM 64-bit Intel (20 Apr 2021)
+Options in effect:
+  --bfile ../input/genotype_100markers
+  --export vcf id-paste=iid
+  --out ../input/genotype_100markers
+
+Hostname: mendel
+Working directory: /net/hunt/zhowei/project/imbalancedCaseCtrlMixedModel/Rpackage_SPAGMMAT/SAIGE_old_check/SAIGE/extdata/test_new
+Start time: Fri Jan 21 11:51:23 2022
+
+Random number seed: 1642783883
+257569 MiB RAM detected; reserving 128784 MiB for main workspace.
+Allocated 54330 MiB successfully, after larger attempt(s) failed.
+Using up to 88 threads (change this with --threads).
+10000 samples (0 females, 0 males, 10000 ambiguous; 10000 founders) loaded from
+../input/genotype_100markers.fam.
+100 variants loaded from ../input/genotype_100markers.bim.
+Note: No phenotype data present.
+--export vcf to ../input/genotype_100markers.vcf ... done.
+
+End time: Fri Jan 21 11:51:23 2022

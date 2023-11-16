@@ -1,0 +1,25 @@
+PLINK v2.00a3LM 64-bit Intel (20 Apr 2021)
+Options in effect:
+  --bfile ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr
+  --freq counts
+  --out ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr
+
+Hostname: mendel
+Working directory: /net/hunt/zhowei/project/imbalancedCaseCtrlMixedModel/Rpackage_SPAGMMAT/SAIGE_newgit/SAIGE_1.0.6/SAIGE/extdata
+Start time: Sun May  8 08:06:31 2022
+
+Random number seed: 1652011591
+257569 MiB RAM detected; reserving 128784 MiB for main workspace.
+Allocated 54330 MiB successfully, after larger attempt(s) failed.
+Using up to 88 threads (change this with --threads).
+1000 samples (0 females, 0 males, 1000 ambiguous; 1000 founders) loaded from
+./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr.fam.
+2000 variants loaded from
+./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr.bim.
+Note: No phenotype data present.
+Calculating allele frequencies... done.
+--freq counts: Allele counts (founders only) written to
+./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr.acount
+.
+
+End time: Sun May  8 08:06:31 2022
