@@ -39,40 +39,18 @@ Rscript -e "install.packages(c(\
   lib='/path/to/your/R_lib', \
   repos='https://cran.rstudio.com')"
 
-wget https://cran.r-project.org/src/contrib/Archive/RcppArmadillo/RcppArmadillo_0.9.900.1.0.tar.gz
-R CMD INSTALL --library=$R_LIB RcppArmadillo_0.9.900.1.0.tar.gz
-wget https://cran.r-project.org/src/contrib/Archive/MetaSKAT/MetaSKAT_0.80.tar.gz
-R CMD INSTALL --library=$R_LIB MetaSKAT_0.80.tar.gz
-
-export LC_ALL=en_US.UTF-8
-
-git clone --depth 1 -b ScoreSPARcpp_v0.44.3 https://github.com/weizhouUMICH/SAIGE
-rm -rf ./SAIGE/configure
-rm -rf ./SAIGE/src/*.o ./SAIGE/src/*.so
-rm -rf ./SAIGE/thirdParty/cget
-
-pip install --user cget
 export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
-
-mkdir -p ./SAIGE/thirdParty/cget
-CXX=g++ CC=gcc cget install -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" --prefix ./SAIGE/thirdParty/cget xiaoyeli/superlu@b6177d0b743c0f1f6765db535dd8b6ce30c00061
-CXX=g++ CC=gcc cget install -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC -fsigned-char" --prefix ./SAIGE/thirdParty/cget https://github.com/statgen/savvy/archive/v2.0.1.tar.gz
-
-cd ./SAIGE/thirdParty/bgen
-# NOTE: change first line of ./waf to use python2, i.e. make it: '#!/usr/bin/env python2'
-./waf configure
-./waf
-cd ../../..
-
-
+git clone https://github.com/exascale-genomics/SAIGE-GPU.git
+cd src
+R CMD INSTALL SAIGE --library=$R_LIB
 ```
 
 ## Install and quick test on HPC from Source Code
 
 ```
-git clone git://path.to.git
-cd SAIGE-GPU
 export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
+git clone https://github.com/exascale-genomics/SAIGE-GPU.git
+cd SAIGE-GPU/src
 R_LIB=/path/to/your/R_lib
 R CMD INSTALL SAIGE --library=$R_LIB
 ```
@@ -126,7 +104,8 @@ It is not necessary to build SAIGE-GPU from source code. Instead you can pull th
 ```
 singularity build saige-doe.sif docker://tnnandi/saige-doe:2
 
-singularity exec --bind /SAIGE_container/SAIGE-DOE/extdata saige_1.1.9.sif /SAIGE_container/SAIGE-DOE/extdata/step1_fitNULLGLMM.R \
+mpirun -n <number of gpus>
+   singularityexec --bind /SAIGE_container/SAIGE-DOE/extdata saige_1.1.9.sif /SAIGE_container/SAIGE-DOE/extdata/step1_fitNULLGLMM.R \
    --plinkFile=$ARRAYS_DIR/100k_arrays \
    --phenoFile=$INPUT_DIR/phenotypes.tsv \
    --invNormalize=FALSE \
