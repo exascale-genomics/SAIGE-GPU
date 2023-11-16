@@ -18,8 +18,52 @@ module load gcc/11.1.0
 There are several R libraries needed to be installed:
 
 ```
-R
->install.packages(c())
+mkdir saige
+cd saige
+
+R_LIB=/path/to/your/R_lib
+Rscript -e "install.packages(c(\
+    'R.utils', \
+    'Rcpp', \
+    'RcppParallel', \
+    'data.table', \
+    'RcppEigen', \
+    'Matrix', \
+    'BH', \
+    'optparse', \
+    'SPAtest',
+    'SKAT', \
+    'RcppArmadillo', \
+    'qlcMatrix', \
+    'RhpcBLASctl'), \
+  lib='/path/to/your/R_lib', \
+  repos='https://cran.rstudio.com')"
+
+wget https://cran.r-project.org/src/contrib/Archive/RcppArmadillo/RcppArmadillo_0.9.900.1.0.tar.gz
+R CMD INSTALL --library=$R_LIB RcppArmadillo_0.9.900.1.0.tar.gz
+wget https://cran.r-project.org/src/contrib/Archive/MetaSKAT/MetaSKAT_0.80.tar.gz
+R CMD INSTALL --library=$R_LIB MetaSKAT_0.80.tar.gz
+
+export LC_ALL=en_US.UTF-8
+
+git clone --depth 1 -b ScoreSPARcpp_v0.44.3 https://github.com/weizhouUMICH/SAIGE
+rm -rf ./SAIGE/configure
+rm -rf ./SAIGE/src/*.o ./SAIGE/src/*.so
+rm -rf ./SAIGE/thirdParty/cget
+
+pip install --user cget
+export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
+
+mkdir -p ./SAIGE/thirdParty/cget
+CXX=g++ CC=gcc cget install -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" --prefix ./SAIGE/thirdParty/cget xiaoyeli/superlu@b6177d0b743c0f1f6765db535dd8b6ce30c00061
+CXX=g++ CC=gcc cget install -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC -fsigned-char" --prefix ./SAIGE/thirdParty/cget https://github.com/statgen/savvy/archive/v2.0.1.tar.gz
+
+cd ./SAIGE/thirdParty/bgen
+# NOTE: change first line of ./waf to use python2, i.e. make it: '#!/usr/bin/env python2'
+./waf configure
+./waf
+cd ../../..
+
 
 ```
 
