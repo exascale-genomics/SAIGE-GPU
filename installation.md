@@ -39,13 +39,11 @@ Rscript -e "install.packages(c(\
   lib='/path/to/your/R_lib', \
   repos='https://cran.rstudio.com')"
 
-export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
-git clone https://github.com/exascale-genomics/SAIGE-GPU.git
-cd src
-R CMD INSTALL SAIGE --library=$R_LIB
 ```
 
 ## Install and quick test on HPC from Source Code
+
+You can install SAIGE from source code. We have merged SAIGE-GPU with the latest version of [SAIGE](https://saigegit.github.io/SAIGE-doc/). This GitHub contains the latest merged version and can be installed following these instructions. You will need the above mentioned R libraries as they are not contained in the branch.
 
 ```
 export PATH=${PATH}:${HOME}/.local/summit/anaconda2/5.3.0/2.7/bin
