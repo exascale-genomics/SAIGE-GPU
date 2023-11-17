@@ -1,6 +1,6 @@
 # SAIGE-GPU
 
-> Executing SAIGE on GPU infrastructures
+> Executing SAIGE on GPU resources
 
 - Run on High-Performance Computers (HPC)
 - Run from container on Cloud infrastructures
