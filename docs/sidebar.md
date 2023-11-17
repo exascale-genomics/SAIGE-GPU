@@ -4,4 +4,4 @@
 - [Installation](installation)
 - [Changelog](CHANGELOG)
 - **Links**
-- [![Github](assets/img/github.png)Github](https://github.com/exascale-genomics/SAIGE-GPU)
+- [![Github](assets/img/github-mark.png)Github](https://github.com/exascale-genomics/SAIGE-GPU)
