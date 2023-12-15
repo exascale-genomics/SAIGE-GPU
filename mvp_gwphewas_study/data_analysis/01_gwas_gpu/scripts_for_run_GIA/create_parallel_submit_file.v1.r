@@ -1,9 +1,9 @@
-#Rscript /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_parallel_submit_file.v1.r EAS > ./submit.step1.parallel.ASN.gpu.txt
+#Rscript .//batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_parallel_submit_file.v1.r EAS > ./submit.step1.parallel.ASN.gpu.txt
 
 args = commandArgs(trailingOnly=TRUE)
 
-path="/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run"
-saige_path="/gpfs/alpine/proj-shared/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata"
+path=".//output/GIA_ANC_Run"
+saige_path="./tools/saige_20220326/SAIGE-DOE/extdata"
 group = args[1]
 gpu_qty = 1
 if (group == "EAS") {
@@ -45,7 +45,7 @@ for (rds in rds_files)
     }
 }
 complete_rds <- as.data.frame(complete_rds)
-complete_rds$plinkFile <- "/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf.05"
+complete_rds$plinkFile <- "./output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf.05"
 complete_rds$output_col <- paste(complete_rds$output_col, "gpu", sep=".")
 complete_rds$outputlog_col <-  paste(trimws( complete_rds$output_col), "log", sep=".")
 

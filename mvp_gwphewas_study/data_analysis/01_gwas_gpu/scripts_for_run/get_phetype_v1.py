@@ -3,7 +3,7 @@ import sys, os, argparse
 #import pandas 
 
 # python ./get_phetype.py --phecode Phe_454_1 
-# for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Binary.ASN.HARE_ANC.filter10cases.txt`; do echo $i; if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/$i/ASN ]; then python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/scripts_for_run/get_phetype_v1.py --phecode $i --ancestry ASN; fi; done
+# for i in `cat ./data/phenotype_data/processed/PhenotypeList.Binary.ASN.HARE_ANC.filter10cases.txt`; do echo $i; if [ ! -d .//output/HARE_ANC_Run/$i/ASN ]; then python .//batch/pre-gwas/scripts_for_run/get_phetype_v1.py --phecode $i --ancestry ASN; fi; done
 
 parser = argparse.ArgumentParser(description='Create Phenotype files and step1 submit files.')
 parser.add_argument('--skip-phenotype', dest='skip_phenotype', action='store_true',
@@ -17,37 +17,22 @@ args = parser.parse_args()
 # goal is to create the phenotype and covariates files for a phecode for each ethnic group
 
 # this part is always the same for each phecode
-#path = "/gpfs/alpine/proj-shared/med112/task0107528/task0105060"
-#path = "/gpfs/alpine/med112/proj-shared/task0110254"
-#path = "/gpfs/alpine/med112/proj-shared/phenotype_data/"
-path = "/gpfs/alpine/med112/proj-shared/data/phenotype_data"
-#PhewasCode_files = ["PheWasCodesV1p1_20200930_v19_2.csv", "PheWasCodesV1p2_20200930_v19_2.csv", "PheWasCodesV1p3_20200930_v19_2.csv"]
-#PhewasCode_files = ["DataCube_PheWasCodesV3p1_20200930_v19_2.csv", "DataCube_PheWasCodesV3p2_20200930_v19_2.csv", "DataCube_PheWasCodesV3p3_20200930_v19_2.csv"]
-#PhewasCode_files = ["DataCube_PheWasCodesV4p1_20200930_v19_2.csv", "DataCube_PheWasCodesV4p2_20200930_v19_2.csv", "DataCube_PheWasCodesV4p3_20200930_v19_2.csv" ]
+path = "./data/phenotype_data"
+PhewasCode_files = ["./data/phenotype_data/processed/gwphewas_binary_traits.pheno"]
 
-PhewasCode_files = ["/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/gwphewas_binary_traits.pheno"]
-
-#quantitative_files = ["/gpfs/alpine/med112/proj-shared/task0105060/test_run_phenotypes/mvp_ldl_alt_raw.txt"]
-#quantitative_files = ["/gpfs/alpine/med112/proj-shared/data/phenotype_data/DataCube_Vitals_V19_2_20200930.csv", "/gpfs/alpine/med112/proj-shared/data/phenotype_data/MVP_Core_Opsdflt_Datacube_PheWasLabs_P3_2020.csv"]
-quantitative_files = ["/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/gwphewas_quantitative_traits.pheno"]
-#pcs_file = "/gpfs/alpine/proj-shared/med112/task0107885/Release4.mvpcoreid.pcs"
-pc_files = { "ASN" : "/gpfs/alpine/proj-shared/med112/pca-anurag/mvp.release4.ASN.eigenvec",
-        "AFR" : "/gpfs/alpine/proj-shared/med112/pca-anurag/mvp.release4.AFR.eigenvec",
-        "HIS" : "/gpfs/alpine/proj-shared/med112/pca-anurag/mvp.release4.HIS.eigenvec",
-        "EUR" : "/gpfs/alpine/proj-shared/med112/pca-anurag/mvp.release4.EUR.eigenvec" }
-hare_file = "/gpfs/alpine/proj-shared/med112/task0107885/Release4.mvpcoreid.hare"
+quantitative_files = ["./data/phenotype_data/processed/gwphewas_quantitative_traits.pheno"]
+pc_files = { "ASN" : "./pca/mvp.release4.ASN.eigenvec",
+        "AFR" : "./pca/mvp.release4.AFR.eigenvec",
+        "HIS" : "./pca/mvp.release4.HIS.eigenvec",
+        "EUR" : "./pca/mvp.release4.EUR.eigenvec" }
+hare_file = "./data/Release4.mvpcoreid.hare"
 
 
-core_file = "/gpfs/alpine/proj-shared/med112/task0107885/MVP_Core_Opsdflt_CoreDemo_v19_2_toSummit.csv"
-#output_path = "/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes"
-#output_path = "/gpfs/alpine/proj-shared/med112//task0101113/output/FullRun"
-output_path = "/gpfs/alpine/proj-shared/med112//task0101113/output/HARE_ANC_Run"
-#saige_path = "/gpfs/alpine/proj-shared/med112/task0101113/tools/saige_ScoreSPARcpp_v0.44.3/SAIGE/extdata"
-#saige_path = "/gpfs/alpine/proj-shared/med112/task0101113/tools/saige/SAIGE/extdata"
-saige_path = "/gpfs/alpine/proj-shared/med112/task0101113/tools/saige-20210825/SAIGE/extdata"
-#geno_path = "%s/inputs/genotypes/re-run" % output_path
-geno_path = "/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/inputs/genotypes/prune2"
-R_path="/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/bin"
+core_file = "./data/MVP_Core_Opsdflt_CoreDemo_v19_2_toSummit.csv"
+output_path = "./output/HARE_ANC_Run"
+saige_path = "./tools/saige-GPU-20210825/SAIGE/extdata"
+geno_path = "./output/pheCodes/inputs/genotypes/prune2"
+R_path=".//tools/R-2/R-4.0.3/bin"
 
 # separate into hare groups
 fhare = open(hare_file, "r")
@@ -202,7 +187,7 @@ for group in pheFiles:
 
     fs.write("output_path=\"%s\"\n" % (step1_outpath))
     nthreads = 42
-    nvme_path = "/mnt/bb/arodriguez"
+    nvme_path = "/mnt/bb/"
     fs.write("nvme_path=%s\n\n" % (nvme_path))
     fs.write("module load gcc/10.2.0\n")
     fs.write("module load cuda/11.1.1\n")
@@ -230,8 +215,8 @@ for group in pheFiles:
     print("Submit files at: %s" % (submit_file))
 
     # create RDS file for step1
-    #scripts_path = "/gpfs/alpine/proj-shared/med112/task0101113/batch/pre-gwas/scripts_for_run"
-    scripts_path = "/gpfs/alpine/proj-shared/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run/"
+    #scripts_path = "./batch/pre-gwas/scripts_for_run"
+    scripts_path = "./batch/pre-gwas/gwPheWAS-Summit/scripts_for_run/"
     cmd = "%s/Rscript %s/create_step1_rds.r %s %s %s/step1.%s.%s.rds %s" % (R_path, scripts_path, phecode, group, step1_outpath, phecode, group, phecodeFlag)
     os.system(cmd)
 

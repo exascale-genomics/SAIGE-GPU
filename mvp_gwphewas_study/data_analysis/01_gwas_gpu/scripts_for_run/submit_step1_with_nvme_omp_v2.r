@@ -1,16 +1,16 @@
-.libPaths( c( .libPaths(), "/ccs/home/arodriguez/med112/task0101113/YoungDae_work/R_libs/") )
-suppressMessages(library(pbdMPI, lib.loc="/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/library/"))
-suppressMessages(library(tasktools, lib.loc="/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/library/"))
-suppressMessages(library(SAIGE, lib.loc="/ccs/home/arodriguez/med112/task0101113/YoungDae_work/R_libs/"))
+.libPaths( c( .libPaths(), ".//R_libs/") )
+suppressMessages(library(pbdMPI, lib.loc=".//tools/R-2/R-4.0.3/library/"))
+suppressMessages(library(tasktools, lib.loc=".//tools/R-2/R-4.0.3/library/"))
+suppressMessages(library(SAIGE, lib.loc=".//R_libs/"))
 path = function(...) paste0(list(...), collapse="/")
-root = "/gpfs/alpine/proj-shared/med112/task0101113/output/HARE_ANC_Run"
+root = "./output/HARE_ANC_Run"
 #params = path(root, "output/phe454_1.submit_df.rda")
 args = commandArgs(trailingOnly=TRUE)
 params = args[1]
 phecode = args[2]
 group = args[3]
 #run_name = paste(phecode, group, sep=".")
-#nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+#nvlm_path = paste("/mnt/bb/", run_name, sep="/")
 #if (comm.localrank() == 0) dir.create(nvlm_path)
 
 checkpoint_path = path(root, "checkpoints", "step1", phecode, group)
@@ -30,7 +30,7 @@ wrapper = function(i)
   # get run_name
   phenoFile_base = basename(phenoFile)
   run_name = paste(unlist(strsplit(phenoFile_base, ".", fixed=T))[2], unlist(strsplit(phenoFile_base, ".", fixed=T))[3], sep=".")
-  nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+  nvlm_path = paste("/mnt/bb/", run_name, sep="/")
   dir.create(nvlm_path)
   print(phenoFile_base)
 
@@ -117,11 +117,6 @@ wrapper = function(i)
       MaleOnly=FALSE,
       noEstFixedEff=FALSE
     )
-  #)
-
-  #capture.output(file=logfile, append=FALSE,
-##  system(paste("export OMP_NUM_THREADS=42; Rscript /gpfs/alpine/proj-shared/med112/task0101113/YoungDae_work/src/SAIGE/extdata/step1_fitNULLGLMM.R --plinkFile=", node_plink_path, " --phenoFile=", node_phenoFile_path, " --outputPrefix=", node_outputPrefix, " --phenoCol=Phenotype --covarColList=Age,Gender,PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10 --sampleIDColinphenoFile=MVPCore_ID --traitType=binary --nThreads=42 --minMAFforGRM 0.0001 --maxiterPCG 500 --maxiter 25 --LOCO FALSE > ", node_outputLog, sep=""))
-  #system(paste("jsrun -n1 -c42 --smpiargs='-disable_gpu_hooks' -bpacked:42 -EOMP_NUM_THREADS=42 Rscript /gpfs/alpine/proj-shared/med112/task0101113/YoungDae_work/src/SAIGE/extdata/step1_fitNULLGLMM.R --plinkFile=", node_plink_path, " --phenoFile=", node_phenoFile_path, " --outputPrefix=", node_outputPrefix, " --phenoCol=Phenotype --covarColList=Age,Gender,PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10 --sampleIDColinphenoFile=MVPCore_ID --traitType=binary --nThreads=42 --minMAFforGRM 0.0001 --maxiterPCG 500 --maxiter 25 --LOCO FALSE > ", node_outputLog, sep=""))    
   #)
 
   # copy back to filesystem the 3 output files

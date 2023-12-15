@@ -1,15 +1,15 @@
 #!/usr/bin/bash
-work_dir=/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run
-phe_dir=/gpfs/alpine/proj-shared/med112/results/DOWNSAMPLING/SNPLIST_dwnsmpl_AFR
+work_dir=.//output/GIA_ANC_Run
+phe_dir=./results/DOWNSAMPLING/SNPLIST_dwnsmpl_AFR
 group="EUR"
 submit_file=$work_dir/SUBMIT/downsampled.submit.step1.parallel.sh
-step1_path=/gpfs/alpine/proj-shared/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/step1_fitNULLGLMM.R
-plink_files=/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf.05
-quant_file=/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/gia_quant.txt
-binary_file=/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/gia_binary.txt
-female_binary_codes=/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Binary.Female.Traits.v2.txt
-male_binary_codes=/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Binary.Male.Traits.v2.txt
-female_quant_codes=/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Quantitative.Female.Traits.txt
+step1_path=./tools/saige_20220326/SAIGE-DOE/extdata/step1_fitNULLGLMM.R
+plink_files=./output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf.05
+quant_file=./data/phenotype_data/processed/GIA/gia_quant.txt
+binary_file=./data/phenotype_data/processed/GIA/gia_binary.txt
+female_binary_codes=./data/phenotype_data/processed/PhenotypeList.Binary.Female.Traits.v2.txt
+male_binary_codes=./data/phenotype_data/processed/PhenotypeList.Binary.Male.Traits.v2.txt
+female_quant_codes=./data/phenotype_data/processed/PhenotypeList.Quantitative.Female.Traits.txt
 
 echo "#!/bin/bash" > $submit_file
 echo "#BSUB -nnodes 1" >> $submit_file

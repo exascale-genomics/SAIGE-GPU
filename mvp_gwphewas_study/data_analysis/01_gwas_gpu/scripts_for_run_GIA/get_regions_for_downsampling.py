@@ -1,14 +1,14 @@
 #!/usr/bin/python
 import sys, os, glob
 
-regions_file = "/ccs/home/arodriguez/MVP.rel4.regions.txt"
+regions_file = "./MVP.rel4.regions.txt"
 regions = {}
 fh = open(regions_file, "r")
 for line in fh:
     (name, chr, start, end) = line.rstrip("\n").split("\t")
     regions[name] = [chr, start, end]
 
-downsampling_variants_dir = "/gpfs/alpine/med112/proj-shared/results/PostGWAS_Analysis/finemaping/GIA/downsampling_variant_lists/"
+downsampling_variants_dir = "./results/PostGWAS_Analysis/finemaping/GIA/downsampling_variant_lists/"
 downsampling_files = glob.glob("%s/*downsampling_variants.txt" % downsampling_variants_dir)
 
 for f in downsampling_files:

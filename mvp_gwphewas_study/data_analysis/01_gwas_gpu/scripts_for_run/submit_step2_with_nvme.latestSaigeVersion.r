@@ -1,17 +1,17 @@
-.libPaths( c( .libPaths(), "/ccs/home/arodriguez/med112/task0101113/YoungDae_work/latest_2022030318/R_libs/") )
-suppressMessages(library(pbdMPI, lib.loc="/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/library/"))
-suppressMessages(library(tasktools, lib.loc="/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/library/"))
-suppressMessages(library(SAIGE, lib.loc="/ccs/home/arodriguez/med112/task0101113/YoungDae_work/latest_2022030318/R_libs/"))
-#suppressMessages(library(SAIGE, lib.loc="/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/library/"))
+.libPaths( c( .libPaths(), ".//latest_2022030318/R_libs/") )
+suppressMessages(library(pbdMPI, lib.loc=".//tools/R-2/R-4.0.3/library/"))
+suppressMessages(library(tasktools, lib.loc=".//tools/R-2/R-4.0.3/library/"))
+suppressMessages(library(SAIGE, lib.loc=".//latest_2022030318/R_libs/"))
+#suppressMessages(library(SAIGE, lib.loc=".//tools/R-2/R-4.0.3/library/"))
 path = function(...) paste0(list(...), collapse="/")
-root = "/gpfs/alpine/proj-shared/med112/task0101113/output/HARE_ANC_Run"
+root = "./output/HARE_ANC_Run"
 #params = path(root, "output/phe454_1.submit_df.rda")
 args = commandArgs(trailingOnly=TRUE)
 params = args[1]
 phecode = args[2]
 group = args[3]
 #run_name = paste(phecode, group, sep=".")
-#nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+#nvlm_path = paste("/mnt/bb", run_name, sep="/")
 #dir.create(nvlm_path)
 
 checkpoint_path = path(root, "checkpoints", phecode, group)
@@ -36,13 +36,13 @@ wrapper = function(i)
   # get run_name
   varianceRatioFile_base = basename(varianceRatioFile)
   run_name = paste(unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[4], unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[5], basename(bgenFile), sep=".")
-  nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+  nvlm_path = paste("/mnt/bb", run_name, sep="/")
   dir.create(nvlm_path)
 
   # get the exclude list file
   local_group = unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[5]
   exclude_list_file = NULL
-  exclude_path = "/gpfs/alpine/proj-shared/med112/bin/data/"
+  exclude_path = "./data/"
   if (local_group == "ASN") {
     exclude_list_file = paste(exclude_path, "R4.exclude_Imp3MAC20.ASN.txt.gz", sep="/")
     nvlm_exclude_path = paste(nvlm_path, "R4.exclude_Imp3MAC20.ASN.txt.gz", sep="/")
@@ -90,8 +90,7 @@ wrapper = function(i)
     #)
   #)
 
-  system(paste("Rscript ", "/gpfs/alpine/proj-shared/med112/task0101113/YoungDae_work/latest_2022030318/SAIGE/extdata/step2_SPAtests.R --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=FALSE --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " > ", nvlm_logfile, sep=" "))
-#  print(paste("Rscript ", "/gpfs/alpine/proj-shared/med112/task0101113/YoungDae_work/latest_2022030318/SAIGE/extdata/step2_SPAtests.R --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=FALSE --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " > ", nvlm_logfile, sep=" "))
+  system(paste("Rscript ", "./latest_2022030318/SAIGE/extdata/step2_SPAtests.R --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=FALSE --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " > ", nvlm_logfile, sep=" "))
      #idstoExcludeFile=nvlm_exclude_path,
 
   # copy back to filesystem the 3 output files

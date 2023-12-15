@@ -50,11 +50,11 @@ is.defined <- function(sym) {
 }
 
 # loading datasets. ---------------------------------------
-gwas_output_path = "/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run"
+gwas_output_path = ".//output/HARE_ANC_Run"
 phecodes = list.dirs(gwas_output_path, recursive=FALSE, full.names=FALSE)
 group = "ASN"
-output.path = "/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/SUBMIT/peaks"
-#gwas_path = "/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/Phe_454_1/ASN/step2/"
+output.path = ".//output/HARE_ANC_Run/SUBMIT/peaks"
+#gwas_path = ".//output/HARE_ANC_Run/Phe_454_1/ASN/step2/"
 
 for (phecode in phecodes) {
   gwas_path = paste(gwas_output_path, phecode, group, "step2", sep="/")

@@ -1,6 +1,6 @@
 args = commandArgs(trailingOnly=TRUE)
 
-path="/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run"
+path=".//output/HARE_ANC_Run"
 group = args[1]
 #group="EUR"
 pattern = paste("step1", '*', group, "rds", sep=".")
@@ -30,7 +30,7 @@ for (rds in rds_files)
     }
 }
 complete_rds <- as.data.frame(complete_rds)
-complete_rds$plinkFile <- "/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf.05"
+complete_rds$plinkFile <- "./output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf.05"
 complete_rds$output_col <- paste(complete_rds$output_col, "omp", sep=".")
 complete_rds$outputlog_col <-  trimws( complete_rds$output_col)
 saveRDS(complete_rds, file=out_rds)

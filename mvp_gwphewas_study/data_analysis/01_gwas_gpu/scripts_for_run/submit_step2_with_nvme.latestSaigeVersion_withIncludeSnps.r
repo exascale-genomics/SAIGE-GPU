@@ -1,19 +1,19 @@
-mylibpath <- "/ccs/home/arodriguez/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/R_lib"
-tasktools_lib <- "/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/library/"
+mylibpath <- ".//tools/saige_20220326/SAIGE-DOE/extdata/R_lib"
+tasktools_lib <- ".//tools/R-2/R-4.0.3/library/"
 .libPaths( c( .libPaths(), mylibpath) )
-suppressMessages(library(SAIGE, lib.loc="/ccs/home/arodriguez/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/R_lib"))
+suppressMessages(library(SAIGE, lib.loc=".//tools/saige_20220326/SAIGE-DOE/extdata/R_lib"))
 suppressMessages(library(pbdMPI, lib.loc=tasktools_lib))
 suppressMessages(library(tasktools, lib.loc=tasktools_lib))
 
 path = function(...) paste0(list(...), collapse="/")
-root = "/gpfs/alpine/proj-shared/med112/task0101113/output/HARE_ANC_Run"
+root = "./output/HARE_ANC_Run"
 #params = path(root, "output/phe454_1.submit_df.rda")
 args = commandArgs(trailingOnly=TRUE)
 params = args[1]
 phecode = args[2]
 group = args[3]
 #run_name = paste(phecode, group, sep=".")
-#nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+#nvlm_path = paste("/mnt/bb/", run_name, sep="/")
 #dir.create(nvlm_path)
 
 checkpoint_path = path(root, "checkpoints", phecode, group)
@@ -38,14 +38,14 @@ wrapper = function(i)
   # get run_name
   varianceRatioFile_base = basename(varianceRatioFile)
   run_name = paste(unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[4], unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[5], basename(bgenFile), sep=".")
-  nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+  nvlm_path = paste("/mnt/bb/", run_name, sep="/")
   dir.create(nvlm_path)
 
   # get the include list file
   local_group = unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[5]
   include_list_file = NULL
-  include_path = "/gpfs/alpine/med112/proj-shared/data/genetic_annotations/"
-  #include_path = "/ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/scripts_for_run/"
+  include_path = "./data/genetic_annotations/"
+  #include_path = ".//batch/pre-gwas/scripts_for_run/"
   if (local_group == "ASN") {
     include_list_file = paste(include_path, "R4.include_Imp3MAC20.HARE.ASN.txt.gz", sep="/")
     nvlm_include_path = paste(nvlm_path, "R4.include_Imp3MAC20.HARE.ASN.txt.gz", sep="/")
@@ -95,9 +95,9 @@ wrapper = function(i)
     #)
   #)
 
-  print (paste("Rscript ", "/ccs/home/arodriguez/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/step2_SPAtests.R", " --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=TRUE --chrom", chromosome, " --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " --idstoIncludeFile ", nvlm_include_path, " --is_Firth_beta=TRUE --pCutoffforFirth=0.05 > ", nvlm_logfile, sep=" "))
-  system(paste("Rscript ", "/ccs/home/arodriguez/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/step2_SPAtests.R", " --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=TRUE --chrom", chromosome, " --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " --idstoIncludeFile ", nvlm_include_path, " --is_Firth_beta=TRUE --pCutoffforFirth=0.05 > ", nvlm_logfile, sep=" "))
-#  print(paste("Rscript ", "/gpfs/alpine/proj-shared/med112/task0101113/YoungDae_work/latest_2022030318/SAIGE/extdata/step2_SPAtests.R --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=FALSE --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " > ", nvlm_logfile, sep=" "))
+  print (paste("Rscript ", ".//tools/saige_20220326/SAIGE-DOE/extdata/step2_SPAtests.R", " --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=TRUE --chrom", chromosome, " --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " --idstoIncludeFile ", nvlm_include_path, " --is_Firth_beta=TRUE --pCutoffforFirth=0.05 > ", nvlm_logfile, sep=" "))
+  system(paste("Rscript ", ".//tools/saige_20220326/SAIGE-DOE/extdata/step2_SPAtests.R", " --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=TRUE --chrom", chromosome, " --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " --idstoIncludeFile ", nvlm_include_path, " --is_Firth_beta=TRUE --pCutoffforFirth=0.05 > ", nvlm_logfile, sep=" "))
+#  print(paste("Rscript ", "./latest_2022030318/SAIGE/extdata/step2_SPAtests.R --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=FALSE --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " > ", nvlm_logfile, sep=" "))
      #idstoIncludeFile=nvlm_include_path,
 
   # copy back to filesystem the 3 output files

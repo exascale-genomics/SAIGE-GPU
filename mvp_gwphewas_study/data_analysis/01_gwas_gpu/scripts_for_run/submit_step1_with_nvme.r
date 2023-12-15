@@ -2,14 +2,12 @@ suppressMessages(library(pbdMPI))
 suppressMessages(library(tasktools))
 suppressMessages(library(SAIGE))
 path = function(...) paste0(list(...), collapse="/")
-root = "/gpfs/alpine/proj-shared/med112/task0101113/output/HARE_ANC_Run"
-#params = path(root, "output/phe454_1.submit_df.rda")
+root = "./output/HARE_ANC_Run"
 args = commandArgs(trailingOnly=TRUE)
 params = args[1]
 phecode = args[2]
 group = args[3]
 #run_name = paste(phecode, group, sep=".")
-#nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
 #if (comm.localrank() == 0) dir.create(nvlm_path)
 
 checkpoint_path = path(root, "checkpoints", "step1", phecode, group)
@@ -29,7 +27,7 @@ wrapper = function(i)
   # get run_name
   phenoFile_base = basename(phenoFile)
   run_name = paste(unlist(strsplit(phenoFile_base, ".", fixed=T))[2], unlist(strsplit(phenoFile_base, ".", fixed=T))[3], sep=".")
-  nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+  nvlm_path = paste("/mnt/bb/.", run_name, sep="/")
   dir.create(nvlm_path)
   print(phenoFile_base)
 

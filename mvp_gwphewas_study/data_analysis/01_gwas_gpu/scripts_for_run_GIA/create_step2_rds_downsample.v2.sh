@@ -1,9 +1,8 @@
 #!/usr/bin/bash
-samples=/gpfs/alpine/proj-shared/med112/results/DOWNSAMPLING/Samples.EUR.AFR_downsample.txt
-#phe_dir=/gpfs/alpine/proj-shared/med112/results/DOWNSAMPLING/SNPLIST_dwnsmpl_AFR
-phe_dir=/gpfs/alpine/med112/proj-shared/results/PostGWAS_Analysis/finemaping/GIA/downsampling_variant_lists
-work_dir=/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/
-rscript_file=/ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_step2_rds_downsample.v2.r
+samples=./results/DOWNSAMPLING/Samples.EUR.AFR_downsample.txt
+phe_dir=./results/PostGWAS_Analysis/finemaping/GIA/downsampling_variant_lists
+work_dir=.//output/GIA_ANC_Run/
+rscript_file=.//batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_step2_rds_downsample.v2.r
 group="EUR"
 
 module load r/4.0.5

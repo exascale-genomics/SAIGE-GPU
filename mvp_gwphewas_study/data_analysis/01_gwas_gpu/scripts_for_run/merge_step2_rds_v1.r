@@ -1,11 +1,11 @@
 args = commandArgs(trailingOnly=TRUE)
 
-path="/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run"
+path="./output/HARE_ANC_Run"
 group = args[1]
 pattern = paste("step2", '*', group, "rds$", sep=".")
 rds_files <- list.files(path, pattern = pattern, recursive = TRUE)
 complete_rds <- NULL
-out_rds <- paste("/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/SUBMIT/complete_step2.finishedstep1tasks", group, "rds", sep=".")
+out_rds <- paste("./output/HARE_ANC_Run/SUBMIT/complete_step2.finishedstep1tasks", group, "rds", sep=".")
 for (rds in rds_files)
 {
     if (length(list.files(path=paste(path, dirname(rds), "../step1", sep="/"), pattern = "\\.omp.varianceRatio.txt$")) > 0)

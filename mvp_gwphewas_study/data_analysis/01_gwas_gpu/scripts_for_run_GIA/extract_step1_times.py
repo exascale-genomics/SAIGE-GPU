@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys, os, glob, re
 group = sys.argv[1]
-path = "/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run"
+path = ".//output/GIA_ANC_Run"
 log_files = glob.glob("%s/*/%s/step1/*.%s.out.gpu.log" % (path, group, group))
 step1_times = {}
 for i in log_files:

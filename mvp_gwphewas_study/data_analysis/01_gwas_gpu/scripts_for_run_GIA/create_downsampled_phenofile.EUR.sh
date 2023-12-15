@@ -1,8 +1,8 @@
 # this Bash script will create the downsampled pheno files for the selected phecodes in the $phe_dir 
 
-samples=/gpfs/alpine/proj-shared/med112/results/DOWNSAMPLING/Samples.EUR.AFR_downsample.txt
-phe_dir=/gpfs/alpine/proj-shared/med112/results/DOWNSAMPLING/SNPLIST_dwnsmpl_AFR
-work_dir=/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/
+samples=./results/DOWNSAMPLING/Samples.EUR.AFR_downsample.txt
+phe_dir=./results/DOWNSAMPLING/SNPLIST_dwnsmpl_AFR
+work_dir=./output/GIA_ANC_Run/
 group="EUR"
 
 for i in $phe_dir/*.EUR.downsampling_variants.txt; do

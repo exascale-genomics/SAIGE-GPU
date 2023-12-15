@@ -14,10 +14,10 @@ outrds = args[3]
 traitType = args[4]
 #step1_output = args[4]
 gender_code = args[5]
-base_path = "/gpfs/alpine/med112/proj-shared/task0101113/output/GIA_ANC_Run"
+base_path = "./output/GIA_ANC_Run"
 
 output_path= paste(base_path, phenoID, group, "step1", sep="/")
-plinkFile="/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf"
+plinkFile="./output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf"
 phenoFile=paste(base_path, phenoID, group, "inputs", paste("PhenoFile", phenoID, group, "txt", sep="."), sep="/")
 output_col = paste(output_path, paste("phewas.ld.maf", phenoID, group, "out", sep="."), sep="/")
 outputlog_col = paste(output_path, paste("phewas.ld.maf", phenoID, group, "log", sep="."), sep="/")

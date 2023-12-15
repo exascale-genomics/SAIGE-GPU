@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-path="/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run"
+path=".//output/HARE_ANC_Run"
 group=$1
 for i in $path/*/$group/step1; do
     if [ ! -f $i/*.out.gpu.rda ]; then

@@ -2,14 +2,14 @@ suppressMessages(library(pbdMPI))
 suppressMessages(library(tasktools))
 suppressMessages(library(SAIGE))
 path = function(...) paste0(list(...), collapse="/")
-root = "/gpfs/alpine/proj-shared/med112/task0101113/output/HARE_ANC_Run"
+root = "./output/HARE_ANC_Run"
 #params = path(root, "output/phe454_1.submit_df.rda")
 args = commandArgs(trailingOnly=TRUE)
 params = args[1]
 phecode = args[2]
 group = args[3]
 #run_name = paste(phecode, group, sep=".")
-#nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+#nvlm_path = paste("/mnt/bb/", run_name, sep="/")
 #dir.create(nvlm_path)
 
 checkpoint_path = path(root, "checkpoints", phecode, group)
@@ -36,13 +36,13 @@ wrapper = function(i)
   # get run_name
   varianceRatioFile_base = basename(varianceRatioFile)
   run_name = paste(unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[4], unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[5], basename(bgenFile), sep=".")
-  nvlm_path = paste("/mnt/bb/arodriguez", run_name, sep="/")
+  nvlm_path = paste("/mnt/bb/", run_name, sep="/")
   dir.create(nvlm_path)
 
   # get the exclude list file
   local_group = unlist(strsplit(varianceRatioFile_base, ".", fixed=T))[5]
   exclude_list_file = NULL
-  exclude_path = "/gpfs/alpine/proj-shared/med112/bin/data/"
+  exclude_path = "./bin/data/"
   if (local_group == "ASN") {
     exclude_list_file = paste(exclude_path, "R4.exclude_Imp3MAC20.ASN.txt.gz", sep="/")
     nvlm_exclude_path = paste(nvlm_path, "R4.exclude_Imp3MAC20.ASN.txt.gz", sep="/")
@@ -75,7 +75,7 @@ wrapper = function(i)
   outputLog_base = basename(logfile)
   node_outputLog = paste(nvlm_path, outputLog_base, sep="/")
 
-  system(paste("jsrun -n1 -c1 --smpiargs='-disable_gpu_hooks' Rscript /gpfs/alpine/proj-shared/med112/task0101113/YoungDae_work/src/SAIGE/extdata/step2_SPAtests.R --bgenFile=", bgenFile, " --bgenFileIndex=", bgenFileIndex, " --minMAF=0.0001 --minMAC=1", " --sampleFile=", sampleFile, " --GMMATmodelFile=", nvlm_GMMATmodelFile, " --varianceRatioFile=", nvlm_varianceRatioFile, " --SAIGEOutputFile=", node_outfile_path, " --numLinesOutput=10000 --IsOutputNinCaseCtrl=TRUE --IsOutputAFinCaseCtrl=TRUE --LOCO=FALSE > ", node_outputLog, sep=""))
+  system(paste("jsrun -n1 -c1 --smpiargs='-disable_gpu_hooks' Rscript ./src/SAIGE/extdata/step2_SPAtests.R --bgenFile=", bgenFile, " --bgenFileIndex=", bgenFileIndex, " --minMAF=0.0001 --minMAC=1", " --sampleFile=", sampleFile, " --GMMATmodelFile=", nvlm_GMMATmodelFile, " --varianceRatioFile=", nvlm_varianceRatioFile, " --SAIGEOutputFile=", node_outfile_path, " --numLinesOutput=10000 --IsOutputNinCaseCtrl=TRUE --IsOutputAFinCaseCtrl=TRUE --LOCO=FALSE > ", node_outputLog, sep=""))
 
 
   # copy back to filesystem the 3 output files

@@ -14,9 +14,9 @@ outrds = args[3]
 traitType = args[4]
 #step1_output = args[4]
 
-output_path= paste("/gpfs/alpine/med112/proj-shared/task0101113/output/HARE_ANC_Run", phenoID, group, "step1", sep="/")
-plinkFile="/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf"
-phenoFile=paste("/gpfs/alpine/proj-shared/med112/task0101113/output/HARE_ANC_Run", phenoID, group, "inputs", paste("PhenoFile", phenoID, group, "txt", sep="."), sep="/")
+output_path= paste("./output/HARE_ANC_Run", phenoID, group, "step1", sep="/")
+plinkFile="./output/pheCodes/inputs/genotypes/re-run/20200917.GenotypeData.Release4.mvpcoreid.ld.maf"
+phenoFile=paste("./output/HARE_ANC_Run", phenoID, group, "inputs", paste("PhenoFile", phenoID, group, "txt", sep="."), sep="/")
 output_col = paste(output_path, paste("phewas.ld.maf", phenoID, group, "out", sep="."), sep="/")
 outputlog_col = paste(output_path, paste("phewas.ld.maf", phenoID, group, "log", sep="."), sep="/")
 

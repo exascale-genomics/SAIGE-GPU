@@ -16,10 +16,10 @@ outrds = args[3]
 sampF="Release4.dose.mvpcoreid.psam"
 rdaF= paste("phewas.ld.maf", phenoID, group, "out.rda", sep=".")
 varF= paste("phewas.ld.maf", phenoID, group, "out.varianceRatio.txt", sep=".")
-base_path = "/gpfs/alpine/med112/proj-shared/task0101113/output/GIA_ANC_Run"
+base_path = "./output/GIA_ANC_Run"
 step1_input_path= paste(base_path, phenoID, group, "step1", sep="/")
 output_path= paste(base_path, phenoID, group, "step2", sep="/")
-bgen_path="/gpfs/alpine/med112/proj-shared/task0101113/output/pheCodes/inputs/bgen"
+bgen_path="./output/pheCodes/inputs/bgen"
 
 bgen_col = paste("", list.files(bgen_path, pattern="bgen$", full.names=TRUE), sep="")
 bgen_index_col = paste("", paste(bgen_col, "bgi", sep="."), sep="")

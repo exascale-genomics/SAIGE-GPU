@@ -3,7 +3,7 @@ import sys, os, argparse
 #import pandas 
 
 # python ./get_phetype.py --phecode Phe_454_1 
-# for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Binary.ASN.HARE_ANC.filter10cases.txt`; do echo $i; if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/$i/ASN ]; then python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/scripts_for_run/get_phetype_v1.py --phecode $i --ancestry ASN; fi; done
+# for i in `cat ./data/phenotype_data/processed/PhenotypeList.Binary.ASN.HARE_ANC.filter10cases.txt`; do echo $i; if [ ! -d .//output/HARE_ANC_Run/$i/ASN ]; then python .//batch/pre-gwas/scripts_for_run/get_phetype_v1.py --phecode $i --ancestry ASN; fi; done
 
 parser = argparse.ArgumentParser(description='Create Phenotype files and step1 submit files.')
 parser.add_argument('--skip-phenotype', dest='skip_phenotype', action='store_true',
@@ -17,32 +17,26 @@ args = parser.parse_args()
 # goal is to create the phenotype and covariates files for a phecode for each ethnic group
 
 # this part is always the same for each phecode
-#path = "/gpfs/alpine/proj-shared/med112/task0107528/task0105060"
-#path = "/gpfs/alpine/med112/proj-shared/task0110254"
-#path = "/gpfs/alpine/med112/proj-shared/phenotype_data/"
-path = "/gpfs/alpine/med112/proj-shared/data/phenotype_data"
-PhewasCode_files = ["/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/gwphewas_binary_traits.pheno"]
-quantitative_files = ["/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/gwphewas_quantitative_traits.pheno"]
-#pcs_file = "/gpfs/alpine/proj-shared/med112/task0107885/Release4.mvpcoreid.pcs"
-pcs_path = "/gpfs/alpine/med112/proj-shared/GIA/output/projections/smartpca_loadings_projection/ancestry_pca"
+path = "./data/phenotype_data"
+PhewasCode_files = ["./data/phenotype_data/processed/GIA/gwphewas_binary_traits.pheno"]
+quantitative_files = ["./data/phenotype_data/processed/GIA/gwphewas_quantitative_traits.pheno"]
+pcs_path = "./output/projections/smartpca_loadings_projection/ancestry_pca"
 pc_files = { "EUR" : os.path.join(pcs_path, "EUR/release4.mvp.gia.EUR.pca.eigenvec"),
              "AFR" : os.path.join(pcs_path, "AFR/release4.mvp.gia.AFR.pca.eigenvec") ,
              "AMR" : os.path.join(pcs_path, "AMR/release4.mvp.gia.AMR.pca.eigenvec"),
              "EAS" : os.path.join(pcs_path, "EAS/release4.mvp.gia.EAS.pca.eigenvec")}
-#hare_file = "/gpfs/alpine/proj-shared/med112/task0107885/Release4.mvpcoreid.hare"
-hare_path = "/gpfs/alpine/med112/proj-shared/GIA/output/projections/smartpca_loadings_projection"
+hare_path = "./output/projections/smartpca_loadings_projection"
 hare_files = { "EUR" : os.path.join(hare_path, "release4.mvp.gia.EUR.txt"),
                "AFR" : os.path.join(hare_path, "release4.mvp.gia.AFR.txt") ,
                "AMR" : os.path.join(hare_path, "release4.mvp.gia.AMR.txt"),
                "EAS" : os.path.join(hare_path, "release4.mvp.gia.EAS.txt") }
 
-core_file = "/gpfs/alpine/proj-shared/med112/task0107885/MVP_Core_Opsdflt_CoreDemo_v19_2_toSummit.csv"
-sex_file = "/gpfs/alpine/proj-shared/med112/task0107885/MVP_Core_Opsdflt_CoreDemo_v19_2_toSummit.GIA.csv"
-#output_path = "/gpfs/alpine/proj-shared/med112//task0101113/output/HARE_ANC_Run"
-output_path = "/gpfs/alpine/proj-shared/med112//task0101113/output/GIA_ANC_Run"
-saige_path = "/gpfs/alpine/proj-shared/med112/task0101113/tools/saige-20210825/SAIGE/extdata"
-geno_path = "/gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/inputs/genotypes/prune2"
-#R_path="/ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/bin"
+core_file = "./data/MVP_Core_Opsdflt_CoreDemo_v19_2_toSummit.csv"
+sex_file = "./data/MVP_Core_Opsdflt_CoreDemo_v19_2_toSummit.GIA.csv"
+output_path = "./output/GIA_ANC_Run"
+saige_path = "./tools/saige-20210825/SAIGE/extdata"
+geno_path = "./output/pheCodes/inputs/genotypes/prune2"
+#R_path=".//tools/R-2/R-4.0.3/bin"
 R_path = ""
 
 # separate into hare groups
@@ -88,9 +82,9 @@ for line in fpcs:
 fpcs.close()
 
 # get the gender specific phenotypes
-female_binary_file = "/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Binary.Female.Traits.v2.txt"
-male_binary_file = "/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Binary.Male.Traits.v2.txt"
-female_quant_file = "/gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/PhenotypeList.Quantitative.Female.Traits.txt"
+female_binary_file = "./data/phenotype_data/processed/PhenotypeList.Binary.Female.Traits.v2.txt"
+male_binary_file = "./data/phenotype_data/processed/PhenotypeList.Binary.Male.Traits.v2.txt"
+female_quant_file = "./data/phenotype_data/processed/PhenotypeList.Quantitative.Female.Traits.txt"
 
 gender_specific = {}
 ffb_h = open(female_binary_file, "r")
@@ -229,7 +223,7 @@ for group in pheFiles:
 
     fs.write("output_path=\"%s\"\n" % (step1_outpath))
     nthreads = 42
-    nvme_path = "/mnt/bb/arodriguez"
+    nvme_path = "/mnt/bb/"
     fs.write("nvme_path=%s\n\n" % (nvme_path))
     fs.write("module load gcc/10.2.0\n")
     fs.write("module load cuda/11.1.1\n")
@@ -266,8 +260,8 @@ for group in pheFiles:
     print("Submit files at: %s" % (submit_file))
 
     # create RDS file for step1
-    #scripts_path = "/gpfs/alpine/proj-shared/med112/task0101113/batch/pre-gwas/scripts_for_run"
-    scripts_path = "/gpfs/alpine/proj-shared/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/"
+    #scripts_path = "./batch/pre-gwas/scripts_for_run"
+    scripts_path = "./batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/"
     cmd = "Rscript %s/create_step1_rds.r %s %s %s/step1.%s.%s.rds %s %s" % (scripts_path, phecode, group, step1_outpath, phecode, group, phecodeFlag, gender_code)
     os.system(cmd)
 

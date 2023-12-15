@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys, os, glob, re
 group = sys.argv[1]
-path = "/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run"
+path = "./output/HARE_ANC_Run"
 phe_dirs = glob.glob("%s/*/%s/step2" % (path, group))
 for j in phe_dirs:
     step2_times = {}

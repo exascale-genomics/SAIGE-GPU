@@ -1,6 +1,6 @@
 args = commandArgs(trailingOnly=TRUE)
 
-path="/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run"
+path=".//output/GIA_ANC_Run"
 group = args[1]
 pattern = paste("*step2.downsampled", '*', group, "rds", sep=".")
 pattern_orig = paste("*step2.downsampled", '*', group, "rds.original.rds", sep=".")
@@ -10,8 +10,8 @@ rds_files_orig <- system(sprintf('find "%s" -name "%s"', path, pattern_orig), in
 
 complete_rds <- NULL
 complete_orig_rds <- NULL
-out_rds <- paste("/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/complete_step2.downsample.gpu", group, "rds", sep=".")
-out_rds_orig <- paste("/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/complete_step2.downsample.original.gpu", group, "rds", sep=".")
+out_rds <- paste(".//output/GIA_ANC_Run/SUBMIT/complete_step2.downsample.gpu", group, "rds", sep=".")
+out_rds_orig <- paste(".//output/GIA_ANC_Run/SUBMIT/complete_step2.downsample.original.gpu", group, "rds", sep=".")
 
 for (rds in rds_files_orig)
 {

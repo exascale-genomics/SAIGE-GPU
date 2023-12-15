@@ -1,6 +1,6 @@
 args = commandArgs(trailingOnly=TRUE)
 
-path="/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run"
+path="./output/HARE_ANC_Run"
 pheno_file = args[1]
 pheno_list <- read.table(pheno_file, header=F)
 rds_files <- c()
@@ -17,7 +17,6 @@ for (pheno in pheno_list$V1) {
 }
 
 complete_rds <- NULL
-#out_rds <- paste("/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/SUBMIT/complete_step2.gender_specific.gpu", "rds", sep=".")
 out_rds <- args[2]
 
 for (rds in rds_files)
@@ -35,7 +34,7 @@ for (rds in rds_files)
 	x$var_col <- gsub("out.varianceRatio.txt", "out.gpu.varianceRatio.txt", x$var_col)
 	x$GMMAT_col <- gsub("out.rda", "out.gpu.rda", x$GMMAT_col)
 	x$group <- data.frame(do.call('rbind', strsplit(as.character(basename(x$output_col)),'.',fixed=TRUE)))$X6
-	x$include_file <- paste("/gpfs/alpine/med112/proj-shared/data/genetic_annotations", paste("R4.include_Imp3MAC20.HARE", x$group, "txt.gz", sep="."), sep="/")
+	x$include_file <- paste("./data/genetic_annotations", paste("R4.include_Imp3MAC20.HARE", x$group, "txt.gz", sep="."), sep="/")
 	#complete_rds <- rbind(complete_rds, x[x$'step2_complete' == FALSE,])
 	complete_rds <- rbind(complete_rds, x)
       }

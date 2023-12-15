@@ -1,6 +1,6 @@
 args = commandArgs(trailingOnly=TRUE)
 
-path="/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run"
+path="./output/HARE_ANC_Run"
 group = args[1]
 pattern = paste("step2", '*', group, "rds", sep=".")
 #rds_files <- list.files(path, pattern = pattern, recursive = TRUE)
@@ -25,14 +25,14 @@ module_list = c("module load python/2.7.15-anaconda2-5.3.0",
                 "module load spectrum-mpi/10.4.0.3-20210112")
 
 complete_rds <- NULL
-out_rds <- paste("/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/SUBMIT/complete_step2.finishedstep1tasks.gpu", group, "rds", sep=".")
+out_rds <- paste("./output/HARE_ANC_Run/SUBMIT/complete_step2.finishedstep1tasks.gpu", group, "rds", sep=".")
 count = 0
 submit_count = 1
 for (rds in rds_files)
 {
     if (count == 0){
         # write the header
-	submit_file <- paste("/ccs/home/arodriguez/med112/task0101113/output/HARE_ANC_Run/SUBMIT", paste("submit.step2.all", group, "nvlm.includesnps.parallel.gpu", submit_count, "txt", sep="."), sep="/")
+	submit_file <- paste("./output/HARE_ANC_Run/SUBMIT", paste("submit.step2.all", group, "nvlm.includesnps.parallel.gpu", submit_count, "txt", sep="."), sep="/")
         cat("#!/bin/bash\n", file=submit_file, append=FALSE)
         cat(paste(total_nodes, "\n", sep=""), file=submit_file, append=TRUE)
         cat(paste(wall_time, "\n", sep=""), file=submit_file, append=TRUE)
@@ -61,15 +61,15 @@ for (rds in rds_files)
 	# get run_name
         x$varianceRatioFile_base = basename(x$var_col)
         x$run_name = paste(unlist(strsplit(x$varianceRatioFile_base, ".", fixed=T))[4], unlist(strsplit(x$varianceRatioFile_base, ".", fixed=T))[5], basename(x$bgen_col), sep=".")
-        x$nvlm_path = paste("/mnt/bb/arodriguez", x$run_name, sep="/")
+        x$nvlm_path = paste("/mnt/bb", x$run_name, sep="/")
         ####dir.create(nvlm_path)
 	x$cmd <- paste("jsrun -n1 -c1 csh -c \'mkdir", "-p", x$nvlm_path)
 
 	# get the include list file
         x$local_group = unlist(strsplit(x$varianceRatioFile_base, ".", fixed=T))[5]
         x$include_list_file = NULL
-        x$include_path = "/gpfs/alpine/med112/proj-shared/data/genetic_annotations/"
-        #include_path = "/ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/scripts_for_run/"
+        x$include_path = "./proj-shared/data/genetic_annotations/"
+        #include_path = ".//batch/pre-gwas/scripts_for_run/"
 	x$include_list_file = paste(x$include_path, paste("R4.include_Imp3MAC20.HARE", x$local_group, "txt.gz", sep="."), sep="/")
         x$nvlm_include_path = paste(x$nvlm_path, paste("R4.include_Imp3MAC20.HARE", x$local_group, "txt.gz", sep="."), sep="/")
 
@@ -84,8 +84,7 @@ for (rds in rds_files)
         x$nvlm_logfile <- paste(x$nvlm_path, paste(x$outFile_base, "log", sep="."), sep="/")
         ####print(paste("START", node_outfile_path, Sys.time(), sep=" "))
 	x$cmd <- paste(x$cmd, paste("echo", "START", x$node_outfile_path, "`date`"), sep="; ")
-        ####system(paste("Rscript ", "/ccs/home/arodriguez/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/step2_SPAtests.R", " --bgenFile ",  bgenFile, " --bgenFileIndex ", bgenFileIndex, " --minMAF=0.0001 --minMAC=20 --markers_per_chunk=10000 --LOCO=TRUE --chrom=", chromosome, " --GMMATmodelFile ", GMMATmodelFile, " --varianceRatioFile ", varianceRatioFile, " --sampleFile ", sampleFile, " --SAIGEOutputFile ", node_outfile_path, " --idstoIncludeFile ", nvlm_include_path, " --is_Firth_beta=TRUE --pCutoffforFirth=0.05 > ", nvlm_logfile, sep=" "))
-	x$cmd <- paste(x$cmd, paste("Rscript", "/ccs/home/arodriguez/med112/task0101113/tools/saige_20220326/SAIGE-DOE/extdata/step2_SPAtests.R", " --bgenFile ",  x$bgen_col, " --bgenFileIndex ", x$bgen_index_col, " --minMAF=0.01 --minMAC=20 --markers_per_chunk=10000 --LOCO=TRUE", paste("--chrom=", x$chromosome, sep=""), " --GMMATmodelFile ", x$GMMAT_col, " --varianceRatioFile ", x$var_col, " --sampleFile ", x$samp_col, " --SAIGEOutputFile ", x$node_outfile_path, " --idstoIncludeFile ", x$nvlm_include_path, " --is_Firth_beta=TRUE --pCutoffforFirth=0.05 > ", x$nvlm_logfile), sep="; ")
+	x$cmd <- paste(x$cmd, paste("Rscript", "./SAIGE-DOE/extdata/step2_SPAtests.R", " --bgenFile ",  x$bgen_col, " --bgenFileIndex ", x$bgen_index_col, " --minMAF=0.01 --minMAC=20 --markers_per_chunk=10000 --LOCO=TRUE", paste("--chrom=", x$chromosome, sep=""), " --GMMATmodelFile ", x$GMMAT_col, " --varianceRatioFile ", x$var_col, " --sampleFile ", x$samp_col, " --SAIGEOutputFile ", x$node_outfile_path, " --idstoIncludeFile ", x$nvlm_include_path, " --is_Firth_beta=TRUE --pCutoffforFirth=0.05 > ", x$nvlm_logfile), sep="; ")
         ####file.copy(node_outfile_path, SAIGEOutputFile, overwrite=TRUE)
 	x$cmd <- paste(x$cmd, paste("cp", x$node_outfile_path, x$output_col), sep="; ")
         ####file.copy(nvlm_logfile, paste(logfile, "log", sep="."), overwrite=TRUE)

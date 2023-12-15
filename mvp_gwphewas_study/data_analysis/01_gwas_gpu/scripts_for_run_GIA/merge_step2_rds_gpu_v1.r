@@ -1,13 +1,13 @@
 args = commandArgs(trailingOnly=TRUE)
 
-path="/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run"
+path=".//output/GIA_ANC_Run"
 group = args[1]
 pattern = paste("step2", '*', group, "rds", sep=".")
 #rds_files <- list.files(path, pattern = pattern, recursive = TRUE)
 rds_files <- system(sprintf('find "%s" -name "%s"', path, pattern), intern=TRUE)
 
 complete_rds <- NULL
-out_rds <- paste("/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/complete_step2.finishedstep1tasks.gpu", group, "rds", sep=".")
+out_rds <- paste(".//output/GIA_ANC_Run/SUBMIT/complete_step2.finishedstep1tasks.gpu", group, "rds", sep=".")
 for (rds in rds_files)
 {
     var_files <- list.files(path=paste(dirname(rds), "../step1", sep="/"), pattern = "\\.gpu.varianceRatio.txt$")
