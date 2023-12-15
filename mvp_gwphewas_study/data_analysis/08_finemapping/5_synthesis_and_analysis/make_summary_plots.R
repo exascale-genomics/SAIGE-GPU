@@ -610,11 +610,9 @@ dev.off()
 
 ### Make plot for lead SNPS ###
 #Read in lead snps file
-leads_raw <- read.csv(paste0(work_dir, "Table-Sxx-all.pheno.meta.gia.lead.snps.w_summary.csv"), sep = ",", header = TRUE)
+leads_raw <- read.csv(paste0(work_dir, "Table-S3-all.pheno.meta.gia.lead.snps.w_summary.csv"), sep = ",", header = TRUE)
 #Modify novelty data
-leads_raw$Novel <- ifelse(leads_raw$Known_Association, "Known Association",
-                                      ifelse(leads_raw$Novel_Association_Known_Signal, "Novel Association Known Signal", 
-                                             ifelse(leads_raw$Novel_Signal, "Novel Signal", NA)))
+leads_raw$Novel <- leads_raw$Locus_Novelty
 
 #Append on trait type information
 leads_raw$ttype <- trait_raw[leads_raw$Trait,"Trait_Type"]
@@ -622,12 +620,12 @@ leads_raw$ttype <- trait_raw[leads_raw$Trait,"Trait_Type"]
 #Create plotting dataframes
 leads_signal_summ_q <- leads_raw %>%
   filter(ttype=="quantitative") %>%
-  mutate(AF.up=ifelse(AF>0.5, 1-AF, AF)) %>%
-  mutate(Beta.up=ifelse(AF>0.5, -(Beta), Beta))
+  mutate(AF.up=MAF) %>%
+  mutate(Beta.up=ifelse(EAF>0.5, -(Beta), Beta))
 leads_signal_summ_b <- leads_raw %>%
   filter(ttype=="binary") %>%
-  mutate(AF.up=ifelse(AF>0.5, 1-AF, AF)) %>%
-  mutate(or.up=ifelse(AF>0.5, exp(-(Beta)), exp(Beta)))
+  mutate(AF.up=MAF) %>%
+  mutate(or.up=ifelse(EAF>0.5, exp(-(Beta)), exp(Beta)))
 #Recode novelty columns as factors
 leads_signal_summ_q$Novel <- factor(leads_signal_summ_q$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
 leads_signal_summ_b$Novel <- factor(leads_signal_summ_b$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
