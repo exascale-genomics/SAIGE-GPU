@@ -1,0 +1,626 @@
+[1] "PhenoFile.Phe_994.EUR.txt"
+[1] "PhenoFile.Phe_755_1.EUR.txt"
+[1] "PhenoFile.Phe_133.EUR.txt"
+[1] "PhenoFile.Phe_610_2.EUR.txt"
+[1] "PhenoFile.Phe_704.EUR.txt"
+[1] "PhenoFile.Phe_443.EUR.txt"
+[1] "PhenoFile.Phe_253_3.EUR.txt"
+[1] "PhenoFile.Phe_292_5.EUR.txt"
+[1] "PhenoFile.Phe_368_9.EUR.txt"
+[1] "PhenoFile.A1C_Max.EUR.txt"
+[1] "PhenoFile.Phe_531_5.EUR.txt"
+[1] "PhenoFile.MPV_Min.EUR.txt"
+[1] "PhenoFile.Eos_Abs_Mean.EUR.txt"
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_755_1.EUR/PhenoFile.Phe_755_1.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_531_5.EUR/PhenoFile.Phe_531_5.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_292_5.EUR/PhenoFile.Phe_292_5.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_368_9.EUR/PhenoFile.Phe_368_9.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_253_3.EUR/PhenoFile.Phe_253_3.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_443.EUR/PhenoFile.Phe_443.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_994.EUR/PhenoFile.Phe_994.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_133.EUR/PhenoFile.Phe_133.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_610_2.EUR/PhenoFile.Phe_610_2.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+658582  samples have genotypes
+658582  samples have genotypes
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Phe_704.EUR/PhenoFile.Phe_704.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+658582  samples have genotypes
+658582  samples have genotypes
+658582  samples have genotypes
+658582  samples have genotypes
+658582  samples have genotypes
+658582  samples have genotypes
+658582  samples have genotypes
+658582  samples have genotypes
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+445997  samples have non-missing phenotypes
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+458200  samples have non-missing phenotypes
+453453  samples have non-missing phenotypes
+436908  samples have non-missing phenotypes
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+458063  samples have non-missing phenotypes
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+432943  samples have non-missing phenotypes
+443137  samples have non-missing phenotypes
+457808  samples have non-missing phenotypes
+457837  samples have non-missing phenotypes
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+435492  samples have non-missing phenotypes
+212585  samples in geno file do not have phenotypes
+445997  samples will be used for analysis
+205129  samples in geno file do not have phenotypes
+453453  samples will be used for analysis
+200382  samples in geno file do not have phenotypes
+458200  samples will be used for analysis
+221674  samples in geno file do not have phenotypes
+436908  samples will be used for analysis
+200519  samples in geno file do not have phenotypes
+458063  samples will be used for analysis
+225639  samples in geno file do not have phenotypes
+432943  samples will be used for analysis
+215445  samples in geno file do not have phenotypes
+443137  samples will be used for analysis
+200774  samples in geno file do not have phenotypes
+457808  samples will be used for analysis
+200745  samples in geno file do not have phenotypes
+457837  samples will be used for analysis
+223090  samples in geno file do not have phenotypes
+435492  samples will be used for analysis
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+qr transformation has been performed on covariates
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a binary trait
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+ 3.734785  -0.037064   0.126984   0.122164   0.022150   0.002027  -0.004965  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+ 0.008638  -0.045235  -0.002330  -0.010822  -0.013281   0.003103  -0.020508  
+
+Degrees of Freedom: 436908 Total (i.e. Null);  436894 Residual
+Null Deviance:	    605700 
+Residual Deviance: 97550 	AIC: 97580
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 29.022  35.745  59.780 
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+    minus1         Age     GenderF     GenderM         pc1         pc2  
+ 3.2507555  -0.2371874  -0.0574457   0.0740010   0.0127274  -0.0108967  
+       pc3         pc4         pc5         pc6         pc7         pc8  
+ 0.0448090  -0.0782185  -0.0768649   0.0004817  -0.0107875  -0.0018913  
+       pc9        pc10  
+ 0.0125032  -0.0032774  
+
+Degrees of Freedom: 443137 Total (i.e. Null);  443123 Residual
+Null Deviance:	    614300 
+Residual Deviance: 143600 	AIC: 143600
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 28.747  36.170  61.858 
+[1] "Start reading genotype plink file here"
+[1] "Start reading genotype plink file here"
+nbyte: 164646
+nbyte: 109227
+reserve: 18782035968
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+nbyte: 164646
+nbyte: 110785
+reserve: 19049934848
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/A1C_Max.EUR/PhenoFile.A1C_Max.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+ 5.745913   0.281500   0.064845   0.065561   0.010239   0.001257   0.065089  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+-0.027239  -0.093034  -0.019049   0.011437   0.019350  -0.034317   0.018426  
+
+Degrees of Freedom: 453453 Total (i.e. Null);  453439 Residual
+Null Deviance:	    628600 
+Residual Deviance: 20230 	AIC: 20260
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 30.168  35.756  60.096 
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/MPV_Min.EUR/PhenoFile.MPV_Min.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+[1] "Start reading genotype plink file here"
+tauInit  is  0 0 
+cateVarRatioMinMACVecExclude  is  0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+cateVarRatioMaxMACVecInclude  is  1.5 2.5 3.5 4.5 5.5 10.5 20.5 
+[1] "Phenotype for this run: /mnt/bb/arodriguez/Eos_Abs_Mean.EUR/PhenoFile.Eos_Abs_Mean.EUR.txt"
+Markers in the Plink file with MAF >=  1e-04  will be used to construct GRM
+42  threads are set to be used  
+nbyte: 164646
+nbyte: 113364
+reserve: 19493396480
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+658582  samples have genotypes
+658582  samples have genotypes
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+  minus1       Age   GenderF   GenderM       pc1       pc2       pc3       pc4  
+ 7.13690  -0.10965  -0.07858   0.04916  -0.06329   0.04657   0.06093  -0.02431  
+     pc5       pc6       pc7       pc8       pc9      pc10  
+ 0.01296   0.11190  -0.02401   0.05703  -0.05930   0.11205  
+
+Degrees of Freedom: 457808 Total (i.e. Null);  457794 Residual
+Null Deviance:	    634700 
+Residual Deviance: 6058 	AIC: 6086
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 32.681  36.152  62.985 
+[1] "Start reading genotype plink file here"
+658582  samples have genotypes
+nbyte: 164646
+nbyte: 114452
+reserve: 19680479232
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+ 2.340079   0.607130   0.088777  -0.098509  -0.002974   0.001986   0.023574  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+-0.025580   0.002248   0.022737  -0.010332   0.001555  -0.022599  -0.044437  
+
+Degrees of Freedom: 432943 Total (i.e. Null);  432929 Residual
+Null Deviance:	    600200 
+Residual Deviance: 269300 	AIC: 269400
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 45.747  35.910  64.013 
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+[1] "Start reading genotype plink file here"
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+ 3.702226   0.071821   0.074642   0.040011  -0.041500   0.025079  -0.037558  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+ 0.035613   0.006829  -0.008660   0.008944  -0.003019   0.033051   0.013730  
+
+Degrees of Freedom: 445997 Total (i.e. Null);  445983 Residual
+Null Deviance:	    618300 
+Residual Deviance: 101700 	AIC: 101800
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 45.941  35.446  63.795 
+344310  samples have non-missing phenotypes
+nbyte: 164646
+nbyte: 108236
+reserve: 18611632128
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+340443  samples have non-missing phenotypes
+[1] "Start reading genotype plink file here"
+formula is  Phenotype~Age+Gender+pc1+pc2+pc3+pc4+pc5+pc6+pc7+pc8+pc9+pc10 
+nbyte: 164646
+nbyte: 111500
+reserve: 19172880384
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+ 3.519211   0.239130   0.105894   0.104729  -0.017087   0.001182  -0.009274  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+ 0.088832  -0.008391  -0.001810  -0.006005  -0.019221  -0.040553  -0.049684  
+
+Degrees of Freedom: 435492 Total (i.e. Null);  435478 Residual
+Null Deviance:	    603700 
+Residual Deviance: 116200 	AIC: 116300
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 45.862  36.921  66.009 
+316043  samples have non-missing phenotypes
+[1] "Start reading genotype plink file here"
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+ 7.107411  -0.035329   0.074737   0.934973   0.037969   0.107828   0.029590  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+-0.026556  -0.022717   0.007363  -0.043055   0.058346  -0.044710  -0.032050  
+
+Degrees of Freedom: 458063 Total (i.e. Null);  458049 Residual
+Null Deviance:	    635000 
+Residual Deviance: 6490 	AIC: 6518
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 38.282  36.039  66.174 
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+10.511294   0.146728   1.682903   0.628906   0.106587   0.050223   0.024187  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+ 0.048202  -0.228113   0.016845   0.078510   0.046150   0.030908  -0.008337  
+
+Degrees of Freedom: 457837 Total (i.e. Null);  457823 Residual
+Null Deviance:	    634700 
+Residual Deviance: 4298 	AIC: 4326
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 37.316  36.648  67.510 
+nbyte: 164646
+nbyte: 108873
+reserve: 18721165312
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+[1] "Start reading genotype plink file here"
+[1] "Start reading genotype plink file here"
+nbyte: 164646
+nbyte: 114516
+reserve: 19691485184
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+nbyte: 164646
+nbyte: 114460
+reserve: 19681855488
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+314272  samples in geno file do not have phenotypes
+344310  samples will be used for analysis
+qr transformation has been performed on covariates
+318139  samples in geno file do not have phenotypes
+340443  samples will be used for analysis
+qr transformation has been performed on covariates
+342539  samples in geno file do not have phenotypes
+316043  samples will be used for analysis
+qr transformation has been performed on covariates
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a quantitative trait
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a quantitative trait
+glm:
+
+Call:  glm(formula = formula.new, family = gaussian(link = "identity"), 
+    data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+-9.391308  -0.021964  -0.003670  -0.023726  -0.012000   0.012486  -0.027247  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+ 0.060371   0.051176   0.025502  -0.005041  -0.001487  -0.011379  -0.004427  
+
+Degrees of Freedom: 340443 Total (i.e. Null);  340429 Residual
+Null Deviance:	    30570000 
+Residual Deviance: 539600 	AIC: 1123000
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 30.736  50.012  73.255 
+[1] "Start reading genotype plink file here"
+colnames(data.new) is  Y minus1 Age GenderF GenderM pc1 pc2 pc3 pc4 pc5 pc6 pc7 pc8 pc9 pc10 
+out.transform$Param.transform$qrr:  14 14 
+Phenotype  is a quantitative trait
+nbyte: 164646
+nbyte: 85111
+reserve: 14635265024
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+glm:
+
+Call:  glm(formula = formula.new, family = gaussian(link = "identity"), 
+    data = data.new)
+
+Coefficients:
+    minus1         Age     GenderF     GenderM         pc1         pc2  
+-0.2115578  -0.0102643  -0.0069568   0.0004152   0.0006416  -0.0007978  
+       pc3         pc4         pc5         pc6         pc7         pc8  
+ 0.0012858  -0.0038783  -0.0015313  -0.0022919  -0.0005148  -0.0007539  
+       pc9        pc10  
+ 0.0009001   0.0012873  
+
+Degrees of Freedom: 316043 Total (i.e. Null);  316029 Residual
+Null Deviance:	    21750 
+Residual Deviance: 7551 	AIC: -283300
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 40.233  49.551  75.023 
+[1] "Start reading genotype plink file here"
+glm:
+
+Call:  glm(formula = formula.new, family = gaussian(link = "identity"), 
+    data = data.new)
+
+Coefficients:
+   minus1        Age    GenderF    GenderM        pc1        pc2        pc3  
+-6.509104  -0.205477  -0.087857  -0.031923  -0.001031   0.006027  -0.021449  
+      pc4        pc5        pc6        pc7        pc8        pc9       pc10  
+-0.031499  -0.049292   0.007303   0.005822   0.002600   0.007399  -0.016098  
+
+Degrees of Freedom: 344310 Total (i.e. Null);  344296 Residual
+Null Deviance:	    15470000 
+Residual Deviance: 864100 	AIC: 1294000
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 41.730  49.208  75.972 
+nbyte: 164646
+nbyte: 79011
+reserve: 13586364416
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+[1] "Start reading genotype plink file here"
+glm:
+
+Call:  glm(formula = formula.new, family = binomial, data = data.new)
+
+Coefficients:
+  minus1       Age   GenderF   GenderM       pc1       pc2       pc3       pc4  
+ 8.15139  -0.11067   0.34635   0.91331  -0.07930   0.01635  -0.06809  -0.01200  
+     pc5       pc6       pc7       pc8       pc9      pc10  
+-0.05771  -0.05057  -0.02807   0.02232  -0.05263  -0.12653  
+
+Degrees of Freedom: 458200 Total (i.e. Null);  458186 Residual
+Null Deviance:	    635200 
+Residual Deviance: 2722 	AIC: 2750
+Start fitting the NULL GLMM
+   user  system elapsed 
+ 82.384  35.528  77.325 
+[1] "Start reading genotype plink file here"
+nbyte: 164646
+nbyte: 86078
+reserve: 14801542144
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+nbyte: 164646
+nbyte: 114550
+reserve: 19697330176
+
+M: 171951, N: 658582
+size of genoVecofPointers: 15
+setgeno mark1
+setgeno mark2
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 432943 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 436908 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 435492 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 443137 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 453453 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 445997 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 457837 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 457808 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 458200 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 458063 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 316043 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 344310 N
+171950 markers with MAF >= 0.0001 are used for GRM.
+setgeno mark5
+setgeno mark6
+M by N size: 171951 M, 340443 N
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@batch1>
+Subject: Job 1686657: <all.s1.EUR> in cluster <summit> Exited
+
+Job <all.s1.EUR> was submitted from host <login2> by user <arodriguez> in cluster <summit> at Sat Dec 11 21:49:07 2021
+Job was executed on host(s) <1*batch1>, in queue <batch-hm>, as user <arodriguez> in cluster <summit> at Wed Dec 15 17:47:32 2021
+                            <42*c37n11>
+                            <42*c37n10>
+                            <42*c37n08>
+                            <42*d37n08>
+                            <42*d37n07>
+                            <42*d37n06>
+                            <42*d37n05>
+                            <42*d37n04>
+                            <42*d37n03>
+                            <42*d37n02>
+                            <42*e37n17>
+                            <42*e37n12>
+                            <42*e37n02>
+</ccs/home/arodriguez> was used as the home directory.
+</ccs/home/arodriguez/med112/task0101113/output/FullRun/SUBMIT> was used as the working directory.
+Started at Wed Dec 15 17:47:32 2021
+Terminated at Wed Dec 15 19:01:42 2021
+Results reported at Wed Dec 15 19:01:42 2021
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <all.s1.run2.EUR.stderr> for stderr output of this job.
+

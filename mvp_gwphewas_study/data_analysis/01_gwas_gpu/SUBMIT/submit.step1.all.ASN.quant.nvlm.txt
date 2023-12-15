@@ -1,0 +1,16 @@
+#!/bin/bash
+#BSUB -nnodes 100
+#BSUB -W 6:00
+#BSUB -q batch
+#BSUB -P MED112
+#BSUB -o all.s1.run2.quant.ASN.stdout
+#BSUB -e all.s1.run2.quant.ASN.stderr
+#BSUB -J all.s1.quant.ASN
+#BSUB -alloc_flags "nvme"
+
+module load gcc/10.2.0
+module load cuda/11.1.1
+module load openblas
+module load bzip2
+module load hdf5
+jsrun -n1300 -a1 -g6 -r1 --smpiargs="-disable_gpu_hooks" -E NVBLAS_CONFIG_FILE=~/gemm/nvblas.conf -E LD_PRELOAD=$OLCF_CUDA_ROOT/lib64/libnvblas.so /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/bin/Rscript /gpfs/alpine/proj-shared/med112/task0101113/batch/pre-gwas/scripts_for_run/submit_step1_with_nvme.r /gpfs/alpine/proj-shared/med112/task0101113/output/FullRun/SUBMIT/complete_step1.tasks.ASN.quant.rds all ASN

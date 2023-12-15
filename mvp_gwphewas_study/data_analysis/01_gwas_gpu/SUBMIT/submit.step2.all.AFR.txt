@@ -1,0 +1,16 @@
+#!/bin/bash
+#BSUB -nnodes 2000
+#BSUB -W 24:00
+#BSUB -q batch
+#BSUB -P MED112
+#BSUB -o all_completed_tasks.s2.AFR.stdout
+#BSUB -e all_completed_tasks.s2.AFR.stderr
+#BSUB -J all_completed_tasks_s2.AFR
+
+module load gcc/10.2.0
+module load cuda/11.1.1
+module load openblas
+module load bzip2
+module load hdf5
+
+jsrun -n84000 -a1 -c1 -r42 /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/bin/Rscript /gpfs/alpine/proj-shared/med112/task0101113/batch/pre-gwas/submit_step2.r /gpfs/alpine/proj-shared/med112/task0101113/output/pheCodes/complete_step2.tasks.AFR.rds all_AFR_phecodes2 all_AFR_groups2

@@ -1,0 +1,74 @@
+# create submit files: EAS, AMR, AFR, EUR
+submit_preprocess_file="/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/submit.preprocess_saige.sh"
+echo '#!/bin/bash' > $submit_preprocess_file
+echo '#BSUB -nnodes 4' >> $submit_preprocess_file
+echo '#BSUB -W 24:00' >> $submit_preprocess_file
+echo '#BSUB -q batch-hm' >> $submit_preprocess_file
+echo '#BSUB -P MED112' >> $submit_preprocess_file
+echo '#BSUB -o preprocess.stdout' >> $submit_preprocess_file
+echo '#BSUB -e preprocess.stderr' >> $submit_preprocess_file
+echo '#BSUB -J preprocess.saige' >> $submit_preprocess_file
+echo '#BSUB -alloc_flags nvme' >> $submit_preprocess_file
+echo "" >> $submit_preprocess_file
+echo "module load python/2.7.15-anaconda2-5.3.0" >> $submit_preprocess_file
+echo "module load r/4.0.5" >> $submit_preprocess_file
+echo "module load gcc/9.1.0" >> $submit_preprocess_file
+echo "module load cmake" >> $submit_preprocess_file
+echo "module load openblas" >> $submit_preprocess_file
+echo "module load cuda/11.0.2" >> $submit_preprocess_file
+echo "module load spectrum-mpi/10.4.0.3-20210112" >> $submit_preprocess_file
+
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Binary.EAS.GIA_ANC.filter200cases.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/EAS ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry EAS &" >> $submit_preprocess_file; fi; done
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Quantitative.EAS.GIA_ANC.filter1000samples.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/EAS ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry EAS &" >> $submit_preprocess_file; fi; done
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Binary.AMR.GIA_ANC.filter200cases.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/AMR ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry AMR &" >> $submit_preprocess_file; fi; done
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Quantitative.AMR.GIA_ANC.filter1000samples.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/AMR ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry AMR &" >> $submit_preprocess_file; fi; done
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Binary.AFR.GIA_ANC.filter200cases.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/AFR ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry AFR &" >> $submit_preprocess_file; fi; done
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Quantitative.AFR.GIA_ANC.filter1000samples.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/AFR ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry AFR &" >> $submit_preprocess_file; fi; done
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Binary.EUR.GIA_ANC.filter200cases.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/EUR ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry EUR &" >> $submit_preprocess_file; fi; done
+for i in `cat /gpfs/alpine/med112/proj-shared/data/phenotype_data/processed/GIA/PhenotypeList.Quantitative.EUR.GIA_ANC.filter1000samples.txt`; do if [ ! -d /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/$i/EUR ]; then echo "jsrun -n1 -c1 python /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/get_phetype_v1.py --phecode $i --ancestry EUR &" >> $submit_preprocess_file; fi; done
+echo "wait" >> $submit_preprocess_file
+
+# create step1 submit file
+Rscript /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_parallel_submit_file.v1.r EAS > /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/submit.step1.parallel.EAS.gpu.txt
+Rscript /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_parallel_submit_file.v1.r AMR > /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/submit.step1.parallel.AMR.gpu.txt
+Rscript /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_parallel_submit_file.v1.r AFR > /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/submit.step1.parallel.AFR.gpu.txt
+Rscript /ccs/home/arodriguez/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/create_parallel_submit_file.v1.r EUR > /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/submit.step1.parallel.EUR.gpu.txt
+
+# submit step1 jobs
+# modify the number of nodes to ask for appropriately for batch-hm (2x for batch)
+# 1 GPU per job for EAS
+# 1 GPU per job for AMR
+# 2 GPU per job for AFR
+# 8 GPU per job for EUR
+
+cd /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/
+bsub ./submit.step1.parallel.EAS.gpu.txt
+bsub ./submit.step1.parallel.AMR.gpu.txt
+bsub ./submit.step1.parallel.AFR.gpu.txt
+bsub ./submit.step1.parallel.EUR.gpu.txt
+
+# create step2 job submit files
+submit_step2_file="/ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/submit.step2.all.EAS.nvlm.includesnps.gpu.txt"
+cd /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT
+Rscript ../../../batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/merge_step2_rds_gpu_v1.r EAS
+echo '#!/bin/bash' > $submit_step2_file
+echo '#BSUB -nnodes 3' >> $submit_step2_file
+echo '#BSUB -W 2:00' >> $submit_step2_file
+echo '#BSUB -q batch' >> $submit_step2_file
+echo '#BSUB -P MED112' >> $submit_step2_file
+echo '#BSUB -o s2.EAS.run1.stdout.locotrue.gpu' >> $submit_step2_file
+echo '#BSUB -e s2.EAS.run1.stderr.locotrue.gpu' >> $submit_step2_file
+echo '#BSUB -J s2.EAS' >> $submit_step2_file
+echo '#BSUB -alloc_flags "nvme"' >> $submit_step2_file
+echo '' >> $submit_step2_file
+echo 'module load python/2.7.15-anaconda2-5.3.0' >> $submit_step2_file
+echo 'module load r/4.0.5' >> $submit_step2_file
+echo 'module load gcc/9.1.0' >> $submit_step2_file
+echo 'module load cmake' >> $submit_step2_file
+echo 'module load openblas' >> $submit_step2_file
+echo 'module load cuda/11.0.2' >> $submit_step2_file
+echo 'module load spectrum-mpi/10.4.0.3-20210112' >> $submit_step2_file
+echo '' >> $submit_step2_file
+
+echo 'jsrun -n126 -a1 -c1 -r42 Rscript /gpfs/alpine/proj-shared/med112/task0101113/batch/pre-gwas/gwPheWAS-Summit/scripts_for_run_GIA/submit_step2_with_nvme.latestSaigeVersion_withIncludeSnps.r /ccs/home/arodriguez/med112/task0101113/output/GIA_ANC_Run/SUBMIT/complete_step2.finishedstep1tasks.gpu.EAS.rds all.s2.EAS EAS 126' >> $submit_step2_file
+

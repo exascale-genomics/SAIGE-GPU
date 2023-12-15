@@ -1,0 +1,11 @@
+module load gcc/10.2.0
+module load bzip2
+module load openblas
+module load hdf5
+module load python/2.7.15-anaconda2-5.3.0
+module load cmake
+module load mercurial
+module load openblas
+module load  cuda/11.1.1
+R_LIB=/gpfs/alpine/proj-shared/med112/task0101113/tools/R-2/R-4.0.3/library/
+export PATH=$PATH:/gpfs/alpine/proj-shared/med112/task0101113/tools/R-2/R-4.0.3/bin

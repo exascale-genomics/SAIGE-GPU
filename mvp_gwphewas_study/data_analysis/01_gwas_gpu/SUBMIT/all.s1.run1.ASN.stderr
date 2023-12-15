@@ -1,0 +1,589 @@
+-------------------------------------------------------------------------------
+There are messages associated with the following module(s):
+-------------------------------------------------------------------------------
+
+cuda/11.1.1:
+  This modulefile is provided for testing purposes only. If you encounter
+  issues, please report them to help@olcf.ornl.gov.
+
+-------------------------------------------------------------------------------
+
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+sh: line 1: 2309618 Aborted                 (core dumped) /usr/bin/which 'uname' 2> /dev/null
+Warning: PAMI CUDA HOOK disabled
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+sh: line 1: 4165608 Aborted                 (core dumped) /usr/bin/which 'uname' 2> /dev/null
+Warning: PAMI CUDA HOOK disabled
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=6411, n=6411, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7859, n=7859, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=6411, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=7859, n=14, k=14
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7859
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=6411, n=6411, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=6411, n=14, k=14
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=8007, n=8007, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8007
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8007
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8007
+
+warning: inv_sympd(): given matrix is not symmetric
+Timing stopped at: 1095 3.862 814.8
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=6411, n=6411, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=6411, n=14, k=14
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7935, n=7935, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7935
+
+warning: inv_sympd(): given matrix is not symmetric
+Timing stopped at: 721.8 3.893 720.9
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=6411, n=6411, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=6411, n=14, k=14
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=8049, n=8049, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8049
+
+warning: inv_sympd(): given matrix is not symmetric
+Timing stopped at: 747.3 3.924 727.6
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=6411, n=6411, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=6411, n=14, k=14
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7968, n=7968, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7968
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7968
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7968
+
+warning: inv_sympd(): given matrix is not symmetric
+Timing stopped at: 1071 3.989 808.4
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=6411, n=6411, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=6411, n=14, k=14
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=6411
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=8050, n=8050, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+
+warning: inv_sympd(): given matrix is not symmetric
+Timing stopped at: 2024 5.156 1047
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7161, n=7161, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+Timing stopped at: 2576 4.814 1183
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=8050, n=8050, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8050
+
+warning: inv_sympd(): given matrix is not symmetric
+Timing stopped at: 919.9 7.177 771.9
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7161, n=7161, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=7161, n=14, k=14
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7983, n=7983, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=13
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7983
+User defined signal 2
+Warning message:
+Large variance estimate observed in the iterations, model not converged... 
+Warning message:
+glm.fit: fitted probabilities numerically 0 or 1 occurred 
+Timing stopped at: 2705 8.08 1221
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+Shutting down jsmd because of a received shutdown signal.
+Could not send jskill request to pmix server
+Could not send jskill request to pmix server

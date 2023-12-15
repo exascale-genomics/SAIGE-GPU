@@ -1,0 +1,1 @@
+for i in /gpfs/alpine/med112/proj-shared/task0101113/output/pheCodes/inputs/bgen/chr*.dose.pvar; do base=`basename $i .pvar`; line=`grep -A 1 "#CHROM" $i | tail -n1  | cut -f1,2`; echo "$base     $line   `tail -n1 $i | cut -f2`"; done > ~/MVP.rel4.regions.txt

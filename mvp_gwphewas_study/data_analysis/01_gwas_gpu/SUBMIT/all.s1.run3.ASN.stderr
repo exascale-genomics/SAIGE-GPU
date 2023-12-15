@@ -1,0 +1,381 @@
+-------------------------------------------------------------------------------
+There are messages associated with the following module(s):
+-------------------------------------------------------------------------------
+
+cuda/11.1.1:
+  This modulefile is provided for testing purposes only. If you encounter
+  issues, please report them to help@olcf.ornl.gov.
+
+-------------------------------------------------------------------------------
+
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :[NVBLAS] Using devices :0 0 2 2 4 4 
+
+[NVBLAS] Config parsed
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+sh: line 1: 96374 Aborted                 (core dumped) /usr/bin/which 'uname' 2> /dev/null
+sh: line 1: 1111733 Aborted                 (core dumped) /usr/bin/which 'uname' 2> /dev/null
+sh: line 1: 622646 Aborted                 (core dumped) /usr/bin/which 'uname' 2> /dev/null
+Warning: PAMI CUDA HOOK disabled
+Warning: PAMI CUDA HOOK disabled
+Warning: PAMI CUDA HOOK disabled
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7861, n=7861, k=171951
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=8036, n=8036, k=171951
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7161, n=7161, k=171951
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=7161, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=13
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=7861, n=14, k=14
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=7861
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+
+error: inv_sympd(): matrix is singular or not positive definite
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[cpu]: ta=N, tb=T, m=14, n=14, k=13
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=8036, n=14, k=14
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] dgemm[gpu]: ta=N, tb=N, m=14, n=14, k=8036
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7161, n=7161, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7868, n=7868, k=171951
+[NVBLAS] sgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=7161, n=14, k=14
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] dgemm[cpu]: ta=N, tb=N, m=14, n=14, k=7161
+[NVBLAS] sgemm[gpu]: ta=T, tb=N, m=7972, n=7972, k=171951
+
+ *** caught segfault ***
+address 0x20091f2770d8, cause 'memory not mapped'
+
+ *** caught segfault ***
+address 0x20091f275174, cause 'memory not mapped'
+Warning: stack imbalance in 'lazyLoadDBfetch', 13 then 14
+
+Traceback:
+ 1: getCoefficients(Y, X, W, tau, maxiter = maxiterPCG, tol = tolPCG)
+ 2: y(X, tau, family, alpha0, eta0, offset, verbose = verbose, maxiterPCG = maxiterPCG,     tolPCG = tolPCG, maxiter = maxiter, maxiter = maxiter)
+ 3: glmmkin.ai_PCG_Rcpp_Binary(plinkFile, fit0, tau = c(0, 0), fixtau = c(0,     0), maxiter = maxiter, tol = tol, verbose = TRUE, nrun = 30,     tolPCG = tolPCG, maxiterPCG = maxiterPCG, subPheno = dataMerge_sort,     obj.noK = obj.noK, out.transform = out.transform, tauInit = tauInit,     memoryChunk = memoryChunk, LOCO = LOCO, chromosomeStartIndexVec = chromosomeStartIndexVec,     chromosomeEndIndexVec = chromosomeEndIndexVec, traceCVcutoff = traceCVcutoff,     isCovariateTransform = isCovariateTransform, isDiagofKinSetAsOne = isDiagofKinSetAsOne,     NULL)
+ 4: system.time(modglmm <- glmmkin.ai_PCG_Rcpp_Binary(plinkFile,     fit0, tau = c(0, 0), fixtau = c(0, 0), fixtau = c(0, 0),     maxiter = maxiter, tol = tol, verbose = TRUE, nrun = 30,     tolPCG = tolPCG, maxiterPCG = maxiterPCG, subPheno = dataMerge_sort,     obj.noK = obj.noK, out.transform = out.transform, tauInit = tauInit,     memoryChunk = memoryChunk, LOCO = LOCO, chromosomeStartIndexVec = chromosomeStartIndexVec,     chromosomeEndIndexVec = chromosomeEndIndexVec, traceCVcutoff = traceCVcutoff,     isCovariateTransform = isCovariateTransform))
+ 5: fitNULLGLMM(plinkFile = node_plink_path, phenoFile = node_phenoFile_path,     phenoCol = "Phenotype", outputPrefix = node_outputPrefix,     traitType = traitType, invNormalize = FALSE, covarColList = covars,     qCovarCol = NULL, sampleIDColinphenoFile = "MVPCore_ID",     tol = 0.02, maxiter = 25, tolPCG = 1e-05, maxiterPCG = 500,     nThreads = 42, SPAcutoff = 2, numMarkers = 30, skipModelFitting = FALSE,     memoryChunk = 2, tauInit = tauInit, LOCO = FALSE, traceCVcutoff = 0.0025,     ratioCVcutoff = 0.001, outputPrefix_varRatio = NULL, IsOverwriteVarianceRatioFile = FALSE,     IsSparseKin = FALSE, sparseGRMFile = NULL, sparseGRMSampleIDFile = NULL,     numRandomMarkerforSparseKin = 2000, relatednessCutoff = 0.125,     isCateVarianceRatio = FALSE, cateVarRatioMinMACVecExclude = cateVarRatioMinMACVecExclude,     cateVarRatioMaxMACVecInclude = cateVarRatioMaxMACVecInclude,     isCovariateTransform = TRUE, isDiagofKinSetAsOne = FALSE,     useSparseSigmaConditionerforPCG = FALSE, useSparseSigmaforInitTau = FALSE,     minMAFforGRM = 1e-04, minCovariateCount = -1, includeNonautoMarkersforVarRatio = FALSE,     sexCol = "", FemaleCode = 1, FemaleOnly = FALSE, MaleCode = 0,     MaleOnly = FALSE, noEstFixedEff = FALSE)
+ 6: wrapper(i)
+ 7: doTryCatch(return(expr), name, parentenv, handler)
+ 8: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 9: tryCatchList(expr, classes, parentenv, handlers)
+10: tryCatch(error = identity, wrapper(i))
+11: FUN(X[i], ...)
+12: crlapply(jobs, FUN, checkpoint_file = checkpoint, checkpoint_freq = checkpoint_freq,     ...)
+13: mpi_napply_preschedule(n = n, FUN = FUN, checkpoint_path = checkpoint_path,     checkpoint_freq = checkpoint_freq, ...)
+14: mpi_napply(n, checkpoint_path = checkpoint_path, function(i) tryCatch(error = identity,     wrapper(i)))
+An irrecoverable exception occurred. R is aborting now ...
+
+ *** caught segfault ***
+address 0x20091f27903c, cause 'memory not mapped'
+
+ *** caught segfault ***
+address 0x20091f273210, cause 'memory not mapped'
+malloc_consolidate(): invalid chunk size
+[h50n13:622565] *** Process received signal ***
+[h50n13:622565] Signal: Aborted (6)
+[h50n13:622565] Signal code:  (-6)
+[h50n13:622565] [ 0] linux-vdso64.so.1(__kernel_sigtramp_rt64+0x0)[0x2000000504d8]
+[h50n13:622565] [ 1] /lib64/power9/libc.so.6(gsignal+0xd8)[0x200001c23618]
+[h50n13:622565] [ 2] /lib64/power9/libc.so.6(abort+0x164)[0x200001c03a2c]
+[h50n13:622565] [ 3] /lib64/power9/libc.so.6(+0x8f43c)[0x200001c6f43c]
+[h50n13:622565] [ 4] 
+Traceback:
+ 1: wrapper(i)
+ 2: /lib64/power9/libc.so.6(+0x98c08)[0x200001c78c08]
+doTryCatch(return(expr), name, parentenv, handler)[h50n13:622565] 
+[ 5]  3: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 4: tryCatchList(expr, classes, parentenv, handlers)
+ 5: tryCatch(error = identity, wrapper(i))/lib64/power9/libc.so.6(+0x99a48)[0x200001c79a48]
+[h50n13:622565] 
+[ 6]  6: FUN(X[i], ...)
+ 7: FUN(checkpoint_file = checkpoint, checkpoint_freq = checkpoint_freq,     checkpoint_file = ..., checkpoint_freq = checkpoint_freq,     ...)
+/lib64/power9/libc.so.6(+0x9c890)[0x200001c7c890]
+[h50n13:622565]  8: [ 7] mpi_napply_preschedule(n = n, FUN = FUN, checkpoint_path = checkpoint_path,     checkpoint_freq = checkpoint_freq, ...)
+ 9: mpi_napply(n, checkpoint_path = checkpoint_path, checkpoint_path = function(i) tryCatch(error = identity,     error = wrapper(i)), NULL)
+An irrecoverable exception occurred. R is aborting now ...
+/lib64/power9/libc.so.6(__libc_malloc+0x290)[0x200001c7ea80]
+[h50n13:622565] [ 8] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_allocVector3+0xba8)[0x2000003a9268]
+[h50n13:622565] [ 9] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x15671c)[0x2000002f671c]
+[h50n13:622565] [10] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x19d4f8)[0x20000033d4f8]
+[h50n13:622565] [11] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_eval+0x228)[0x20000034f7a8]
+[h50n13:622565] [12] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x1b25ac)[0x2000003525ac]
+[h50n13:622565] [13] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_applyClosure+0x234)[0x200000353d14]
+[h50n13:622565] [14] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x1a52d4)[0x2000003452d4]
+[h50n13:622565] [15] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_eval+0x228)[0x20000034f7a8]
+[h50n13:622565] [16] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x1b25ac)[0x2000003525ac]
+[h50n13:622565] [17] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_applyClosure+0x234)[0x200000353d14]
+[h50n13:622565] [18] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x1a52d4)[0x2000003452d4]
+[h50n13:622565] [19] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_eval+0x228)[0x20000034f7a8]
+[h50n13:622565] [20] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x1b25ac)[0x2000003525ac]
+[h50n13:622565] [21] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_applyClosure+0x234)[0x200000353d14]
+[h50n13:622565] [22] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_eval+0x464)[0x20000034f9e4]
+[h50n13:622565] [23] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x1b6b94)[0x200000356b94]
+[h50n13:622565] [24] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_eval+0x7c8)[0x20000034fd48]
+[h50n13:622565] [25] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_ReplIteration+0x49c)[0x20000039724c]
+[h50n13:622565] [26] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(+0x1f7eb4)[0x200000397eb4]
+[h50n13:622565] [27] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(run_Rmainloop+0x6c)[0x200000397f9c]
+[h50n13:622565] [28] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/lib/libR.so(Rf_mainloop+0x20)[0x200000398050]
+[h50n13:622565] [29] /ccs/home/arodriguez/med112/task0101113/tools/R-2/R-4.0.3/bin/exec/R(main+0x30)[0x100007f0]
+[h50n13:622565] *** End of error message ***
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :[NVBLAS] Using devices :0 0 2 2 4 4 
+
+[NVBLAS] Config parsed
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is set to '/ccs/home/arodriguez/gemm/nvblas.conf'
+[NVBLAS] Cannot Log File '/ccs/home/arodriguez/gemm/nvblas.log'
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] Using devices :0 2 4 
+[NVBLAS] Config parsed
+[NVBLAS] cublasXtDeviceSelect FAILED
+[NVBLAS] cublasXtDeviceSelect FAILED
+ERROR:  One or more process (first noticed rank 2) terminated with signal 11 (core dumped)
