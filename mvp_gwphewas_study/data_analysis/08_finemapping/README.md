@@ -17,7 +17,7 @@ These scripts combine the results of all the individual SuSiE output ".rds" file
 ## 5) Synthesis and Analysis ##
 These scripts are the downstream analysis scripts that analyze and plot all the summary-level results. These scripts created the fine-mapping figures referenced in Verma et al. The figures and the scripts that generated them are as follows:
 
-Fig. 3 - **make_summary_plots.R** /
+Fig. 3 - **make_summary_plots.R** __
 fig. S3 - Sankey plot is from **make_sankey_plot.R** and the bar plot is from **make_summary_plots.R**. The flow diagram was manually created.
 fig. S4 - **make_summary_plots.R**
 fig. S5 - **make_summary_plots.R**
