@@ -339,8 +339,8 @@ known_novel_raw <- known_novel_raw[which(!(duplicated(known_novel_raw$unique_id)
 rownames(known_novel_raw) <- known_novel_raw$unique_id
 #Recode known_novel_raw column
 known_novel_raw$Novel_label <- ifelse(known_novel_raw$Known_Association=="True", "Known Association",
-                                ifelse(known_novel_raw$Novel_Association_Known_Signal=="True", "Novel Association Known Signal", 
-                                       ifelse(known_novel_raw$Novel_Signal=="True", "Novel Signal", NA)))
+                                ifelse(known_novel_raw$Novel_Association_Known_Signal=="True", "Unreported Assoc. Known Signal", 
+                                       ifelse(known_novel_raw$Novel_Signal=="True", "Previously Unreported Signal", NA)))
 #Tack novelty data onto complete_high_pip_df (data frame of all high-pip variants for all ancestries)
 complete_high_pip_df <- cbind.data.frame(complete_high_pip_df, Novel=known_novel_raw[rownames(complete_high_pip_df,),"Novel_label"])
 
@@ -406,15 +406,15 @@ finemap_signal_summ_b <- finemap_signal_summ_b %>%
   mutate(eaf.ANC.up=ifelse(eaf.ANC>0.5, 1-eaf.ANC, eaf.ANC)) %>%
   mutate(or.ANC.up=ifelse(eaf.ANC>0.5, exp(-(beta.ANC)), exp(beta.ANC)))
 #Recode novelty columns as factors
-finemap_signal_summ_q$Novel <- factor(finemap_signal_summ_q$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
-finemap_signal_summ_b$Novel <- factor(finemap_signal_summ_b$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
+finemap_signal_summ_q$Novel <- factor(finemap_signal_summ_q$Novel, levels = c("Previously Unreported Signal", "Unreported Assoc. Known Signal", "Known Association"))
+finemap_signal_summ_b$Novel <- factor(finemap_signal_summ_b$Novel, levels = c("Previously Unreported Signal", "Unreported Assoc. Known Signal", "Known Association"))
 #Get minimum and maximum values for y-axis on plots
 quantitative_beta_limit <- max(abs(finemap_signal_summ_q$beta.ANC.up), na.rm = TRUE)
 binary_or_limit <- max(exp(abs(finemap_signal_summ_b$beta.ANC)), na.rm = TRUE)
 
 #Make data tables for annotating the figures
-Novel_Map <- c("Novel\nSignal", "Known\nAssociation", "Novel Association\nKnown Signal")
-names(Novel_Map) <- c("Novel Signal", "Known Association", "Novel Association Known Signal")
+Novel_Map <- c("Previously Unreported\nSignal", "Known\nAssociation", "Unreported Assoc.\nKnown Signal")
+names(Novel_Map) <- c("Previously Unreported Signal", "Known Association", "Unreported Assoc. Known Signal")
 quantitative_annotate_table <- as.data.frame(table(finemap_signal_summ_q[,c("ANC","Novel")]))
 quantitative_annotate_table$Novel <- Novel_Map[quantitative_annotate_table$Novel]
 binary_annotate_table <- as.data.frame(table(finemap_signal_summ_b[,c("ANC", "Novel")]))
@@ -432,7 +432,7 @@ quantitative_inset <- ggplot(quantitative_annotate_table, aes(y=Freq, x=ANC, alp
   scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "25%", "50%", "75%", "100%"), limits = c(0,1)) + 
   scale_fill_manual(values = c("#56B893", "#F87850", "#7B8DBF", "#DF71B6")) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
-  ylab(label = "Signal Novelty") + 
+  ylab(label = "Prior Report") + 
   theme(axis.title.x = element_blank(),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_rect(fill = "transparent",colour = NA), legend.title = element_blank(), 
@@ -445,7 +445,7 @@ binary_inset <- ggplot(binary_annotate_table, aes(y=Freq, x=ANC, alpha=Novel)) +
   scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "25%", "50%", "75%", "100%"), limits = c(0,1)) + 
   scale_fill_manual(values = c("#56B893", "#F87850", "#7B8DBF", "#DF71B6")) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
-  ylab(label = "Signal Novelty") + 
+  ylab(label = "Prior Report") + 
   theme(axis.title.x = element_blank(),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_rect(fill = "transparent",colour = NA), legend.title = element_blank(), 
@@ -463,8 +463,8 @@ legend_labels_df <- cbind.data.frame(x=c(rep(0, 3), seq(1,10,3)), y=c(seq(1.2,1,
 legend_df$Novel <- factor(legend_df$Novel, levels = levels(finemap_signal_summ_b$Novel))
 legend_plot <- ggplot(data = legend_df) + 
   geom_point(mapping = aes(x = x, y = y, color = ANC, alpha = Novel, shape = Novel), size = 4) + 
-  geom_text(data = legend_labels_df, mapping = aes(x = x, y = y, label = label, hjust = hjust, angle=angle), size = 5) + 
-  xlim(-20, 10.1) + 
+  geom_text(data = legend_labels_df, mapping = aes(x = x, y = y, label = label, hjust = hjust, angle=angle), size = 4) + 
+  xlim(-21, 10.1) + 
   ylim(0.95,1.4) + 
   scale_color_manual(values = c("#56B893", "#F87850", "#7B8DBF", "#DF71B6")) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
@@ -526,8 +526,8 @@ finemap_signal_derived_b <- separated_high_pip_ea_df[which(separated_high_pip_df
   mutate(derived_af=ifelse(ea == AA, 1-eaf.ANC, eaf.ANC)) %>%
   mutate(derived_or=ifelse(ea == AA, exp(-(beta.ANC)), exp(beta.ANC)))
 #Recode novelty columns as factors
-finemap_signal_derived_q$Novel <- factor(finemap_signal_derived_q$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
-finemap_signal_derived_b$Novel <- factor(finemap_signal_derived_b$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
+finemap_signal_derived_q$Novel <- factor(finemap_signal_derived_q$Novel, levels = c("Previously Unreported Signal", "Unreported Assoc. Known Signal", "Known Association"))
+finemap_signal_derived_b$Novel <- factor(finemap_signal_derived_b$Novel, levels = c("Previously Unreported Signal", "Unreported Assoc. Known Signal", "Known Association"))
 
 #Make data tables for annotating the figures
 quantitative_derived_annotate_table <- as.data.frame(table(finemap_signal_derived_q[,c("ANC","Novel")]))
@@ -547,7 +547,7 @@ quantitative_derived_inset <- ggplot(quantitative_derived_annotate_table, aes(y=
   scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "25%", "50%", "75%", "100%"), limits = c(0,1)) + 
   scale_fill_manual(values = c("#56B893", "#F87850", "#7B8DBF", "#DF71B6")) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
-  ylab(label = "Signal Novelty") + 
+  ylab(label = "Prior Report") + 
   theme(axis.title.x = element_blank(),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_rect(fill = "transparent",colour = NA), legend.title = element_blank(), 
@@ -560,7 +560,7 @@ binary_derived_inset <- ggplot(binary_derived_annotate_table, aes(y=Freq, x=ANC,
   scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "25%", "50%", "75%", "100%"), limits = c(0,1)) + 
   scale_fill_manual(values = c("#56B893", "#F87850", "#7B8DBF", "#DF71B6")) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
-  ylab(label = "Signal Novelty") + 
+  ylab(label = "Prior Report") + 
   theme(axis.title.x = element_blank(),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_rect(fill = "transparent",colour = NA), legend.title = element_blank(), 
@@ -612,7 +612,8 @@ dev.off()
 #Read in lead snps file
 leads_raw <- read.csv(paste0(work_dir, "Table-S3-all.pheno.meta.gia.lead.snps.w_summary.csv"), sep = ",", header = TRUE)
 #Modify novelty data
-leads_raw$Novel <- leads_raw$Locus_Novelty
+leads_raw$Novel <- ifelse(leads_raw$Locus_Novelty == "Known Association", "Known Association", 
+                          ifelse(leads_raw$Locus_Novelty == "Novel Association Known Signal", "Unreported Assoc. Known Signal", "Previously Unreported Signal"))
 
 #Append on trait type information
 leads_raw$ttype <- trait_raw[leads_raw$Trait,"Trait_Type"]
@@ -627,8 +628,8 @@ leads_signal_summ_b <- leads_raw %>%
   mutate(AF.up=MAF) %>%
   mutate(or.up=ifelse(EAF>0.5, exp(-(Beta)), exp(Beta)))
 #Recode novelty columns as factors
-leads_signal_summ_q$Novel <- factor(leads_signal_summ_q$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
-leads_signal_summ_b$Novel <- factor(leads_signal_summ_b$Novel, levels = c("Novel Signal", "Novel Association Known Signal", "Known Association"))
+leads_signal_summ_q$Novel <- factor(leads_signal_summ_q$Novel, levels = c("Previously Unreported Signal", "Unreported Assoc. Known Signal", "Known Association"))
+leads_signal_summ_b$Novel <- factor(leads_signal_summ_b$Novel, levels = c("Previously Unreported Signal", "Unreported Assoc. Known Signal", "Known Association"))
 
 #Create inset plot dataframes
 quantitative_annotate_lead_table <- as.data.frame(table(leads_signal_summ_q[,c("Novel")]))
@@ -644,7 +645,7 @@ quantitative_leads_inset <- ggplot(quantitative_annotate_lead_table, aes(x=1, y=
   scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "25%", "50%", "75%", "100%"), limits = c(0,1)) +
   scale_x_discrete(breaks = c(1), labels = c("META")) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
-  ylab(label = "Signal Novelty") + 
+  ylab(label = "Prior Report") + 
   theme(axis.title.x = element_blank(),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_rect(fill = "transparent",colour = NA), legend.title = element_blank(), 
@@ -657,7 +658,7 @@ binary_leads_inset <- ggplot(binary_annotate_lead_table, aes(x=1, y=Freq, alpha=
   scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "25%", "50%", "75%", "100%"), limits = c(0,1)) + 
   scale_x_discrete(breaks = c(1), labels = c("META")) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
-  ylab(label = "Signal Novelty") + 
+  ylab(label = "Prior Report") + 
   theme(axis.title.x = element_blank(),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_rect(fill = "transparent",colour = NA), legend.title = element_blank(), 
@@ -675,7 +676,7 @@ legend_labels_leads_df <- cbind.data.frame(x=c(rep(0, 3), 1), y=c(seq(1.2,1,-0.1
 legend_leads_df$Novel <- factor(legend_leads_df$Novel, levels = levels(leads_signal_summ_b$Novel))
 legend_leads_plot <- ggplot(data = legend_leads_df) + 
   geom_point(mapping = aes(x = x, y = y, alpha = Novel, shape = Novel), size = 4, color="#36454F") + 
-  geom_text(data = legend_labels_leads_df, mapping = aes(x = x, y = y, label = label, hjust = hjust, angle=angle), size = 5) + 
+  geom_text(data = legend_labels_leads_df, mapping = aes(x = x, y = y, label = label, hjust = hjust, angle=angle), size = 4) + 
   xlim(-15, 1.1) + 
   ylim(0.95,1.4) + 
   scale_alpha_manual(values = c(1, 0.6, 0.3, 0.1)) + 
@@ -686,7 +687,7 @@ legend_leads_plot <- ggplot(data = legend_leads_df) +
         axis.title.x = element_blank(), axis.title.y = element_blank(), axis.ticks = element_blank()) 
 data.tb.legend.leads.minor <- tibble(x = 0.50, y = quantitative_beta_limit, plot = list(legend_leads_plot))
 
-#Make minor allele plots for quantitative trait and binary trait
+#Make lead allele plots for quantitative trait and binary trait
 quant_leads_plot <- ggplot() +
   geom_point(data = leads_signal_summ_q, aes(x=AF.up, y=Beta.up, shape=Novel, alpha=Novel), color="#36454F") + 
   scale_y_continuous(limits = c(-quantitative_beta_limit, quantitative_beta_limit), breaks = seq(-3,3,1), labels = format(seq(-3,3,1), width = 5, justify = "right")) + 
