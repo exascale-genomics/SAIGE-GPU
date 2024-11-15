@@ -245,6 +245,135 @@ mpirun -n <number of gpus>
 
 
 
-## Install on Google Cloud Platform
+## Run on DNANexus for UK Biobank
 
-I will place instructions on how to run on GCP shortly...
+This guide provides step-by-step instructions to execute **SAIGE-GPU Step 1** for genome-wide association studies (GWAS) using GPU-accelerated tools for the DNAnexus platform for UKBB data. It includes memory calculation, dataset preparation, and command-line execution details.
+
+---
+
+### 1. Calculate Memory Requirements
+
+To estimate the memory required for Step 1:
+
+- **Formula**:  
+  Memory (GB) = `4 * M * N / 1e+9`  
+  Where:
+  - `M`: Number of genetic markers (variants).
+  - `N`: Number of samples (participants).
+
+- **Example Calculation**:  
+  For a GWAS with 112,871 variants and 435,212 samples:  
+  ```plaintext
+  (4 * 435,212 * 112,871) / 1e+9 ≈ 196.49 GB
+  ```
+- **Note**: Ensure an additional 20 GB of memory for auxiliary requirements.
+- **Check GPU Memory**:
+  Use the nvidia-smi command to assess available GPU memory.
+  
+### 2. Launch a Cloud Workstation Job
+
+Prepare the following inputs for Step 1 on DNAnexus or another cloud platform:
+
+- **Required Files**:
+  - SAIGE-GPU image or tarball.
+  - PLINK files:
+      - .bed
+      - .bim
+      - .fam
+  - Phenotype-covariate table.
+ 
+### 3. Install Docker
+
+Install Docker on your system by following [Docker’s installation guide for Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
+
+### 4. OPTIONAL: Prune Datasets for Memory Requirements
+
+If your dataset exceeds memory limits, prune it as follows:
+
+- **Download PLINK**:
+
+```bash
+  wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241022.zip
+  unzip plink_linux_x86_64_20241022.zip
+```
+
+- **Randomly select variants**:
+
+```bash
+  shuf -n [number of variants] [your plink dataset prefix].bim > random_variants.txt
+```
+
+- **Generate New PLINK Files**:
+
+```bash
+  ./plink --bfile [your PLINK dataset prefix] --extract random_variants.txt --make-bed --out [new PLINK dataset prefix]
+```
+
+### 5. Prepare Files and Load Docker Image
+
+- **Pull Docker Image**:
+
+```bash
+    docker pull /tnnandi/saige-doe:2
+```
+
+- **Save image for faster use**:
+
+```bash
+   docker save tnnandi/saige-doe:2 | gzip > saige_gpu_image.tar.gz
+```
+
+- **Load Docker Image**:
+
+```bash
+   docker load -i saige_gpu_image.tar.gz
+```
+
+- **Organize Data**:
+
+```bash
+  mkdir data experiment
+  mv [your PLINK dataset prefix].* data/
+  mv [your pheno-covar table] data/
+```
+
+### 6. Run Step 1
+
+Replace [ ] with your specific dataset information and run the following command:
+
+```bash
+  docker run --rm \
+           -v /home/dnanexus/data:/SAIGE_container/data \
+           -v $PWD/experiment:/SAIGE_container/output \
+           --gpus device=all \
+           saige_gpu_image \
+           mpirun -n [number of gpus] --allow-run-as-root \
+           /opt/conda/lib/R/bin/Rscript /SAIGE_container/SAIGE-DOE/extdata/step1_fitNULLGLMM.R \
+           --plinkFile=/SAIGE_container/data/[your PLINK dataset prefix] \
+           --phenoFile=/SAIGE_container/data/[your pheno-covar table] \
+           --phenoCol=[Phenotype column name] \
+           --covarColList=[Covariates list] \
+           --sampleIDColinphenoFile=[Sample ID column name] \
+           --traitType=binary \
+           --outputPrefix=/SAIGE_container/output/step1 \
+           --nThreads=1 \
+           --minMAFforGRM [Minimum MAF value] \
+           --maxiterPCG [Max PCG iterations] \
+           --maxiter [Max iterations] \
+           --LOCO FALSE \
+           --IsOverwriteVarianceRatioFile=TRUE > step1.log
+```
+
+### 7. Monitoring and Troubleshooting
+
+- **Run in `tmux` for monitoring**:
+  - Monitor GPU usage:
+    ```bash
+       nvidia-smi
+    ```
+    
+  - Check SAIGE log output:
+    ```bash
+       tail -f step1.log
+    ```
+
