@@ -130,8 +130,8 @@ In this example I am naming my environment `RSAIGE_GPU_V2`, you can replace with
 In addition, due to the size of the conda environment and packages, I will be installing the environment in a different mount where I have more space. You can create your environment either in your home directory if you have enough space, or your project space.
 
 ```bash
-conda env create  --file=./conda_env/environment-RSAIGE.yml -p /grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU_V2
-conda activate /grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU_V2
+conda env create  --file=./conda_env/environment-RSAIGE.yml -p /grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU
+conda activate /grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU
 ```
 
 #### Step 3: Install Dependencies
@@ -143,17 +143,19 @@ pip3 install cget click
 conda install cuda -c nvidia/label/cuda-11.4.3
 ```
 
-You need to install openMPI version `4.1.5`. This is difficult to perform within Conda, so we will install separately, but then include it in our Conda environment:
+You need to install openMPI version `4.1.5`. This is difficult to perform within Conda, so we will install separately, but then include it in our Conda environment. To do so, we will first deactivate the `conda` environment and install `openmpi-4.1.5`:
 
 ```bash
+conda deactivate
 cd /grand/projects/GeomicVar/rodriguez/conda_envs/pkgs
-wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz tar -xzf openmpi-4.1.5.tar.gz
+wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz
+tar -xzf openmpi-4.1.5.tar.gz
 cd openmpi-4.1.5
-./configure --prefix=/grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU_V2/opt/openmpi
+./configure --prefix=/grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU/opt/openmpi
 make -j4
 make install
-export PATH=/grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU_V2/opt/openmpi/bin:$PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU_V2/opt/openmpi/lib
+export PATH=/grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU/opt/openmpi/bin:$PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU/opt/openmpi/lib
 
 mkdir -p $CONDA_PREFIX/etc/conda/activate.d
 mkdir -p $CONDA_PREFIX/etc/conda/deactivate.d
@@ -161,9 +163,11 @@ echo 'export PATH=$CONDA_PREFIX/opt/openmpi/bin:$PATH' > $CONDA_PREFIX/etc/conda
 echo 'export LD_LIBRARY_PATH=$CONDA_PREFIX/opt/openmpi/lib:$LD_LIBRARY_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 ```
 
+Now you can activate the `conda` environment once again. 
 Install other required libraries, such as pbdMPI, savvy, superlu:
 
 ```bash
+conda activate /grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU
 Rscript -e 'install.packages("pbdMPI", repos=c("https://cloud.r-project.org"))'
 conda install -c conda-forge -c bioconda savvy
 conda install conda-forge::superlu
@@ -173,17 +177,17 @@ conda install conda-forge::superlu
 To compile SAIGE-GPU, first clean any previous builds and then run make:
 
 ```bash
-cd ~/SAIGE-GPU
+cd ./SAIGE-GPU
 R CMD INSTALL SAIGE-DOE
 ```
 
 If you encounter linking errors, ensure that the PKG_LIBS line in the Makevars file correctly references the MPI library.
 
 #### Step 5: Verify Installation
-Check if the installation was successful by running the following commands where the output should be the list of parameter options:
+Check if the installation for step 1 was successful by running the following commands where the output should be the list of parameter options:
 
 ```bash
-path_to_saige=~/SAIGE-GPU_3/SAIGE-DOE
+path_to_saige=./SAIGE-GPU/SAIGE-DOE
 Rscript $path_to_saige/extdata/step1_fitNULLGLMM.R --help
 ```
 
@@ -198,9 +202,9 @@ qsub -A geomicVar -I -l select=1 -l walltime=1:00:00 -l filesystems=home:eagle -
 # once the node is provided
 module use /soft/modulefiles/
 module load conda
-conda activate /grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU_V2
+conda activate /grand/projects/GeomicVar/rodriguez/conda_envs/RSAIGE_GPU
 
-path_to_saige=~/SAIGE-GPU_3/SAIGE-DOE
+path_to_saige=~/SAIGE-GPU/SAIGE-DOE
 mpirun -n 4 Rscript $path_to_saige/extdata/step1_fitNULLGLMM.R \
 --plinkFile=$path_to_saige/extdata/input/plinkforGRM_1000samples_10kMarkers \
 --phenoFile=$path_to_saige/extdata/input/pheno_1000samples.txt \
@@ -218,6 +222,24 @@ mpirun -n 4 Rscript $path_to_saige/extdata/step1_fitNULLGLMM.R \
 
 You should see a succesful run where all GPUs are used. The log should provide the IDs of the GPUs used.
 
+Currently, Step 2 is not optimized to use GPUs and is being developed to run multiple phenotypes in parallel. 
+You can also test step 2 for a single phenotype by running the following:
+
+```
+ Rscript step2_SPAtests.R        \
+     --bgenFile=./input/genotype_100markers.bgen    \
+     --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+     --SAIGEOutputFile=./genotype_100markers_bgen_Test_out_GRMforStep1.txt \
+     --chrom=1 \
+     --AlleleOrder=ref-first \
+     --minMAF=0 \
+     --minMAC=0.5 \
+     --sampleFile=./input/samplelist.txt \
+     --GMMATmodelFile=./GPU_step1_output.rda \
+     --varianceRatioFile=./GPU_step1_output.varianceRatio.txt   \
+     --LOCO=FALSE       \
+     --is_fastTest=TRUE
+```
 
 ## Run on HPC Systems Using Singularity Container
 
