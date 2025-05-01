@@ -17,12 +17,28 @@ openOutfile_single_LDmat <- function(isappend) {
     .Call('_SAIGE_openOutfile_single_LDmat', PACKAGE = 'SAIGE', isappend)
 }
 
+openOutfile_LDmat <- function(isappend) {
+    .Call('_SAIGE_openOutfile_LDmat', PACKAGE = 'SAIGE', isappend)
+}
+
+openOutfile_index_LDmat <- function(isappend) {
+    .Call('_SAIGE_openOutfile_index_LDmat', PACKAGE = 'SAIGE', isappend)
+}
+
 closeOutfile_single_LDmat <- function() {
     invisible(.Call('_SAIGE_closeOutfile_single_LDmat', PACKAGE = 'SAIGE'))
 }
 
 setAssocTest_GlobalVarsInCPP <- function(t_impute_method, t_missing_cutoff, t_min_maf_marker, t_min_mac_marker, t_min_info_marker, t_dosage_zerod_cutoff, t_dosage_zerod_MAC_cutoff, t_weights_beta, t_outputFilePrefix, t_MACCutoffforER) {
     invisible(.Call('_SAIGE_setAssocTest_GlobalVarsInCPP', PACKAGE = 'SAIGE', t_impute_method, t_missing_cutoff, t_min_maf_marker, t_min_mac_marker, t_min_info_marker, t_dosage_zerod_cutoff, t_dosage_zerod_MAC_cutoff, t_weights_beta, t_outputFilePrefix, t_MACCutoffforER))
+}
+
+setAssocTest_GlobalVarsInCPP_indexInModel_male <- function(t_indexInModel_male) {
+    invisible(.Call('_SAIGE_setAssocTest_GlobalVarsInCPP_indexInModel_male', PACKAGE = 'SAIGE', t_indexInModel_male))
+}
+
+setAssocTest_GlobalVarsInCPP_X_PARregion_mat <- function(t_X_PARregion_mat) {
+    invisible(.Call('_SAIGE_setAssocTest_GlobalVarsInCPP_X_PARregion_mat', PACKAGE = 'SAIGE', t_X_PARregion_mat))
 }
 
 setMarker_GlobalVarsInCPP <- function(t_isOutputMoreDetails, t_marker_chunksize) {
@@ -35,6 +51,14 @@ setRegion_GlobalVarsInCPP <- function(t_max_maf_region, t_max_markers_region, t_
 
 mainMarkerInCPP <- function(t_genoType, t_traitType, t_genoIndex_prev, t_genoIndex, t_isMoreOutput, t_isImputation, t_isFirth) {
     invisible(.Call('_SAIGE_mainMarkerInCPP', PACKAGE = 'SAIGE', t_genoType, t_traitType, t_genoIndex_prev, t_genoIndex, t_isMoreOutput, t_isImputation, t_isFirth))
+}
+
+Unified_getOneMarker <- function(t_genoType, t_gIndex_prev, t_gIndex, t_ref, t_alt, t_marker, t_pd, t_chr, t_altFreq, t_altCounts, t_missingRate, t_imputeInfo, t_isOutputIndexForMissing, t_indexForMissing, t_isOnlyOutputNonZero, t_indexForNonZero, t_GVec, t_isImputation) {
+    .Call('_SAIGE_Unified_getOneMarker', PACKAGE = 'SAIGE', t_genoType, t_gIndex_prev, t_gIndex, t_ref, t_alt, t_marker, t_pd, t_chr, t_altFreq, t_altCounts, t_missingRate, t_imputeInfo, t_isOutputIndexForMissing, t_indexForMissing, t_isOnlyOutputNonZero, t_indexForNonZero, t_GVec, t_isImputation)
+}
+
+processMale_XnonPAR <- function(t_GVec, t_pd, t_XPARregion) {
+    invisible(.Call('_SAIGE_processMale_XnonPAR', PACKAGE = 'SAIGE', t_GVec, t_pd, t_XPARregion))
 }
 
 Unified_getSampleSizeinGeno <- function(t_genoType) {
@@ -511,6 +535,10 @@ SPA <- function(mu, g, q, qinv, pval_noadj, tol, logp, traitType, pval, isSPACon
 
 SPA_fast <- function(mu, g, q, qinv, pval_noadj, logp, gNA, gNB, muNA, muNB, NAmu, NAsigma, tol, traitType, pval, isSPAConverge) {
     invisible(.Call('_SAIGE_SPA_fast', PACKAGE = 'SAIGE', mu, g, q, qinv, pval_noadj, logp, gNA, gNB, muNA, muNB, NAmu, NAsigma, tol, traitType, pval, isSPAConverge))
+}
+
+SPA_pval <- function(mu, g, q, qinv, pval_noadj, tol, logp, traitType, isSPAConverge) {
+    .Call('_SAIGE_SPA_pval', PACKAGE = 'SAIGE', mu, g, q, qinv, pval_noadj, tol, logp, traitType, isSPAConverge)
 }
 
 Korg_Binom <- function(t1, mu, g) {

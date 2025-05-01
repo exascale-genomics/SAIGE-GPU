@@ -252,8 +252,9 @@ SAIGE.Region = function(mu,
   OutList.all = NULL
   Output_MarkerList.all = NULL
   cth_chunk_to_output = 1
-  
+  iswriteMarkerList = FALSE 
   i = indexChunk + 1
+  nEachChunk = numberRegionsInChunk
   while (i <= nRegions) {
     #for(i in (indexChunk+1):nRegions){
     if (mth ==  numberRegionsInChunk) {
@@ -417,7 +418,9 @@ SAIGE.Region = function(mu,
         
         
         annoMAFIndicatorMat = outList$annoMAFIndicatorMat
-        
+       
+
+
         if ((sum(outList$NumUltraRare_GroupVec) + sum(outList$NumRare_GroupVec)) > 0) {
           if (regionTestType != "BURDEN") {
             #ta0 = proc.time()
@@ -469,8 +472,6 @@ SAIGE.Region = function(mu,
             wStatVec = StatVec * AnnoWeights
             
             wadjVarSMat = outList$VarMat * weightMat
-            #print("outList$VarMat")
-            #print(outList$VarMat)
             
             if (isCondition) {
               wStatVec_cond = wStatVec - outList$TstatAdjCond
@@ -478,7 +479,6 @@ SAIGE.Region = function(mu,
             }
             
             #gc()
-            
             
             annoMAFIndVec = c()
             for (j in 1:length(annolistsub)) {
@@ -489,6 +489,9 @@ SAIGE.Region = function(mu,
                 jm = (j - 1) * (length(maxMAFlist)) + m
                 maxMAFName = maxMAFlist[m]
                 if (m <= maxMAF0) {
+
+		
+
                   tempPos = which(annoMAFIndicatorMat[, jm] == 1)
                   if (length(tempPos) > 0) {
                     isPolyRegion = TRUE
@@ -509,6 +512,7 @@ SAIGE.Region = function(mu,
                                                       Phi,
                                                       regionTestType)
                       Phi = re_phi$val
+
                     }
                     groupOutList = get_SKAT_pvalue(Score, Phi, r.corr, regionTestType)
                     resultDF = data.frame(
@@ -521,6 +525,7 @@ SAIGE.Region = function(mu,
                       BETA_Burden = groupOutList$BETA_Burden,
                       SE_Burden = groupOutList$SE_Burden
                     )
+
                     if (isCondition) {
                       if (traitType == "binary") {
                         G1tilde_P_G2tilde_Mat_scaled = t(t((
@@ -995,7 +1000,7 @@ SAIGE.Region = function(mu,
           #Start = (i==1)
           Start = (cth_chunk_to_output == 1)
           End = (i == nRegions)
-          nEachChunk = 1
+          #nEachChunk = 1
           
           if (regionTestType != "BURDEN") {
             pval.Region.all = rbind(pval.Region.all, pval.Region)
@@ -1075,9 +1080,13 @@ SAIGE.Region = function(mu,
                 row.names = F,
                 na = "NA"
               )
+	      iswriteMarkerList = TRUE
+	      Output_MarkerList.all = NULL
             }
           } else {
             if (!is.null(Output_MarkerList.all)) {
+	    if(iswriteMarkerList){	
+
               fwrite(
                 Output_MarkerList.all,
                 paste0(OutputFile, ".markerList.txt"),
@@ -1088,6 +1097,22 @@ SAIGE.Region = function(mu,
                 row.names = F,
                 na = "NA"
               )
+	     }else{
+              fwrite(
+                Output_MarkerList.all,
+                paste0(OutputFile, ".markerList.txt"),
+                quote = F,
+                sep = "\t",
+                append = F,
+                col.names = T,
+                row.names = F,
+                na = "NA"
+              )
+
+
+	     }
+	      iswriteMarkerList = TRUE
+	      Output_MarkerList.all = NULL
             }
             #write.table(Output, OutputFile, quote = F, sep = "\t", append = T, col.names = F, row.names = F)
           }

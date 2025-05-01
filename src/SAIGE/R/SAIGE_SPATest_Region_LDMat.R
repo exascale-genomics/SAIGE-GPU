@@ -141,6 +141,19 @@ SAIGE.Region.LDmat = function(
    stop(OutputFile, ".marker_info.txt can't be opened to output marker information.\n") 
  } 	 
 
+ 
+ isOpenOutFile = openOutfile_LDmat(isappend)
+ if(!isOpenOutFile){
+   stop(OutputFile, ".LDmat.txt can't be opened to output LD matrix.\n") 
+ } 	 
+
+
+ isOpenOutFile = openOutfile_index_LDmat(isappend)
+ if(!isOpenOutFile){
+   stop(OutputFile, ".index.txt can't be opened to output index.\n") 
+ } 	 
+
+
   #n = length(mu) #sample size
   ##check group file
   region_list = checkGroupFile(groupFile)
@@ -246,6 +259,7 @@ SAIGE.Region.LDmat = function(
       #LDmatInCPP(genoType, region$genoIndex_prev, region$genoIndex, annoIndicatorMat, maxMAFlist, OutputFile, traitType, n, P1Mat, P2Mat, regionTestType, isImputation, WEIGHT, weight_cond, is_single_in_groupTest, is_output_markerList_in_groupTest, annolistsub, regionName, is_fastTest, is_output_moreDetails)
       n=Unified_getSampleSizeinAnalysis(genoType)
       LDmatRegionInCPP(genoType, region$genoIndex_prev, region$genoIndex, annoIndicatorMat, OutputFile, n, isImputation, annolistsub, regionName)
+      #i1_nchunks_list = LDmatRegionInCPP(genoType, region$genoIndex_prev, region$genoIndex, annoIndicatorMat, OutputFile, n, isImputation, annolistsub, regionName)
 
     }else{#if(!is.null(region$SNP) & length(annolistsub) > 0){
       cat(regionName, " is empty.\n")	
@@ -539,8 +553,3 @@ if(nrow(RegionData) != 0){
 
   return(RegionList)
 }
-
-
-
-
-

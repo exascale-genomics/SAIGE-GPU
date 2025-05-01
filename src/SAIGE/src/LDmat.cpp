@@ -39,6 +39,10 @@ static VCF::VcfClass* ptr_gVCFobj = NULL;
 
 std::ofstream OutFile_single_LDmat;
 std::string g_outputFilePrefixSingle_LDmat;
+std::ofstream OutFile_index_LDmat;
+std::string g_outputFilePrefixIndex_LDmat;
+std::ofstream OutFile_LDmat;
+std::string g_outputFilePrefix_LDmat;
 
 // global variables for analysis
 std::string g_impute_method_LDmat;      // "mean", "minor", or "drop", //drop is not allowed
@@ -53,6 +57,8 @@ double g_marker_minMAC_cutoff_LDmat;
 double g_marker_minINFO_cutoff_LDmat;
 
 unsigned int g_region_maxMarkers_cutoff_LDmat;   // maximal number of markers in one chunk, only used for region-based analysis to reduce memory usage
+unsigned int g_startpos;
+unsigned int g_endpos;
 
 
 // [[Rcpp::export]]
@@ -83,8 +89,12 @@ void setGlobalVarsInCPP_LDmat(std::string t_impute_method,
   g_region_maxMarkers_cutoff_LDmat = t_max_markers_region;
 
   g_outputFilePrefixSingle_LDmat = t_outputFile + ".marker_info.txt";
-
+  g_outputFilePrefixIndex_LDmat = t_outputFile + ".index.txt";
+  g_outputFilePrefix_LDmat = t_outputFile + ".LDmat.txt";
+  g_startpos=-1;
+  g_endpos=-1;
 }
+
 
 // [[Rcpp::export]]
 void LDmatRegionInCPP(
@@ -96,7 +106,8 @@ void LDmatRegionInCPP(
 			   unsigned int t_n,           // sample size
                            bool t_isImputation,
                            std::vector<std::string> & annoStringVec,
-                           std::string regionName) 
+                           std::string regionName
+			   ) 
 {
   //create the output list
   //arma::vec timeoutput1 = getTime();
@@ -126,6 +137,9 @@ void LDmatRegionInCPP(
   unsigned int ichunk = 0; //ith chunk
   unsigned int i1InChunk = 0; //i1th marker in ith chunk
   unsigned int i1 = 0;    // index of Markers (non-URV)
+
+
+
   unsigned int jm;
   std::vector<uint32_t> location_m_P1Mat;
   std::vector<uint32_t> location_n_P1Mat;
@@ -201,7 +215,6 @@ void LDmatRegionInCPP(
     altFreqVec.at(i) = altFreq;           // allele frequencies of ALT allele, this is not always < 0.5.
     missingRateVec.at(i) = missingRate;
     MAFVec.at(i) = MAF;
-    MACVec.at(i) = MAC;
     N_Vec.at(i) = t_n;
     imputationInfoVec.at(i) = imputeInfo;
     infoVec.at(i) = info;                 // marker information: CHR:POS:REF:ALT
@@ -209,6 +222,7 @@ void LDmatRegionInCPP(
    if((missingRate > g_missingRate_cutoff_LDmat) || (MAF > g_maxMAFLimit_LDmat) || (MAF < g_marker_minMAF_cutoff_LDmat) || (MAC < g_marker_minMAC_cutoff_LDmat) || (imputeInfo < g_marker_minINFO_cutoff_LDmat)){
 	       continue;
    }else{
+    MACVec.at(i) = MAC;
     altCountsVec.at(i) = altCounts;
     indexNonZeroVec_arma = arma::conv_to<arma::uvec>::from(indexNonZeroVec);
     location_m_P1Mat.insert(std::end(location_m_P1Mat), indexNonZeroVec.size(), i1InChunk);
@@ -237,6 +251,7 @@ void LDmatRegionInCPP(
 	arma::sp_imat P1Mat(location_P1Mat_arma, value_P1Mat_arma, i1InChunk, t_n);
 
 	P1Mat.save(t_outputFile + "_P1Mat_Chunk_" + std::to_string(ichunk) + ".bin");
+	//P1Mat.save(t_outputFile + "_P1Mat_Chunk_" + std::to_string(ichunk) + ".bin.txt", arma::coord_ascii);
 	value_P1Mat.clear();
 	location_m_P1Mat.clear();
 	location_n_P1Mat.clear();
@@ -264,6 +279,7 @@ void LDmatRegionInCPP(
        	arma::ivec value_P1Mat_arma =  arma::conv_to<arma::ivec>::from(value_P1Mat);
         arma::sp_imat P1Mat(location_P1Mat_arma, value_P1Mat_arma, i1InChunk, t_n);
         P1Mat.save(t_outputFile + "_P1Mat_Chunk_" + std::to_string(ichunk) + ".bin");
+        //P1Mat.save(t_outputFile + "_P1Mat_Chunk_" + std::to_string(ichunk) + ".bin.txt", arma::coord_ascii);
         value_P1Mat.clear();
         location_m_P1Mat.clear();
         location_n_P1Mat.clear();
@@ -280,12 +296,18 @@ void LDmatRegionInCPP(
   nchunks = mPassCVVecsize;
 
 
-  arma::imat VarMat;
-//(i1, i1);
-  VarMat.resize(i1, i1);
-  //if(nchunks == 1){
-  //  VarMat = P1Mat * (P1Mat.t());
-  //}
+  //arma::imat VarMat;
+  //VarMat.resize(i1, i1);
+ 
+  //arma::uvec rowIndices_VarMat;
+  //arma::uvec colIndices_VarMat;
+  //arma::ivec values_VarMat;
+  // Get the nonzero locations of the first row
+  std::vector<unsigned int> rowIndices_VarMat_vec;
+  std::vector<unsigned int> colIndices_VarMat_vec;
+  unsigned int rowind_new;
+  unsigned int colind_new;
+  std::vector<int> values_VarMat_vec;
 
   arma::sp_imat P1Mat; 
   arma::sp_imat P2Mat; 
@@ -319,10 +341,33 @@ void LDmatRegionInCPP(
          
 	last_col = first_col + mPassCVVec.at(index2) - 1;
 
-        VarMat.submat(first_row, first_col, last_row, last_col) = offVarMat;
-        VarMat.submat(first_col, first_row, last_col, last_row) = offVarMat.t();
+        //VarMat.submat(first_row, first_col, last_row, last_col) = offVarMat;
+        //VarMat.submat(first_col, first_row, last_col, last_row) = offVarMat.t();
+
+  //arma::uword nnz = offVarMat.n_nonzero;
+  // Create vectors to store row indices, column indices, and values
+  //arma::uvec rowIndices(nnz);
+  //arma::uvec colIndices(nnz);
+  //arma::vec values(nnz);
+  // Iterate over non-zero elements and extract information
+  arma::sp_imat::const_iterator it = offVarMat.begin();
+  arma::sp_imat::const_iterator it_end = offVarMat.end();
+
+  for (arma::uword iof = 0; it != it_end; ++it, ++iof) {
+    rowind_new = it.row() + first_row;
+    colind_new = it.col() + first_col;
+    if(rowind_new >= colind_new){ 
+      rowIndices_VarMat_vec.push_back(it.row() + first_row);
+      colIndices_VarMat_vec.push_back(it.col() + first_col);
+      values_VarMat_vec.push_back(*it);
+    }
+    //rowIndices(iof) = it.row();
+    //colIndices(iof) = it.col();
+    //values(iof) = *it;
+  }
+
         first_col = last_col + 1;
-      }
+ }
 
       // diagonal sub-matrix
       last_col = first_col + mPassCVVec.at(index1) - 1;
@@ -332,7 +377,23 @@ void LDmatRegionInCPP(
 
       arma::sp_imat diagVarMat = P1Mat * (P2Mat.t());
 
-      VarMat.submat(first_row, first_col, last_row, last_col) = diagVarMat;
+      arma::sp_imat::const_iterator it = diagVarMat.begin();
+      arma::sp_imat::const_iterator it_end = diagVarMat.end();
+
+  for (arma::uword iof = 0; it != it_end; ++it, ++iof) {
+    rowind_new = it.row() + first_row;
+    colind_new = it.col() + first_col;
+    if(rowind_new >= colind_new){
+      rowIndices_VarMat_vec.push_back(it.row() + first_row);
+      colIndices_VarMat_vec.push_back(it.col() + first_col);
+      values_VarMat_vec.push_back(*it);
+    }
+    //rowIndices(iof) = it.row();
+    //colIndices(iof) = it.col();
+    //values(iof) = *it;
+  }
+
+      //VarMat.submat(first_row, first_col, last_row, last_col) = diagVarMat;
 
       first_row = last_row + 1;
       first_col = 0;
@@ -351,10 +412,74 @@ void LDmatRegionInCPP(
 
   }
 
+/*
+//write the vectors to a binary file
+  std::ofstream file(t_outputFile + "_"+regionName+".txt", std::ios::binary);
+  if (!file.is_open()) {
+    Rcpp::stop("Error opening file for writing.");
+  }
+  // Write the sizes of the vectors to the file
+  size_t size1 = rowIndices_VarMat_vec.size();
+  size_t size2 = colIndices_VarMat_vec.size();
+  size_t size3 = values_VarMat_vec.size();
+
+  file.write(reinterpret_cast<const char*>(&size1), sizeof(size_t));
+  file.write(reinterpret_cast<const char*>(&size2), sizeof(size_t));
+  file.write(reinterpret_cast<const char*>(&size3), sizeof(size_t));
+
+  // Write the vector elements to the file
+  file.write(reinterpret_cast<const char*>(rowIndices_VarMat_vec.data()), size1 * sizeof(int));
+  file.write(reinterpret_cast<const char*>(colIndices_VarMat_vec.data()), size2 * sizeof(int));
+  file.write(reinterpret_cast<const char*>(values_VarMat_vec.data()), size3 * sizeof(int));
+*/
+
+//g_outputFilePrefix_LDmat = t_outputFile + "_"+regionName+".txt";
+//OutFile_LDmat.open(g_outputFilePrefix_LDmat.c_str());
+
+  //std::ofstream file(t_outputFile + "_"+regionName+".txt");
+  if (OutFile_LDmat.is_open()) {
+  for(unsigned int k = 0; k < rowIndices_VarMat_vec.size(); k++){
+      OutFile_LDmat << rowIndices_VarMat_vec.at(k);
+      OutFile_LDmat << " ";
+      OutFile_LDmat << colIndices_VarMat_vec.at(k);
+      OutFile_LDmat << " ";
+      OutFile_LDmat << values_VarMat_vec.at(k);
+      OutFile_LDmat << "\n";
+  }
+ 
+ // Close the file
+  //OutFile_LDmat.close();
+}else{
+  std::cout << g_outputFilePrefix_LDmat << " is not opened" << std::endl;
+}
+
+  if (OutFile_index_LDmat.is_open()) {
+        g_startpos = g_endpos+1;
+	g_endpos = g_startpos + rowIndices_VarMat_vec.size() - 1;
+	OutFile_index_LDmat << g_startpos;
+	OutFile_index_LDmat << " ";
+	OutFile_index_LDmat << g_endpos;
+	OutFile_index_LDmat << " ";
+	OutFile_index_LDmat << regionName;
+	OutFile_index_LDmat << "\n";
+  }else{
+    std::cout << g_outputFilePrefixIndex_LDmat << " is not opened" << std::endl;
+  }
+
+
+/*
+        arma::uvec location_row_VarMat_arma =  arma::conv_to<arma::uvec>::from(rowIndices_VarMat_vec);
+        arma::uvec location_col_VarMat_arma =  arma::conv_to<arma::uvec>::from(colIndices_VarMat_vec);
+	arma::umat location_VarMat_arma (2, location_row_VarMat_arma.n_elem);
+	location_VarMat_arma.row(0) = location_row_VarMat_arma.t();
+	location_VarMat_arma.row(1) = location_col_VarMat_arma.t();
+	arma::ivec value_VarMat_arma = arma::conv_to<arma::ivec>::from(values_VarMat_vec);
+	arma::sp_imat VarMat(location_VarMat_arma, value_VarMat_arma, i1, i1);
+
   //VarMat.print("VarMat");
   VarMat.save(t_outputFile + "_"+regionName+".txt", arma::coord_ascii);
   VarMat.clear();
-
+*/
   writeOutfile_single_LDmat(chrVec,
 		  posVec,
 		  refVec,
@@ -364,6 +489,7 @@ void LDmatRegionInCPP(
 		  missingRateVec,
 		  N_Vec,
 		  regionName);
+  
 }
 
 
@@ -422,6 +548,31 @@ bool openOutfile_single_LDmat(bool isappend){
        return(isopen);
 }
 
+// [[Rcpp::export]]
+bool openOutfile_LDmat(bool isappend){
+      bool isopen;
+      if(!isappend){
+        OutFile_LDmat.open(g_outputFilePrefix_LDmat.c_str());
+        isopen = OutFile_LDmat.is_open();
+       }else{
+         OutFile_LDmat.open(g_outputFilePrefix_LDmat.c_str(), std::ofstream::out | std::ofstream::app);
+         isopen = OutFile_LDmat.is_open();
+       }
+       return(isopen);
+}
+
+// [[Rcpp::export]]
+bool openOutfile_index_LDmat(bool isappend){
+      bool isopen;
+      if(!isappend){
+        OutFile_index_LDmat.open(g_outputFilePrefixIndex_LDmat.c_str());
+        isopen = OutFile_index_LDmat.is_open();
+       }else{
+         OutFile_index_LDmat.open(g_outputFilePrefixIndex_LDmat.c_str(), std::ofstream::out | std::ofstream::app);
+         isopen = OutFile_index_LDmat.is_open();
+       }
+       return(isopen);
+}
 
 // [[Rcpp::export]]
 void closeOutfile_single_LDmat(){

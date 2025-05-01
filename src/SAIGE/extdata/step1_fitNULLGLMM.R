@@ -151,6 +151,9 @@ set.seed(1)
 if(packageVersion("SAIGE")<"1.1.3"){
 
 fitNULLGLMM(plinkFile=opt$plinkFile,
+	    bedFile=opt$bedFile,
+	    bimFile=opt$bimFile,
+	    famFile=opt$famFile,
 	    useSparseGRMtoFitNULL=opt$useSparseGRMtoFitNULL, 
             sparseGRMFile=opt$sparseGRMFile,
             sparseGRMSampleIDFile=opt$sparseGRMSampleIDFile,
@@ -177,6 +180,7 @@ fitNULLGLMM(plinkFile=opt$plinkFile,
             tauInit = tauInit,
             LOCO = opt$LOCO,
             traceCVcutoff = opt$traceCVcutoff,
+	    nrun = opt$nrun,
             ratioCVcutoff = opt$ratioCVcutoff,
 	    outputPrefix_varRatio = opt$outputPrefix_varRatio,
 	    IsOverwriteVarianceRatioFile = opt$IsOverwriteVarianceRatioFile,

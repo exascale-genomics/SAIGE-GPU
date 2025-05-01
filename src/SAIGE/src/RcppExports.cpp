@@ -71,6 +71,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// openOutfile_LDmat
+bool openOutfile_LDmat(bool isappend);
+RcppExport SEXP _SAIGE_openOutfile_LDmat(SEXP isappendSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type isappend(isappendSEXP);
+    rcpp_result_gen = Rcpp::wrap(openOutfile_LDmat(isappend));
+    return rcpp_result_gen;
+END_RCPP
+}
+// openOutfile_index_LDmat
+bool openOutfile_index_LDmat(bool isappend);
+RcppExport SEXP _SAIGE_openOutfile_index_LDmat(SEXP isappendSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type isappend(isappendSEXP);
+    rcpp_result_gen = Rcpp::wrap(openOutfile_index_LDmat(isappend));
+    return rcpp_result_gen;
+END_RCPP
+}
 // closeOutfile_single_LDmat
 void closeOutfile_single_LDmat();
 RcppExport SEXP _SAIGE_closeOutfile_single_LDmat() {
@@ -96,6 +118,26 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type t_outputFilePrefix(t_outputFilePrefixSEXP);
     Rcpp::traits::input_parameter< double >::type t_MACCutoffforER(t_MACCutoffforERSEXP);
     setAssocTest_GlobalVarsInCPP(t_impute_method, t_missing_cutoff, t_min_maf_marker, t_min_mac_marker, t_min_info_marker, t_dosage_zerod_cutoff, t_dosage_zerod_MAC_cutoff, t_weights_beta, t_outputFilePrefix, t_MACCutoffforER);
+    return R_NilValue;
+END_RCPP
+}
+// setAssocTest_GlobalVarsInCPP_indexInModel_male
+void setAssocTest_GlobalVarsInCPP_indexInModel_male(arma::uvec& t_indexInModel_male);
+RcppExport SEXP _SAIGE_setAssocTest_GlobalVarsInCPP_indexInModel_male(SEXP t_indexInModel_maleSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::uvec& >::type t_indexInModel_male(t_indexInModel_maleSEXP);
+    setAssocTest_GlobalVarsInCPP_indexInModel_male(t_indexInModel_male);
+    return R_NilValue;
+END_RCPP
+}
+// setAssocTest_GlobalVarsInCPP_X_PARregion_mat
+void setAssocTest_GlobalVarsInCPP_X_PARregion_mat(arma::umat& t_X_PARregion_mat);
+RcppExport SEXP _SAIGE_setAssocTest_GlobalVarsInCPP_X_PARregion_mat(SEXP t_X_PARregion_matSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::umat& >::type t_X_PARregion_mat(t_X_PARregion_matSEXP);
+    setAssocTest_GlobalVarsInCPP_X_PARregion_mat(t_X_PARregion_mat);
     return R_NilValue;
 END_RCPP
 }
@@ -136,6 +178,46 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool& >::type t_isImputation(t_isImputationSEXP);
     Rcpp::traits::input_parameter< bool& >::type t_isFirth(t_isFirthSEXP);
     mainMarkerInCPP(t_genoType, t_traitType, t_genoIndex_prev, t_genoIndex, t_isMoreOutput, t_isImputation, t_isFirth);
+    return R_NilValue;
+END_RCPP
+}
+// Unified_getOneMarker
+bool Unified_getOneMarker(std::string& t_genoType, uint64_t& t_gIndex_prev, uint64_t& t_gIndex, std::string& t_ref, std::string& t_alt, std::string& t_marker, uint32_t& t_pd, std::string& t_chr, double& t_altFreq, double& t_altCounts, double& t_missingRate, double& t_imputeInfo, bool& t_isOutputIndexForMissing, std::vector<uint>& t_indexForMissing, bool& t_isOnlyOutputNonZero, std::vector<uint>& t_indexForNonZero, arma::vec& t_GVec, bool t_isImputation);
+RcppExport SEXP _SAIGE_Unified_getOneMarker(SEXP t_genoTypeSEXP, SEXP t_gIndex_prevSEXP, SEXP t_gIndexSEXP, SEXP t_refSEXP, SEXP t_altSEXP, SEXP t_markerSEXP, SEXP t_pdSEXP, SEXP t_chrSEXP, SEXP t_altFreqSEXP, SEXP t_altCountsSEXP, SEXP t_missingRateSEXP, SEXP t_imputeInfoSEXP, SEXP t_isOutputIndexForMissingSEXP, SEXP t_indexForMissingSEXP, SEXP t_isOnlyOutputNonZeroSEXP, SEXP t_indexForNonZeroSEXP, SEXP t_GVecSEXP, SEXP t_isImputationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string& >::type t_genoType(t_genoTypeSEXP);
+    Rcpp::traits::input_parameter< uint64_t& >::type t_gIndex_prev(t_gIndex_prevSEXP);
+    Rcpp::traits::input_parameter< uint64_t& >::type t_gIndex(t_gIndexSEXP);
+    Rcpp::traits::input_parameter< std::string& >::type t_ref(t_refSEXP);
+    Rcpp::traits::input_parameter< std::string& >::type t_alt(t_altSEXP);
+    Rcpp::traits::input_parameter< std::string& >::type t_marker(t_markerSEXP);
+    Rcpp::traits::input_parameter< uint32_t& >::type t_pd(t_pdSEXP);
+    Rcpp::traits::input_parameter< std::string& >::type t_chr(t_chrSEXP);
+    Rcpp::traits::input_parameter< double& >::type t_altFreq(t_altFreqSEXP);
+    Rcpp::traits::input_parameter< double& >::type t_altCounts(t_altCountsSEXP);
+    Rcpp::traits::input_parameter< double& >::type t_missingRate(t_missingRateSEXP);
+    Rcpp::traits::input_parameter< double& >::type t_imputeInfo(t_imputeInfoSEXP);
+    Rcpp::traits::input_parameter< bool& >::type t_isOutputIndexForMissing(t_isOutputIndexForMissingSEXP);
+    Rcpp::traits::input_parameter< std::vector<uint>& >::type t_indexForMissing(t_indexForMissingSEXP);
+    Rcpp::traits::input_parameter< bool& >::type t_isOnlyOutputNonZero(t_isOnlyOutputNonZeroSEXP);
+    Rcpp::traits::input_parameter< std::vector<uint>& >::type t_indexForNonZero(t_indexForNonZeroSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type t_GVec(t_GVecSEXP);
+    Rcpp::traits::input_parameter< bool >::type t_isImputation(t_isImputationSEXP);
+    rcpp_result_gen = Rcpp::wrap(Unified_getOneMarker(t_genoType, t_gIndex_prev, t_gIndex, t_ref, t_alt, t_marker, t_pd, t_chr, t_altFreq, t_altCounts, t_missingRate, t_imputeInfo, t_isOutputIndexForMissing, t_indexForMissing, t_isOnlyOutputNonZero, t_indexForNonZero, t_GVec, t_isImputation));
+    return rcpp_result_gen;
+END_RCPP
+}
+// processMale_XnonPAR
+void processMale_XnonPAR(arma::vec& t_GVec, uint32_t& t_pd, arma::umat& t_XPARregion);
+RcppExport SEXP _SAIGE_processMale_XnonPAR(SEXP t_GVecSEXP, SEXP t_pdSEXP, SEXP t_XPARregionSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec& >::type t_GVec(t_GVecSEXP);
+    Rcpp::traits::input_parameter< uint32_t& >::type t_pd(t_pdSEXP);
+    Rcpp::traits::input_parameter< arma::umat& >::type t_XPARregion(t_XPARregionSEXP);
+    processMale_XnonPAR(t_GVec, t_pd, t_XPARregion);
     return R_NilValue;
 END_RCPP
 }
@@ -1660,6 +1742,25 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// SPA_pval
+double SPA_pval(arma::vec& mu, arma::vec& g, double q, double qinv, double pval_noadj, double tol, bool logp, std::string traitType, bool& isSPAConverge);
+RcppExport SEXP _SAIGE_SPA_pval(SEXP muSEXP, SEXP gSEXP, SEXP qSEXP, SEXP qinvSEXP, SEXP pval_noadjSEXP, SEXP tolSEXP, SEXP logpSEXP, SEXP traitTypeSEXP, SEXP isSPAConvergeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec& >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type g(gSEXP);
+    Rcpp::traits::input_parameter< double >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double >::type qinv(qinvSEXP);
+    Rcpp::traits::input_parameter< double >::type pval_noadj(pval_noadjSEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< bool >::type logp(logpSEXP);
+    Rcpp::traits::input_parameter< std::string >::type traitType(traitTypeSEXP);
+    Rcpp::traits::input_parameter< bool& >::type isSPAConverge(isSPAConvergeSEXP);
+    rcpp_result_gen = Rcpp::wrap(SPA_pval(mu, g, q, qinv, pval_noadj, tol, logp, traitType, isSPAConverge));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Korg_Binom
 double Korg_Binom(double t1, arma::vec& mu, arma::vec& g);
 RcppExport SEXP _SAIGE_Korg_Binom(SEXP t1SEXP, SEXP muSEXP, SEXP gSEXP) {
@@ -2160,11 +2261,17 @@ static const R_CallMethodDef CallEntries[] = {
     {"_SAIGE_setGlobalVarsInCPP_LDmat", (DL_FUNC) &_SAIGE_setGlobalVarsInCPP_LDmat, 10},
     {"_SAIGE_LDmatRegionInCPP", (DL_FUNC) &_SAIGE_LDmatRegionInCPP, 9},
     {"_SAIGE_openOutfile_single_LDmat", (DL_FUNC) &_SAIGE_openOutfile_single_LDmat, 1},
+    {"_SAIGE_openOutfile_LDmat", (DL_FUNC) &_SAIGE_openOutfile_LDmat, 1},
+    {"_SAIGE_openOutfile_index_LDmat", (DL_FUNC) &_SAIGE_openOutfile_index_LDmat, 1},
     {"_SAIGE_closeOutfile_single_LDmat", (DL_FUNC) &_SAIGE_closeOutfile_single_LDmat, 0},
     {"_SAIGE_setAssocTest_GlobalVarsInCPP", (DL_FUNC) &_SAIGE_setAssocTest_GlobalVarsInCPP, 10},
+    {"_SAIGE_setAssocTest_GlobalVarsInCPP_indexInModel_male", (DL_FUNC) &_SAIGE_setAssocTest_GlobalVarsInCPP_indexInModel_male, 1},
+    {"_SAIGE_setAssocTest_GlobalVarsInCPP_X_PARregion_mat", (DL_FUNC) &_SAIGE_setAssocTest_GlobalVarsInCPP_X_PARregion_mat, 1},
     {"_SAIGE_setMarker_GlobalVarsInCPP", (DL_FUNC) &_SAIGE_setMarker_GlobalVarsInCPP, 2},
     {"_SAIGE_setRegion_GlobalVarsInCPP", (DL_FUNC) &_SAIGE_setRegion_GlobalVarsInCPP, 4},
     {"_SAIGE_mainMarkerInCPP", (DL_FUNC) &_SAIGE_mainMarkerInCPP, 7},
+    {"_SAIGE_Unified_getOneMarker", (DL_FUNC) &_SAIGE_Unified_getOneMarker, 18},
+    {"_SAIGE_processMale_XnonPAR", (DL_FUNC) &_SAIGE_processMale_XnonPAR, 3},
     {"_SAIGE_Unified_getSampleSizeinGeno", (DL_FUNC) &_SAIGE_Unified_getSampleSizeinGeno, 1},
     {"_SAIGE_Unified_getSampleSizeinAnalysis", (DL_FUNC) &_SAIGE_Unified_getSampleSizeinAnalysis, 1},
     {"_SAIGE_setPLINKobjInCPP", (DL_FUNC) &_SAIGE_setPLINKobjInCPP, 5},
@@ -2284,6 +2391,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_SAIGE_setminMAC_VarianceRatio", (DL_FUNC) &_SAIGE_setminMAC_VarianceRatio, 3},
     {"_SAIGE_SPA", (DL_FUNC) &_SAIGE_SPA, 10},
     {"_SAIGE_SPA_fast", (DL_FUNC) &_SAIGE_SPA_fast, 16},
+    {"_SAIGE_SPA_pval", (DL_FUNC) &_SAIGE_SPA_pval, 9},
     {"_SAIGE_Korg_Binom", (DL_FUNC) &_SAIGE_Korg_Binom, 3},
     {"_SAIGE_K1_adj_Binom", (DL_FUNC) &_SAIGE_K1_adj_Binom, 4},
     {"_SAIGE_K2_Binom", (DL_FUNC) &_SAIGE_K2_Binom, 3},

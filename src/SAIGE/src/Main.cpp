@@ -66,6 +66,12 @@ arma::vec g_weights_beta(2);
 bool  g_is_Firth_beta;
 double g_pCutoffforFirth;
 double g_MACCutoffforER;
+bool g_is_rewrite_XnonPAR_forMales = false;
+
+
+arma::uvec g_indexInModel_male;
+
+arma::umat g_X_PARregion_mat;
 
 
 std::ofstream OutFile;
@@ -109,6 +115,20 @@ void setAssocTest_GlobalVarsInCPP(std::string t_impute_method,
   g_outputFilePrefixSingle = t_outputFilePrefix;
   g_MACCutoffforER = t_MACCutoffforER;
 }
+
+// [[Rcpp::export]]
+void setAssocTest_GlobalVarsInCPP_indexInModel_male(arma::uvec & t_indexInModel_male){
+  g_indexInModel_male = t_indexInModel_male;
+  g_is_rewrite_XnonPAR_forMales = true;
+}
+
+// [[Rcpp::export]]
+void setAssocTest_GlobalVarsInCPP_X_PARregion_mat(arma::umat & t_X_PARregion_mat){
+  g_X_PARregion_mat = t_X_PARregion_mat;
+}
+
+
+
 // [[Rcpp::export]]
 void setMarker_GlobalVarsInCPP(
 			       bool t_isOutputMoreDetails,
@@ -338,11 +358,12 @@ void mainMarkerInCPP(
     double MAC = MAF * n * (1 - missingRate) *2;
     
     
-   /*
+  /*
    std::cout << "missingRate " << missingRate << std::endl;
    std::cout << "MAF " << MAF << std::endl;
    std::cout << "MAC " << MAC << std::endl;
    std::cout << "altFreq " << altFreq << std::endl;
+   std::cout << "altCounts " << altCounts << std::endl;
    std::cout << "n " << n << std::endl;
    */
 
@@ -360,12 +381,16 @@ void mainMarkerInCPP(
 
 
     flip = imputeGenoAndFlip(t_GVec, altFreq, altCounts,indexForMissing, g_impute_method, g_dosage_zerod_cutoff, g_dosage_zerod_MAC_cutoff, MAC, indexZeroVec, indexNonZeroVec);
-   
+    MAC = std::min(altCounts, 2*n-altCounts);
+    MAF = std::min(altFreq, 1 - altFreq);
+
+   if((MAF < g_marker_minMAF_cutoff) || (MAC < g_marker_minMAC_cutoff)){
+	continue;
+   }else{
 //arma::vec timeoutput4 = getTime();
 //printTime(timeoutput3, timeoutput4, "imputeGenoAndFlip");
     altFreqVec.at(i) = altFreq;         // allele frequencies of ALT allele, this is not always < 0.5.
     altCountsVec.at(i) = altCounts;         // allele frequencies of ALT allele, this is not always < 0.5.
-    MAC = std::min(altCounts, 2*n-altCounts);
    //std::cout << "MAC " << MAC << std::endl; 
    //std::cout << "altFreq after flip " << altFreq << std::endl; 
    //std::cout << "info " << info << std::endl; 
@@ -380,6 +405,7 @@ void mainMarkerInCPP(
     arma::uvec indexZeroVec_arma, indexNonZeroVec_arma;
     indexZeroVec_arma = arma::conv_to<arma::uvec>::from(indexZeroVec);
     indexNonZeroVec_arma = arma::conv_to<arma::uvec>::from(indexNonZeroVec);
+
     indexZeroVec.clear();
     indexNonZeroVec.clear();
     t_P2Vec.clear();
@@ -528,10 +554,11 @@ void mainMarkerInCPP(
 
     }
 
+   }// if((MAF < g_marker_minMAF_cutoff) || (MAC < g_marker_minMAC_cutoff)){
     
    } //    if((missingRate > g_missingRate_cutoff) || (MAF < g_marker_minMAF_cutoff) || (MAC < g_marker_minMAC_cutoff || imputeInfo < g_marker_minINFO_cutoff)){
  
-  
+   
   
     //t_GVec.clear();
   }
@@ -580,8 +607,10 @@ void mainMarkerInCPP(
 
 
 
-
 // a unified function to get single marker from genotype file
+
+
+// [[Rcpp::export]]
 bool Unified_getOneMarker(std::string & t_genoType,   // "PLINK", "BGEN", "Vcf"
                                uint64_t & t_gIndex_prev,        // different meanings for different genoType
                                uint64_t & t_gIndex,        // different meanings for different genoType
@@ -628,8 +657,28 @@ bool Unified_getOneMarker(std::string & t_genoType,   // "PLINK", "BGEN", "Vcf"
                                       t_isOutputIndexForMissing, t_indexForMissing, t_isOnlyOutputNonZero, t_indexForNonZero, isBoolRead, t_GVec, t_isImputation);
     ptr_gVCFobj->move_forward_iterator(1);
   }	  
-  
+ 
+  if(g_is_rewrite_XnonPAR_forMales){
+  	processMale_XnonPAR(t_GVec, t_pd, g_X_PARregion_mat);
+	t_altCounts = arma::sum(t_GVec);
+	t_altFreq = arma::mean(t_GVec)/2.0;	
+  }
+
   return isBoolRead;
+}
+
+
+// [[Rcpp::export]]
+void processMale_XnonPAR(arma::vec & t_GVec,  uint32_t& t_pd , arma::umat & t_XPARregion){
+	bool isPAR = false;
+	for(unsigned int j = 0; j < t_XPARregion.n_rows; j++){
+		if(t_pd <= t_XPARregion(j,1) && t_pd >= t_XPARregion(j,0)){	
+			isPAR = true;
+		}
+	}
+	if(!isPAR){
+		t_GVec.elem(g_indexInModel_male) = t_GVec.elem(g_indexInModel_male) * 2;
+	}
 }
 
 
@@ -1648,7 +1697,6 @@ if(t_regionTestType != "BURDEN"){
     
   }
 }  //if(t_regionTestType != "BURDEN"){
-
 
 //read and test single markers done
 //arma::vec timeoutput2 = getTime();

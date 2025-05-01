@@ -514,7 +514,7 @@ if(!t_isER){
     	//bool logp=false;
 	double tol0 = std::numeric_limits<double>::epsilon();
 	tol1 = std::pow(tol0, 0.25);
-	if(p_iIndexComVecSize >= 0.5){
+	if(p_iIndexComVecSize >= 0.5 && !m_flagSparseGRM_cur){
 		//std::cout << "SPA_fast" << std::endl;
         	SPA_fast(m_mu, t_gtilde, q, qinv, pval_noadj, ispvallog, gNA, gNB, muNA, muNB, NAmu, NAsigma, tol1, m_traitType, t_SPApval, t_isSPAConverge);
 	}else{
@@ -526,9 +526,11 @@ if(!t_isER){
     boost::math::normal ns;
     double t_qval;
 
+
+
     if(t_isSPAConverge){
         try {
-          t_qval = R::qnorm(t_SPApval, 0, 1, false, ispvallog);		
+          t_qval = R::qnorm(t_SPApval/2, 0, 1, false, ispvallog);		
           t_qval = fabs(t_qval);
           t_seBeta = fabs(t_Beta)/t_qval;
         }catch (const std::overflow_error&) {
@@ -572,13 +574,13 @@ if(!t_isER){
 	if(!ispvallog){
 		if(m_is_Firth_beta && pval <= m_pCutoffforFirth){
 			t_isFirth = true;
-			t_qval_Firth = R::qnorm(pval, 0, 1, false, false);
+			t_qval_Firth = R::qnorm(pval/2, 0, 1, false, false);
 		}
 
 	}else{
 		if(m_is_Firth_beta && pval <= std::log(m_pCutoffforFirth)){
 			t_isFirth = true;
-			t_qval_Firth = R::qnorm(pval, 0, 1, false, true);
+			t_qval_Firth = R::qnorm(pval/2, 0, 1, false, true);
 		}
 	}
 
@@ -713,7 +715,7 @@ if(!t_isER){
         }
 
 
-        if(p_iIndexComVecSize >= 0.5){
+        if(p_iIndexComVecSize >= 0.5 && !m_flagSparseGRM_cur){
 		//std::cout << "SPA_fast " << std::endl;
                 SPA_fast(m_mu, t_gtilde, q_c, qinv_c, pval_noSPA_c, ispvallog, gNA, gNB, muNA, muNB, NAmu, NAsigma, tol1, m_traitType, SPApval_c, t_isSPAConverge_c);
         }else{
@@ -730,7 +732,7 @@ if(!t_isER){
           if(!ispvallog){
            t_qval_c = boost::math::quantile(ns, SPApval_c/2);
           }else{
-	   t_qval_c = R::qnorm(SPApval_c, 0, 1, false, true);
+	   t_qval_c = R::qnorm(SPApval_c/2, 0, 1, false, true);
           }
            t_qval_c = fabs(t_qval_c);
            t_seBeta_c = fabs(t_Beta_c)/t_qval_c;
@@ -815,7 +817,7 @@ bool SAIGEClass::assignVarianceRatio(double MAC, bool issparseforVR){
     }
 
     if(!hasVarRatio){	
-	if(MAC < m_cateVarRatioMinMACVecExclude(0)){
+	if(MAC <= m_cateVarRatioMinMACVecExclude(0)){
 		m_varRatioVal = m_varRatio(0);
 		hasVarRatio = true;
 	}	

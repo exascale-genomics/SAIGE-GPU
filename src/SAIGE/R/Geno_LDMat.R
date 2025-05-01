@@ -148,6 +148,10 @@ setGenoInput_LDmat = function(bgenFile = "",
 
     if(is.null(AlleleOrder)) AlleleOrder = "ref-first"
 
+    if(AlleleOrder != "ref-first"){
+        stop("genotype is in bgen, please set AlleleOrder=ref-first\n")
+    }
+
     if(sampleFile != "" | !checkIfSampleIDsExist(bgenFile)){
         print("Sample IDs were not found in the bgen file.")
         Check_File_Exist(sampleFile)
