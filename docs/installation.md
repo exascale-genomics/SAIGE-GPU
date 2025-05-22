@@ -96,6 +96,100 @@ jsrun -n6 -a1 -c1 -g1 Rscript $path_to_saige/step1_fitNULLGLMM.R \
    --IsOverwriteVarianceRatioFile=TRUE \
    --nThreads=1; gsutil -m cp $TMPDIR/GPU_step1_output* $OUT_DIR
 ```
+## Install from source on OLCF Frontier
+
+Frotier uses AMD GPUs, so the code is different than running on Summit.
+
+### Dependencies
+
+The dependencies listed below are modules used to install SAIGE from source code in the [ORNL OLCF Summit HPC](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html).
+
+```
+module load python/3.10-miniforge3
+module load r/4.4.1
+module load amd/5.6.0
+
+```
+
+There are several R libraries needed to be installed:
+
+```
+mkdir saige
+cd saige
+R_LIB=/lustre/orion/bif154/proj-shared/arodriguez/tools/R/libs
+#R_LIB=/path/to/your/R_lib
+Rscript -e "install.packages(c(\
+     'R.utils', \
+     'MetaSKAT', \
+     'RSQLite', \
+     'dplyr', \
+     'Rcpp', \
+     'RcppParallel', \
+     'data.table', \
+     'RcppEigen', \
+     'Matrix', \
+     'optparse', \
+     'SPAtest',
+     'SKAT', \
+     'RcppArmadillo', \
+     'qlcMatrix', \
+     'RhpcBLASctl'), \
+   lib='/lustre/orion/bif154/proj-shared/arodriguez/tools/R/libs', \
+   repos='https://cran.rstudio.com')"
+
+```
+
+There are additional R libraries that need to be installed, but need to be of specific version and installed with specific arguments.
+You will need to load an R shell.
+
+```
+R
+install.packages("https://cran.r-project.org/src/contrib/Archive/BH/BH_1.78.0-0.tar.gz",
+                 repos = NULL, type = "source", lib="/lustre/orion/bif154/proj-shared/arodriguez/tools/R/libs")
+install.packages("pbdMPI", repos = c("https://cloud.r-project.org"), lib="/lustre/orion/bif154/proj-shared/arodriguez/tools/R/libs", configure.args = c("--with-mpi=/opt/cray/pe/mpich/8.1.31/ofi/amd/6.0/"))
+q()
+```
+
+Download the repository from GitHub the branch which includes the changes for AMD GPU resources.
+
+```
+cd /lustre/orion/bif154/proj-shared/arodriguez/tools
+git clone https://github.com/exascale-genomics/SAIGE-GPU.git
+git checkout SAIGE-GPU-AMD-1.3.3
+cd SAIGE-GPU/src
+```
+
+Install additional dependencies (i.e. cget, savvy, superlu):
+
+```
+cd /lustre/orion/bif154/proj-shared/arodriguez/tools/SAIGE-GPU/src/
+pip install --target /lustre/orion/bif154/proj-shared/arodriguez/tools/SAIGE-GPU/src/SAIGE/thirdParty/cget/ cget
+export PYTHONPATH=/lustre/orion/bif154/proj-shared/arodriguez/tools/SAIGE-GPU/src/SAIGE/thirdParty/cget/:$PYTHONPATH
+export PATH=/lustre/orion/bif154/proj-shared/arodriguez/tools/SAIGE-GPU/src/SAIGE/thirdParty/cget/bin:$PATH
+export CXX=g++
+export LDFLAGS="-fPIC"
+export CFLAGS="-fPIC $CFLAGS"
+export CXXFLAGS="-fPIC $CXXFLAGS"
+
+CC=gcc CXX=g++ cget install --prefix thirdParty/cget -f thirdParty/requirements.txt
+```
+
+### Install and quick test on HPC from Source Code
+
+You can install SAIGE from source code. We have merged SAIGE-GPU with the latest version of [SAIGE](https://saigegit.github.io/SAIGE-doc/). This GitHub contains the latest merged version and can be installed following these instructions. You will need the above mentioned R libraries as they are not contained in the branch.
+
+```
+R CMD INSTALL SAIGE --library=$R_LIB
+```
+
+You can submit a quick test job on a GPU machine. For the test you only need 1 GPU available of minimum 16 Gigabytes of memory.
+
+The following file was used to submit to the HPC:
+
+```
+Rscript $path_to_saige/extdata/step1_fitNULLGLMM.R --plinkFile=$path_to_saige/extdata/input/plinkforGRM_1000samples_10kMarkers --phenoFile=$path_to_saige/extdata/input/pheno_1000samples.txt --invNormalize=FALSE --phenoCol=y --covarColList=x1,x2 --sampleIDColinphenoFile=IID --traitType=binary --outputPrefix=./GPU_step1_output --minMAFforGRM 0.01 --LOCO T  --IsOverwriteVarianceRatioFile=TRUE --nThreads=1
+```
+
 
 ## Install via Conda on ALCF Polaris
 
