@@ -20,7 +20,7 @@
 #include "getMem.hpp"
 
 #if defined(USE_GPU)
-#include "gpuSymMatMult.hpp"
+#include "gpuSymMatMult_hip.hpp"
 #endif
 
 using namespace Rcpp;
@@ -105,7 +105,7 @@ public:
 #endif
 
 #if defined(USE_GPU)
-	gpuSymMatMult gpuSNPMatrix;
+	gpuSymMatMult_hip gpuSNPMatrix;
 #endif
 
 	arma::ivec xout;
