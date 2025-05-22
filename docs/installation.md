@@ -187,6 +187,11 @@ You can submit a quick test job on a GPU machine. For the test you only need 1 G
 The following file was used to submit to the HPC:
 
 ```
+module load python/3.10-miniforge3
+module load r/4.4.1
+module load amd/5.6.0
+R_LIB=/lustre/orion/bif154/proj-shared/arodriguez/tools/R/libs
+path_to_saige="/lustre/orion/bif154/proj-shared/arodriguez/tools/SAIGE-GPU/src/SAIGE"
 Rscript $path_to_saige/extdata/step1_fitNULLGLMM.R --plinkFile=$path_to_saige/extdata/input/plinkforGRM_1000samples_10kMarkers --phenoFile=$path_to_saige/extdata/input/pheno_1000samples.txt --invNormalize=FALSE --phenoCol=y --covarColList=x1,x2 --sampleIDColinphenoFile=IID --traitType=binary --outputPrefix=./GPU_step1_output --minMAFforGRM 0.01 --LOCO T  --IsOverwriteVarianceRatioFile=TRUE --nThreads=1
 ```
 
