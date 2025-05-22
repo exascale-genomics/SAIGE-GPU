@@ -193,6 +193,16 @@ module load amd/5.6.0
 R_LIB=/lustre/orion/bif154/proj-shared/arodriguez/tools/R/libs
 path_to_saige="/lustre/orion/bif154/proj-shared/arodriguez/tools/SAIGE-GPU/src/SAIGE"
 Rscript $path_to_saige/extdata/step1_fitNULLGLMM.R --plinkFile=$path_to_saige/extdata/input/plinkforGRM_1000samples_10kMarkers --phenoFile=$path_to_saige/extdata/input/pheno_1000samples.txt --invNormalize=FALSE --phenoCol=y --covarColList=x1,x2 --sampleIDColinphenoFile=IID --traitType=binary --outputPrefix=./GPU_step1_output --minMAFforGRM 0.01 --LOCO T  --IsOverwriteVarianceRatioFile=TRUE --nThreads=1
+
+# List of modules
+[arodriguez@login11.frontier src]$ module list
+
+Currently Loaded Modules:
+  1) craype-x86-trento                6) cray-pmi/6.1.15    11) DefApps                 16) cray-mpich/8.1.31
+  2) libfabric/1.22.0                 7) Core/25.03         12) python/3.10-miniforge3  17) cray-libsci/24.11.0
+  3) craype-network-ofi               8) tmux/3.4           13) r/4.4.1                 18) PrgEnv-amd/8.6.0
+  4) perftools-base/24.11.0           9) hsi/default        14) craype/2.7.33           19) amd/5.6.0
+  5) xpmem/2.10.6-1.2_gfaa90a94be64  10) lfs-wrapper/0.0.1  15) cray-dsmml/0.3.0
 ```
 
 
