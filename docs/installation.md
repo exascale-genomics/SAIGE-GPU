@@ -102,7 +102,7 @@ Frotier uses AMD GPUs, so the code is different than running on Summit.
 
 ### Dependencies
 
-The dependencies listed below are modules used to install SAIGE from source code in the [ORNL OLCF Summit HPC](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html).
+The dependencies listed below are modules used to install SAIGE from source code in the [ORNL OLCF Frontier HPC](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html).
 
 ```
 module load python/3.10-miniforge3
