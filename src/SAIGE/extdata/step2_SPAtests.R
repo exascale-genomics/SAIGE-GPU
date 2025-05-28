@@ -2,7 +2,8 @@
 
 #options(stringsAsFactors=F, scipen = 999)
 options(stringsAsFactors=F)
-.libPaths(c(.libPaths(), "/gpfs/alpine/proj-shared/med112/task0101113/tools/R-2/R-4.0.3/library/"))
+.libPaths(c(.libPaths(), "/lustre/orion/bif154/proj-shared/arodriguez/tools/conda_envs/RSAIGE_1.3.3_amd_gpu/lib/R/library/"))
+#.libPaths(c(.libPaths(), "/gpfs/alpine/proj-shared/med112/task0101113/tools/R-2/R-4.0.3/library/"))
 library(SAIGE)
 BLASctl_installed <- require(RhpcBLASctl)
 library(optparse)

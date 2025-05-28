@@ -5,9 +5,9 @@ MPI_LDFLAGS = -L/opt/cray/pe/mpich/8.1.31/ofi/amd/6.0/lib -lmpi
 MPI_CPPFLAGS = -I/opt/cray/pe/mpich/8.1.31/ofi/amd/6.0/include/
 
 HIPCC = hipcc
-HIP_LIBS = -L/opt/rocm-5.6.0/lib -lamdhip64 -lhiprtc -lhipblas -lhipfft -Wl,-rpath,/opt/rocm-5.6.0/lib
+HIP_LIBS = -L/opt/rocm-6.4.0/lib -lamdhip64 -lhiprtc -lhipblas -lhipfft -Wl,-rpath,/opt/rocm-6.4.0/lib
 
-PKG_CPPFLAGS = -I/opt/rocm-5.6.0/include -D__HIP_PLATFORM_AMD__=1
+PKG_CPPFLAGS = -I/opt/rocm-6.4.0/include -D__HIP_PLATFORM_AMD__=1
 PKG_CPPFLAGS += $(MPI_CPPFLAGS)
 PKG_CPPFLAGS += \
 -I ../thirdParty/cget/include \
@@ -32,7 +32,7 @@ PKG_LIBS += $(HIP_LIBS)
 OBJECTS = gpuSymMatMult_hip.o RcppExports.o SAIGE_fitGLMM_fast.o getMem.o VCF.o BGEN.o PLINK.o SAIGE_test.o SPA_binary.o SPA.o SPA_survival.o UTIL.o Main.o test.o CCT.o Binary_HyperGeo.o Binary_ComputeExact.o Binary_global.o Binary_ComputeExactSKATO.o Binary_resampling.o Binary_Permu_SKAT.o ER_binary_func.o LDmat.o
 
 %.o: %_hip.cpp
-	$(HIPCC) -O2 -c -fPIC --offload-arch=gfx906 -I/opt/rocm-5.6.0/include/hipblas/ -L/opt/rocm-5.6.0//lib -x hip $< -o $@
+	$(HIPCC) -O2 -c -fPIC --offload-arch=gfx906 -I/opt/rocm-6.4.0/include/hipblas/ -L/opt/rocm-6.4.0//lib -x hip $< -o $@
 
 
 all: $(SHLIB)
