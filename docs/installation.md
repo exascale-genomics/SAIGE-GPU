@@ -41,6 +41,7 @@ Rscript -e "install.packages(c(\
      'MetaSKAT', \
      'RSQLite', \
      'dplyr', \
+     'dbplyr', \
      'Rcpp', \
      'RcppParallel', \
      'data.table', \
