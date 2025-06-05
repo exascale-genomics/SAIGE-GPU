@@ -22,9 +22,9 @@
 #' @param maxMissing numeric. Maximum missing rate for markers to be tested. By default, 0.15
 #' @param impute_method character. Imputation method for missing dosages. best_guess, mean or minor. best_guess: missing dosages imputed as best guessed genotyes round(2*allele frequency). mean: missing dosages are imputed as mean (2*allele frequency). minor: missing dosages are imputed as minor allele homozygotes. By default, minor
 #' @param LOCO logical. Whether to apply the leave-one-chromosome-out option. If TRUE, --chrom is required. By default, TRUE
-#' @param GMMATmodelFile character. Path to the input file containing the glmm model, which is output from previous step. Will be used by load()
-#' @param varianceRatioFile character. Path to the input file containing the variance ratio, which is output from the previous step
-#' @param SAIGEOutputFile character. Prefix of the output files containing assoc test results
+#' @param GMMATmodelFiles character or list. Path to the input file containing the glmm model, which is output from previous step.  If a character vector of paths, each path corresponds to a different trait.
+#' @param varianceRatioFiles character or list. Path to the input file containing the variance ratio, which is output from the previous step. If a character vector of paths, each path corresponds to a different trait.
+#' @param SAIGEOutputFile character or list. Prefix of the output files containing assoc test results
 #' @param markers_per_chunk character. Number of markers to be tested and output in each chunk in the single-variant assoc tests. By default, 10000
 #' @param groups_per_chunk character. Number of groups/sets to be read in and tested in each chunk in the set-based assoc tests. By default, 100
 #' @param is_output_moreDetails logical. Whether to output heterozygous and homozygous counts in cases and controls. By default, FALSE. If True, the columns homN_Allele2_cases, hetN_Allelelogical2_cases, homN_Allele2_ctrls, hetN_Allele2_ctrls will be output. By default, FALSE
@@ -79,13 +79,13 @@ SPAGMMATtest = function(bgenFile = "",
                  min_MAF = 0,
                  min_Info = 0,
                  is_imputed_data = FALSE, #new
-                 GMMATmodelFile = "",
+                 GMMATmodelFiles = c(),   # Modified to accept list
                  LOCO=TRUE,
-                 varianceRatioFile = "",
+                 varianceRatioFiles = c(),  # Modified to accept list
                  cateVarRatioMinMACVecExclude=c(10.5,20.5),
                  cateVarRatioMaxMACVecInclude=c(20.5),
                  SPAcutoff=2,
-                 SAIGEOutputFile = "",
+                 SAIGEOutputFiles = c(),   # Modified to accept list
                  markers_per_chunk = 10000,
 		 groups_per_chunk = 100,
 		 markers_per_chunk_in_groupTest = 100, #new
@@ -152,11 +152,22 @@ SPAGMMATtest = function(bgenFile = "",
 
     ##check and create the output file
     #Check_OutputFile_Create(SAIGEOutputFile)
-    OutputFile = SAIGEOutputFile
-    OutputFileIndex=NULL
-    if(is.null(OutputFileIndex)){OutputFileIndex = paste0(OutputFile, ".index")} 
+    OutputFiles = SAIGEOutputFiles
+    OutputFilesIndex = paste0(OutputFiles, ".index")
 
+    #########ALEX: This is where I left off ... below it is setting OutputFile in memory as a Global Var
+    ############### Might need to modify that
     ##check the variance ratio file and extract the variance ratio vector
+#    setAssocTest_GlobalVarsInCPP(impute_method,
+#                            max_missing,
+#                            min_MAF,
+#                            min_MAC,
+#                            min_Info,
+#                        dosage_zerod_cutoff,
+#                        dosage_zerod_MAC_cutoff,
+#                        weights.beta,
+#                        OutputFiles[[1]],
+#                        max_MAC_use_ER)
     setAssocTest_GlobalVarsInCPP(impute_method,
                             max_missing,
                             min_MAF,
@@ -165,7 +176,7 @@ SPAGMMATtest = function(bgenFile = "",
 			dosage_zerod_cutoff,
                         dosage_zerod_MAC_cutoff,
 			weights.beta, 
-			OutputFile,
+			OutputFiles,
 			max_MAC_use_ER)	
 
     if(groupFile == ""){
@@ -220,122 +231,125 @@ SPAGMMATtest = function(bgenFile = "",
     }
    
 
+    # Store models and variance ratios in lists
+    obj.models <- list()
+    ratioVecLists <- list()
+    SAIGE_OBJECTS <- list()  # Global list to store the SAIGE objects
+    num_traits <- length(GMMATmodelFiles)
+    print("NUM_TRAITS")
+    print(num_traits)
 
-
-    if(subSampleFile == ""){
-    	obj.model = ReadModel(GMMATmodelFile, chrom, LOCO, is_Firth_beta) #readInGLMM.R
-    }else{
-    	obj.model = ReadModel_subsample(GMMATmodelFile, chrom, LOCO, is_Firth_beta, subSampleFile) #readInGLMM.R	
-    }
-
-
-      if (is_rewrite_XnonPAR_forMales) {
-        cat("is_rewrite_XnonPAR_forMales is TRUE, so genotypes/dosages in the non-PAR regions of X chromosome for males will be multiplied by 2\n")
-        if (!file.exists(sampleFile_male)) {
-            stop("ERROR! The sample file for male IDs ", sampleFile_male,
-                " does not exist\n")
-        }else {
-            sampleList_male = data.frame(data.table:::fread(sampleFile_male,
-                header = F, stringsAsFactors = FALSE, colClasses = c("character"),
-                data.table = F))
-            colnames(sampleList_male) = c("sampleID_male")
-            cat(nrow(sampleList_male), " sample IDs are found in ",
-                sampleFile_male, "\n")
-            indexInModel_male = which(obj.model$sampleID %in% (sampleList_male$sampleID_male))
-            cat(length(indexInModel_male), " males are found in the test\n")
-            if (length(indexInModel_male) == 0) {
-                is_rewrite_XnonPAR_forMales = FALSE
-                if (nrow(sampleList_male) > 0) {
-                  cat("WARNING: no male IDs specified in the ",
-                    sampleFile_male, " are found sample IDs used to fit in the null model in Step 1\n")
-                }
-            }else {
-                cat("is_rewrite_XnonPAR_forMales=TRUE and minInfo and minMAF won't be applied to all X chromosome variants\n")
-                minInfo = 0
-                minMAF = 1/(2 * length(obj.model$sampleID))
-
-		setAssocTest_GlobalVarsInCPP_indexInModel_male(indexInModel_male-1)
-
-            }
-        }
-        X_PARregion_list = unlist(strsplit(X_PARregion, split = ","))
-        X_PARregion_mat = NULL
-        if (length(X_PARregion_list) > 0) {
-            for (lxp in 1:length(X_PARregion_list)) {
-                X_PARregion_list_sub = as.numeric(unlist(strsplit(X_PARregion_list[lxp],
-                  split = "-")))
-                X_PARregion_mat = rbind(X_PARregion_mat, X_PARregion_list_sub)
-            }
-	    setAssocTest_GlobalVarsInCPP_X_PARregion_mat(X_PARregion_mat)
-
-        }else {
-            cat("PAR region on X chromosome is not specified\n")
-        }
-    } 
-
-
-
-
-
-    if(obj.model$traitType == "binary"){
-        if(max_MAC_use_ER > 0){
-             cat("P-values of genetic variants with MAC <= ", max_MAC_use_ER, " will be calculated via effecient resampling.\n")
-             if(max_MAC_use_ER > 4){
-               cat("WARNING: Efficient resampling may not work well for MAC > 4!")
-             }
-        }
-    }else{
-        max_MAC_use_ER = 0
-    }
-    
-    if(!LOCO){
-     #	LOCO = FALSE
-        print("LOCO = FASLE and leave-one-chromosome-out is not applied")
-    }	    
-
-    sparseSigmaRList = list()
-    isSparseGRM = TRUE
-    if(sparseGRMFile != ""){ 
-      #sparseSigmaRList = setSparseSigma(sparseSigmaFile)
-      sparseSigmaRList = setSparseSigma_new(sparseGRMFile, sparseGRMSampleIDFile, relatednessCutoff, obj.model$sampleID, obj.model$theta, obj.model$mu2,  obj.model$traitType)
-      isSparseGRM = TRUE
-
-    }else{
-      #if(!is.null(obj.model$useSparseGRMforVarRatio)){
-      #	if(obj.model$useSparseGRMforVarRatio == TRUE){
-      # 		stop("sparse GRM is not specified but it was used in Step 1.\n")
-      #	}	
-      #}		      
-      sparseSigmaRList = list(nSubj = 0, locations = matrix(0,nrow=2,ncol=2), values = rep(0,2))  
-      isSparseGRM = FALSE 
-    }	    
-    ratioVecList = Get_Variance_Ratio(varianceRatioFile, cateVarRatioMinMACVecExclude, cateVarRatioMaxMACVecInclude, isGroupTest, isSparseGRM) #readInGLMM.R
-
-    if(is_fastTest){
-      if(!file.exists(varianceRatioFile)){
-         is_fastTest = FALSE
-	 cat("No variance ratio file is specified, so is_fastTest is not working.\n")
-      }
-    }
-
-
-    if(is_fastTest){
-      if(isSparseGRM){
-	cat("is_fastTest is TRUE.\n")
-	if(ratioVecList$ratioVec_null[1] == -1){
-	  stop("Variance ratios estimated without GRM are not found, so the fast tests can't be performed.\n Please set is_fastTest=FALSE or re-run the variance ratio estimation in Step 1 with --skipModelFitting=TRUE using the most recent version of the program.\n")
+    for (i in 1:num_traits) {
+        # Read the GMMAT model file: #readInGLMM.R
+        if(subSampleFile == ""){
+    	    obj.model <- ReadModel(GMMATmodelFiles[[i]], chrom, LOCO, is_Firth_beta)
 	}else{
-	  cat("The fast tests will be performed (when p-values >= ", pval_cutoff_for_fastTest, ").\n")	
-	}
-      }else{
-          is_fastTest = FALSE
-	  cat("No sparse GRM is specified, so is_fastTest is not working.\n")
-      }
+            obj.model = ReadModel_subsample(GMMATmodelFiles[[i]], chrom, LOCO, is_Firth_beta, subSampleFile)
+        }
+
+        if (is_rewrite_XnonPAR_forMales) {
+            cat("is_rewrite_XnonPAR_forMales is TRUE, so genotypes/dosages in the non-PAR regions of X chromosome for males will be multiplied by 2\n")
+            if (!file.exists(sampleFile_male)) {
+                stop("ERROR! The sample file for male IDs ", sampleFile_male, " does not exist\n")
+            }else {
+                sampleList_male = data.frame(data.table:::fread(sampleFile_male,
+                    header = F, stringsAsFactors = FALSE, colClasses = c("character"),
+                    data.table = F))
+                colnames(sampleList_male) = c("sampleID_male")
+                cat(nrow(sampleList_male), " sample IDs are found in ", sampleFile_male, "\n")
+                indexInModel_male = which(obj.model$sampleID %in% (sampleList_male$sampleID_male))
+                cat(length(indexInModel_male), " males are found in the test\n")
+                if (length(indexInModel_male) == 0) {
+                    is_rewrite_XnonPAR_forMales = FALSE
+                    if (nrow(sampleList_male) > 0) {
+                        cat("WARNING: no male IDs specified in the ",
+                        sampleFile_male, " are found sample IDs used to fit in the null model in Step 1\n")
+                    }
+                }else {
+                    cat("is_rewrite_XnonPAR_forMales=TRUE and minInfo and minMAF won't be applied to all X chromosome variants\n")
+                    minInfo = 0
+                    minMAF = 1/(2 * length(obj.model$sampleID))
+    		    setAssocTest_GlobalVarsInCPP_indexInModel_male(indexInModel_male-1)
+                }
+            }
+            X_PARregion_list = unlist(strsplit(X_PARregion, split = ","))
+            X_PARregion_mat = NULL
+            if (length(X_PARregion_list) > 0) {
+                for (lxp in 1:length(X_PARregion_list)) {
+                    X_PARregion_list_sub = as.numeric(unlist(strsplit(X_PARregion_list[lxp], split = "-")))
+                    X_PARregion_mat = rbind(X_PARregion_mat, X_PARregion_list_sub)
+                }
+	        setAssocTest_GlobalVarsInCPP_X_PARregion_mat(X_PARregion_mat)
+            }else {
+                cat("PAR region on X chromosome is not specified\n")
+            }
+        } 
+
+        if(obj.model$traitType == "binary"){
+            if(max_MAC_use_ER > 0){
+                 cat("P-values of genetic variants with MAC <= ", max_MAC_use_ER, " will be calculated via effecient resampling.\n")
+                 if(max_MAC_use_ER > 4){
+                     cat("WARNING: Efficient resampling may not work well for MAC > 4!")
+                 }
+            }
+        }else{
+            max_MAC_use_ER = 0
+        }
+    
+        if(!LOCO){
+            #	LOCO = FALSE
+            print("LOCO = FASLE and leave-one-chromosome-out is not applied")
+        }	    
+
+        sparseSigmaRList = list()
+        isSparseGRM = TRUE
+        if(sparseGRMFile != ""){ 
+            #sparseSigmaRList = setSparseSigma(sparseSigmaFile)
+            sparseSigmaRList = setSparseSigma_new(sparseGRMFile, sparseGRMSampleIDFile, relatednessCutoff, obj.model$sampleID, obj.model$theta, obj.model$mu2,  obj.model$traitType)
+            isSparseGRM = TRUE
+        }else{
+            #if(!is.null(obj.model$useSparseGRMforVarRatio)){
+            #	if(obj.model$useSparseGRMforVarRatio == TRUE){
+            # 		stop("sparse GRM is not specified but it was used in Step 1.\n")
+            #	}	
+            #}		      
+            sparseSigmaRList = list(nSubj = 0, locations = matrix(0,nrow=2,ncol=2), values = rep(0,2))  
+            isSparseGRM = FALSE 
+        }
+
+        # Read the variance ratio file
+        ratioVecList <- Get_Variance_Ratio(varianceRatioFiles[[i]], cateVarRatioMinMACVecExclude, cateVarRatioMaxMACVecInclude, isGroupTest, isSparseGRM)
+        ratioVecLists[[i]] <- ratioVecList # Store the variance ratio list
+        obj.models[[i]] <- obj.model # Store the model
+
+        #ratioVecList = Get_Variance_Ratio(varianceRatioFile, cateVarRatioMinMACVecExclude, cateVarRatioMaxMACVecInclude, isGroupTest, isSparseGRM) #readInGLMM.R
+    
+
+        if(is_fastTest){
+            if(!file.exists(varianceRatioFiles[[i]])){
+                is_fastTest = FALSE
+	        cat("No variance ratio file is specified, so is_fastTest is not working.\n")
+            }
+        }
+
+
+        if(is_fastTest){
+            if(isSparseGRM){
+	        cat("is_fastTest is TRUE.\n")
+	        if(ratioVecList$ratioVec_null[1] == -1){
+	            stop("Variance ratios estimated without GRM are not found, so the fast tests can't be performed.\n Please set is_fastTest=FALSE or re-run the variance ratio estimation in Step 1 with --skipModelFitting=TRUE using the most recent version of the program.\n")
+	        }else{
+	            cat("The fast tests will be performed (when p-values >= ", pval_cutoff_for_fastTest, ").\n")
+	        }
+            }else{
+                is_fastTest = FALSE
+	        cat("No sparse GRM is specified, so is_fastTest is not working.\n")
+            }
+        }
+        nsample = length(obj.model$y)
+        cateVarRatioMaxMACVecInclude = c(cateVarRatioMaxMACVecInclude, nsample)	
     }
 
-    nsample = length(obj.model$y)
-    cateVarRatioMaxMACVecInclude = c(cateVarRatioMaxMACVecInclude, nsample)	
-    
     #in Geno.R
     objGeno = setGenoInput(bgenFile = bgenFile,
                  bgenFileIndex = bgenFileIndex,
@@ -354,23 +368,29 @@ SPAGMMATtest = function(bgenFile = "",
                  AlleleOrder = AlleleOrder,
                  sampleInModel = obj.model$sampleID)
 
-   genoType = objGeno$genoType
-   if(condition != ""){
+    genoType = objGeno$genoType
+    if(condition != ""){
         isCondition = TRUE
 	if(is_fastTest){
-		is_fastTest = FALSE
-		cat("is_fastTest is not working for conditional analysis.\n")
+	    is_fastTest = FALSE
+	    cat("is_fastTest is not working for conditional analysis.\n")
 	}
-   }else {
+    }else {
         isCondition = FALSE
-   }
+    }
     
     condition_genoIndex = c(-1)
     if(isCondition){
         cat("Conducting conditional analysis. Please specify the conditioning markers in the order as they are store in the genotype/dosage file.\n")
-    }	   
-    #set up the SAIGE object based on the null model results
-    setSAIGEobjInCPP(t_XVX=obj.model$obj.noK$XVX,
+    }	
+
+
+    # iterate through the obj.models list to place objects in c++ memory
+    for (i in 1:num_traits) {
+        #set up the SAIGE object based on the null model results
+        cat("trait: ", i, "\n")
+	obj.model <- obj.models[[i]]
+        index <- createSAIGEObject(t_XVX=obj.model$obj.noK$XVX,
 		     t_XXVX_inv=obj.model$obj.noK$XXVX_inv,
 		     t_XV=obj.model$obj.noK$XV,
 		     t_XVX_inv_XV=obj.model$obj.noK$XVX_inv_XV,
@@ -401,9 +421,11 @@ SPAGMMATtest = function(bgenFile = "",
 		     t_pCutoffforFirth = pCutoffforFirth,
 		     t_offset = obj.model$offset, 
 		     t_resout = as.integer(obj.model$obj_cc$res.out))
-  rm(sparseSigmaRList)
-  gc()
-   #process condition
+	#SAIGE_OBJECTS <- append(SAIGE_OBJECTS, index)
+    }
+    rm(sparseSigmaRList)
+    gc()
+    #process condition
     if (isCondition) {
         n = length(obj.model$y) #sample size
 
@@ -455,29 +477,46 @@ SPAGMMATtest = function(bgenFile = "",
     #}
 
     if(!isGroupTest){
-    OutputFile = SAIGEOutputFile
+    OutputFile = SAIGEOutputFiles[[1]]
+    OutputFileIndex = OutputFilesIndex[[1]]
 
     #if(file.exists(SAIGEOutputFile)) {print("ok 2 file exist")}
     if(!is.null(objGeno$markerInfo$CHROM)){
     	setorderv(objGeno$markerInfo,col=c("CHROM","POS"))
     }
 
+#        SAIGE.Marker(traitType,
+#		   genoType,
+#                   objGeno$markerInfo$genoIndex_prev,
+#                   objGeno$markerInfo$genoIndex,
+#                   objGeno$markerInfo$CHROM,
+#                   OutputFile,
+#                   OutputFileIndex,
+#                   markers_per_chunk,
+#                   is_output_moreDetails,
+#		   is_imputed_data,
+#		   is_Firth_beta,
+#                   LOCO,
+#                   chrom,
+#		   isCondition,
+#		   is_overwrite_output,
+#		   objGeno$anyInclude)
         SAIGE.Marker(traitType,
-		   genoType,
+                   genoType,
                    objGeno$markerInfo$genoIndex_prev,
                    objGeno$markerInfo$genoIndex,
                    objGeno$markerInfo$CHROM,
-                   OutputFile,
-                   OutputFileIndex,
+                   OutputFiles,
+                   OutputFilesIndex,
                    markers_per_chunk,
                    is_output_moreDetails,
-		   is_imputed_data,
-		   is_Firth_beta,
+                   is_imputed_data,
+                   is_Firth_beta,
                    LOCO,
                    chrom,
-		   isCondition,
-		   is_overwrite_output,
-		   objGeno$anyInclude)
+                   isCondition,
+                   is_overwrite_output,
+                   objGeno$anyInclude)
     }else{
       maxMACbinind = which(maxMAC_in_groupTest > 0)	
       if(length(maxMACbinind) > 0){ 
