@@ -4,7 +4,7 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 #include <RcppArmadillo.h>
 
-
+/*
 void setAssocTest_GlobalVarsInCPP(std::string t_impute_method,
                 double t_missing_cutoff,
                                double t_min_maf_marker,
@@ -14,7 +14,18 @@ void setAssocTest_GlobalVarsInCPP(std::string t_impute_method,
                                double t_dosage_zerod_MAC_cutoff,
                                arma::vec & t_weights_beta,
 			       std::string t_outputFilePrefix);
+*/
 
+void setAssocTest_GlobalVarsInCPP(std::string t_impute_method,
+                                 double t_missing_cutoff,
+                                 double t_min_maf_marker,
+                                 double t_min_mac_marker,
+                                 double t_min_info_marker,
+                                 double t_dosage_zerod_cutoff,
+                                 double t_dosage_zerod_MAC_cutoff,
+                                 arma::vec & t_weights_beta,
+                                 std::vector<std::string> t_outputFilePrefixes,  // Changed to vector
+                                 double t_MACCutoffforER);  // Added the missing parameter
 
 void setAssocTest_GlobalVarsInCPP_indexInModel_male(arma::uvec & t_indexInModel_male);
 
@@ -211,6 +222,45 @@ bool openOutfile(std::string t_traitType, bool isappend);
 bool openOutfile_singleinGroup(std::string t_traitType, bool t_isImputation, bool isappend, bool t_isMoreOutput);
 
 bool openOutfile_single(std::string t_traitType, bool t_isImputation, bool isappend, bool t_isMoreOutput);
+
+void writeOutfile_single_multiple(bool t_isMoreOutput,
+                        bool t_isImputation,
+                        bool t_isCondition,
+                        bool t_isFirth,
+                        arma::Mat<uint32_t> mFirth,
+                        arma::Mat<uint32_t> mFirthConverge,
+                        std::string t_traitType,
+                        std::vector<std::string> & chrVec,
+                        std::vector<std::string> & posVec,
+                        std::vector<std::string> & markerVec,
+                        std::vector<std::string> & refVec,
+                        std::vector<std::string> & altVec,
+                        std::vector<double> & altCountsVec,
+                        std::vector<double> & altFreqVec,
+                        std::vector<double> & imputationInfoVec,
+                        std::vector<double> & missingRateVec,
+                        arma::mat & BetaMat,
+                        arma::mat & seBetaMat,
+                        arma::mat & TstatMat,
+                        arma::mat & varTMat,
+                        std::vector<std::vector<std::string>> & pvalMat,
+                        std::vector<std::vector<std::string>> & pvalNAMat,
+                        std::vector<std::vector<bool>>  & isSPAConvergeMat,
+                        arma::mat & Beta_cMat,
+                        arma::mat & seBeta_cMat,
+                        arma::mat & Tstat_cMat,
+                        arma::mat & varT_cMat,
+                        std::vector<std::vector<std::string>> & pval_CMat,
+                        std::vector<std::vector<std::string>> & pvalNA_cMat,
+                        arma::mat & AF_caseMat,
+                        arma::mat & AF_ctrlVec,
+                        arma::Mat<uint32_t> & N_caseMat,
+                        arma::Mat<uint32_t> & N_ctrlMat,
+                        arma::mat  & N_case_homMat,
+                        arma::mat  & N_ctrl_hetMat,
+                        arma::mat  & N_case_hetMat,
+                        arma::mat  & N_ctrl_homMat,
+                        arma::Mat<uint32_t> & N_Mat);
 
 void writeOutfile_single(bool t_isMoreOutput,
       bool t_isImputation,

@@ -61,11 +61,11 @@ option_list <- list(
 
 
   make_option("--GMMATmodelFile", type="character",default="",
-    help="Path to the input file containing the glmm model, which is output from previous step. Will be used by load()"),
+    help="Path to the input file containing the glmm model, which is output from previous step.  Can be a comma-separated list for multiple traits. Will be used by load()"),
   make_option("--varianceRatioFile", type="character",default="",
-    help="Path to the input file containing the variance ratio, which is output from the previous step"),
+    help="Path to the input file containing the variance ratio, which is output from the previous step.  Can be a comma-separated list for multiple traits."),
   make_option("--SAIGEOutputFile", type="character", default="",
-    help="Path to the output file containing assoc test results"),
+    help="Path to the output file containing assoc test results. Can be a comma-separated list for multiple traits."),
   make_option("--markers_per_chunk", type="numeric",default=10000,
     help="Number of markers to be tested and output in each chunk in the single-variant assoc tests [default=10000]"),
   make_option("--groups_per_chunk", type="numeric",default=100,
@@ -189,6 +189,19 @@ if (BLASctl_installed){
 print("opt$r.corr")
 print(opt$r.corr)
 
+GMMATmodelFiles <- strsplit(opt$GMMATmodelFile, ",")[[1]]
+varianceRatioFiles <- strsplit(opt$varianceRatioFile, ",")[[1]]
+SAIGEOutputFiles <- strsplit(opt$SAIGEOutputFile, ",")[[1]]
+
+if (length(GMMATmodelFiles) != length(varianceRatioFiles)) {
+  stop("Number of GMMAT model files must equal the number of variance ratio files.")
+}
+
+num_traits <- length(GMMATmodelFiles) # Number of traits
+
+print("$num_traits")
+print(num_traits)
+
 if(packageVersion("SAIGE")<"1.1.3"){
 
 
@@ -214,9 +227,9 @@ if(packageVersion("SAIGE")<"1.1.3"){
              max_missing = opt$maxMissing,	
 	     impute_method = opt$impute_method,
 	     LOCO=opt$LOCO,
-             GMMATmodelFile=opt$GMMATmodelFile,
-             varianceRatioFile=opt$varianceRatioFile,
-             SAIGEOutputFile=opt$SAIGEOutputFile,	
+             GMMATmodelFile=GMMATmodelFiles,
+             varianceRatioFile=varianceRatioFiles,
+             SAIGEOutputFile=SAIGEOutputFiles,	
 	     markers_per_chunk=opt$markers_per_chunk,
 	     groups_per_chunk=opt$groups_per_chunk,
              markers_per_chunk_in_groupTest=opt$markers_per_chunk_in_groupTest,
@@ -272,9 +285,9 @@ if(packageVersion("SAIGE")>"1.1.4"){
              max_missing = opt$maxMissing,
              impute_method = opt$impute_method,
              LOCO=opt$LOCO,
-             GMMATmodelFile=opt$GMMATmodelFile,
-             varianceRatioFile=opt$varianceRatioFile,
-             SAIGEOutputFile=opt$SAIGEOutputFile,
+             GMMATmodelFile=GMMATmodelFiles,
+             varianceRatioFile=varianceRatioFiles,
+             SAIGEOutputFile=SAIGEOutputFiles,
              markers_per_chunk=opt$markers_per_chunk,
              groups_per_chunk=opt$groups_per_chunk,
              markers_per_chunk_in_groupTest=opt$markers_per_chunk_in_groupTest,
@@ -334,9 +347,9 @@ if(packageVersion("SAIGE")>"1.1.4"){
              max_missing = opt$maxMissing,
              impute_method = opt$impute_method,
              LOCO=opt$LOCO,
-             GMMATmodelFile=opt$GMMATmodelFile,
-             varianceRatioFile=opt$varianceRatioFile,
-             SAIGEOutputFile=opt$SAIGEOutputFile,
+             GMMATmodelFile=GMMATmodelFiles,
+             varianceRatioFile=varianceRatioFiles,
+             SAIGEOutputFile=SAIGEOutputFiles,
              markers_per_chunk=opt$markers_per_chunk,
              groups_per_chunk=opt$groups_per_chunk,
              markers_per_chunk_in_groupTest=opt$markers_per_chunk_in_groupTest,
