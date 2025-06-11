@@ -11,6 +11,76 @@ library(data.table)
 library(methods)
 print(sessionInfo())
 
+
+# Function to read and process manifest file
+read_manifest_file <- function(manifest_file_path) {
+  # Check if manifest file exists
+  if (!file.exists(manifest_file_path)) {
+    stop(paste("Manifest file does not exist:", manifest_file_path))
+  }
+
+  # Read the manifest file
+  tryCatch({
+    manifestData <- read.table(manifest_file_path, header = FALSE, sep = "\t",
+                              stringsAsFactors = FALSE, comment.char = "", quote = "")
+
+    # Check if the file has exactly 3 columns
+    if (ncol(manifestData) != 3) {
+      stop(paste("Manifest file must have exactly 3 columns. Found:", ncol(manifestData), "columns"))
+    }
+
+    # Check if the file has at least one row
+    if (nrow(manifestData) == 0) {
+      stop("Manifest file is empty")
+    }
+
+    # Extract the columns
+    GMMATmodelFiles <- manifestData[, 1]
+    varianceRatioFiles <- manifestData[, 2]
+    SAIGEOutputFiles <- manifestData[, 3]
+
+    # Remove any leading/trailing whitespace
+    GMMATmodelFiles <- trimws(GMMATmodelFiles)
+    varianceRatioFiles <- trimws(varianceRatioFiles)
+    SAIGEOutputFiles <- trimws(SAIGEOutputFiles)
+
+    # Check for empty entries
+    if (any(GMMATmodelFiles == "" | is.na(GMMATmodelFiles))) {
+      stop("Found empty or NA values in GMMATmodelFiles column (column 1)")
+    }
+    if (any(varianceRatioFiles == "" | is.na(varianceRatioFiles))) {
+      stop("Found empty or NA values in varianceRatioFiles column (column 2)")
+    }
+    if (any(SAIGEOutputFiles == "" | is.na(SAIGEOutputFiles))) {
+      stop("Found empty or NA values in SAIGEOutputFiles column (column 3)")
+    }
+
+    # Optional: Check if the files exist (you can comment this out if not needed)
+    missing_gmmat <- GMMATmodelFiles[!file.exists(GMMATmodelFiles)]
+    if (length(missing_gmmat) > 0) {
+      warning(paste("The following GMMATmodelFiles do not exist:", paste(missing_gmmat, collapse = ", ")))
+    }
+
+    missing_variance <- varianceRatioFiles[!file.exists(varianceRatioFiles)]
+    if (length(missing_variance) > 0) {
+      warning(paste("The following varianceRatioFiles do not exist:", paste(missing_variance, collapse = ", ")))
+    }
+
+    cat("Successfully read manifest file with", nrow(manifestData), "traits\n")
+
+    # Return the three vectors as a named list
+    return(list(
+      GMMATmodelFiles = GMMATmodelFiles,
+      varianceRatioFiles = varianceRatioFiles,
+      SAIGEOutputFiles = SAIGEOutputFiles
+    ))
+
+  }, error = function(e) {
+    stop(paste("Error reading manifest file:", e$message))
+  })
+}
+
+
 option_list <- list(
   make_option("--vcfFile", type="character",default="",
     help="Path to vcf file."),
@@ -134,7 +204,9 @@ mean, p-value based on traditional score test is returned. Default value is 2.")
     help="p-values of genetic variants with MAC <= max_MAC_for_ER will be calculated via efficient resampling. [default=4]"),
 
  make_option("--subSampleFile", type="character",default="",
-    help="Path to the file that contains one column for IDs of samples that are included in Step 1 and will be also included in Step 2. This option is used when any sample included in Step 1 but does not have dosages/genotypes for Step 2. Please make sure it contains one column of sample IDs that will be used for subsetting samples from the Step 1 results for Step 2 jobs. Note: Thi option has not been fully evaluated. If more than 5% of the samples in Step 1 are missing in Step 2, please consider re-run Step 1. ")
+    help="Path to the file that contains one column for IDs of samples that are included in Step 1 and will be also included in Step 2. This option is used when any sample included in Step 1 but does not have dosages/genotypes for Step 2. Please make sure it contains one column of sample IDs that will be used for subsetting samples from the Step 1 results for Step 2 jobs. Note: Thi option has not been fully evaluated. If more than 5% of the samples in Step 1 are missing in Step 2, please consider re-run Step 1. "),
+ make_option("--manifestFile", type="character",default="",
+    help="Path to the file that contains the information for the GMMATmodelFile, varianceRatioFile and SAIGEOutputFile for each trait that will be run. No header is needed and the order of columns should be GMMATmodelFile, varianceRatioFile and SAIGEOutputFile. Complete path should be provided. Each row is associated to a trait or result from step 1. If you provide this option, you won't need to provide the options for --GMMATmodelFile, --varianceRatioFile and --SAIGEOutputFile.")
 )
 
 
@@ -189,9 +261,18 @@ if (BLASctl_installed){
 print("opt$r.corr")
 print(opt$r.corr)
 
-GMMATmodelFiles <- strsplit(opt$GMMATmodelFile, ",")[[1]]
-varianceRatioFiles <- strsplit(opt$varianceRatioFile, ",")[[1]]
-SAIGEOutputFiles <- strsplit(opt$SAIGEOutputFile, ",")[[1]]
+if (is.null(opt$manifestFile)){
+    GMMATmodelFiles <- strsplit(opt$GMMATmodelFile, ",")[[1]]
+    varianceRatioFiles <- strsplit(opt$varianceRatioFile, ",")[[1]]
+    SAIGEOutputFiles <- strsplit(opt$SAIGEOutputFile, ",")[[1]]
+}else{
+    # Read manifest file and extract the file lists
+    manifest_result <- read_manifest_file(opt$manifestFile)
+    GMMATmodelFiles <- manifest_result$GMMATmodelFiles
+    varianceRatioFiles <- manifest_result$varianceRatioFiles
+    SAIGEOutputFiles <- manifest_result$SAIGEOutputFiles
+}
+
 
 if (length(GMMATmodelFiles) != length(varianceRatioFiles)) {
   stop("Number of GMMAT model files must equal the number of variance ratio files.")
@@ -258,7 +339,8 @@ if(packageVersion("SAIGE")<"1.1.3"){
 	     is_single_in_groupTest = opt$is_single_in_groupTest,
              is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
 	     is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
-	     is_fastTest = opt$is_fastTest
+	     is_fastTest = opt$is_fastTest,
+	     manifestFile = opt$manifestFile
 )
 }else{
 
@@ -321,7 +403,8 @@ if(packageVersion("SAIGE")>"1.1.4"){
              is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
              is_fastTest = opt$is_fastTest,
 	     max_MAC_use_ER = opt$max_MAC_for_ER,
-	     subSampleFile = opt$subSampleFile
+	     subSampleFile = opt$subSampleFile,
+             manifestFile = opt$manifestFile
 )
   }else{
 
@@ -379,7 +462,8 @@ if(packageVersion("SAIGE")>"1.1.4"){
              is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
              is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
              is_fastTest = opt$is_fastTest,
-             max_MAC_use_ER = opt$max_MAC_for_ER
+             max_MAC_use_ER = opt$max_MAC_for_ER,
+             manifestFile = opt$manifestFile
 )
 
 
