@@ -261,7 +261,7 @@ if (BLASctl_installed){
 print("opt$r.corr")
 print(opt$r.corr)
 
-if (is.null(opt$manifestFile)){
+if (opt$manifestFile == ""){
     GMMATmodelFiles <- strsplit(opt$GMMATmodelFile, ",")[[1]]
     varianceRatioFiles <- strsplit(opt$varianceRatioFile, ",")[[1]]
     SAIGEOutputFiles <- strsplit(opt$SAIGEOutputFile, ",")[[1]]
