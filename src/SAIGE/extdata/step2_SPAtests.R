@@ -339,8 +339,7 @@ if(packageVersion("SAIGE")<"1.1.3"){
 	     is_single_in_groupTest = opt$is_single_in_groupTest,
              is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
 	     is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
-	     is_fastTest = opt$is_fastTest,
-	     manifestFile = opt$manifestFile
+	     is_fastTest = opt$is_fastTest
 )
 }else{
 
@@ -403,8 +402,7 @@ if(packageVersion("SAIGE")>"1.1.4"){
              is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
              is_fastTest = opt$is_fastTest,
 	     max_MAC_use_ER = opt$max_MAC_for_ER,
-	     subSampleFile = opt$subSampleFile,
-             manifestFile = opt$manifestFile
+	     subSampleFile = opt$subSampleFile
 )
   }else{
 
@@ -462,8 +460,7 @@ if(packageVersion("SAIGE")>"1.1.4"){
              is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
              is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
              is_fastTest = opt$is_fastTest,
-             max_MAC_use_ER = opt$max_MAC_for_ER,
-             manifestFile = opt$manifestFile
+             max_MAC_use_ER = opt$max_MAC_for_ER
 )
 
 

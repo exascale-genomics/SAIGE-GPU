@@ -42,7 +42,8 @@ int gpuSymMatMult_hip::set_matrix(int rank, size_t g_col_start, size_t n_rows, s
     std::cout << "[" << rank << "] "
               << "A in HIP = " << A << std::endl;
 
-    hipStat = hipSetDevice(rank);
+    //hipStat = hipSetDevice(rank);
+    hipStat = hipSetDevice(0);
     if (hipStat != hipSuccess) {
         std::cerr << "[" << rank << "] "
                   << "Error: hipSetDevice() has failed: " << hipStat << std::endl;

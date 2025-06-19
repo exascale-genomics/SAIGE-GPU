@@ -18,6 +18,7 @@
 #include <cassert>
 #include <boost/date_time.hpp> // for gettimeofday and timeval
 #include "getMem.hpp"
+#include <hip/hip_runtime.h>
 
 #if defined(USE_GPU)
 #include "gpuSymMatMult_hip.hpp"
@@ -807,6 +808,9 @@ public:
 		cout << "nbyte: " << nbyteOld << endl;
 		cout << "nbyte: " << nbyteNew << endl;		
 		cout << "reserve: " << reserve << endl;		
+                int gpucount;
+                hipGetDeviceCount(&gpucount);
+                std::cout << "Number of visible GPUs: " << gpucount << std::endl;
 
     		genoVecOneMarkerOld.reserve(nbyteOld);
     		genoVecOneMarkerOld.resize(nbyteOld);
@@ -1925,6 +1929,8 @@ int gpuDistributeSNPs()
               << "Aj = " << Aj << " n_rows = " << A.n_rows << " n_cols = " << A.n_cols << std::endl;
     std::cout << "[" << rank << "] "
               << "A.memptr() in gcc = " << A.memptr() << " pid = " << pid << std::endl;
+    std::cout << "[" << rank << "] Global column start = " << start_index
+          << ", local cols = " << n_cols << std::endl;
 #if defined(PERF_TIMING)
     begin = std::chrono::steady_clock::now();
 #endif
