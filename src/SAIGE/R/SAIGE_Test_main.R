@@ -120,6 +120,7 @@ SPAGMMATtest = function(bgenFile = "",
 		 subSampleFile = ""
 ){
    #cat("r.corr is ", r.corr, "\n")
+   print("IAM NOW HERE")
    if(!(impute_method %in% c("best_guess", "mean","minor"))){
      stop("impute_method should be 'best_guess', 'mean' or 'minor'.")
    }
@@ -154,7 +155,7 @@ SPAGMMATtest = function(bgenFile = "",
     #Check_OutputFile_Create(SAIGEOutputFile)
     OutputFiles = SAIGEOutputFiles
     OutputFilesIndex = paste0(OutputFiles, ".index")
-
+    print("MADE IT")
     #########ALEX: This is where I left off ... below it is setting OutputFile in memory as a Global Var
     ############### Might need to modify that
     ##check the variance ratio file and extract the variance ratio vector
@@ -178,7 +179,7 @@ SPAGMMATtest = function(bgenFile = "",
 			weights.beta, 
 			OutputFiles,
 			max_MAC_use_ER)	
-
+    print("ALSO MADE IT")
     if(groupFile == ""){
       isGroupTest = FALSE
       cat("single-variant association test will be performed\n")
@@ -230,7 +231,7 @@ SPAGMMATtest = function(bgenFile = "",
 
     }
    
-
+    print("NOW HERE")
     # Store models and variance ratios in lists
     obj.models <- list()
     ratioVecLists <- list()
@@ -390,6 +391,7 @@ SPAGMMATtest = function(bgenFile = "",
         #set up the SAIGE object based on the null model results
         cat("trait: ", i, "\n")
 	obj.model <- obj.models[[i]]
+	ratioVecList <- ratioVecLists[[i]]
         index <- createSAIGEObject(t_XVX=obj.model$obj.noK$XVX,
 		     t_XXVX_inv=obj.model$obj.noK$XXVX_inv,
 		     t_XV=obj.model$obj.noK$XV,

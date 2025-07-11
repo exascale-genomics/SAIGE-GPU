@@ -356,7 +356,6 @@ rm(obj.noK)
 
 
 Get_Variance_Ratio<-function(varianceRatioFile, cateVarRatioMinMACVecExclude, cateVarRatioMaxMACVecInclude, isGroupTest, isSparseGRM, useSparseGRMtoFitNULL){
-
     iscateVR = FALSE
     # check variance ratio
     if (!file.exists(varianceRatioFile)) {

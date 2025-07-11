@@ -5,7 +5,6 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 #include <RcppArmadillo.h>
 
-
 namespace SAIGE2{
 
 class SAIGE2Class
@@ -25,7 +24,6 @@ class SAIGE2Class
       std::string m_impute_method;
       std::vector<uint32_t> m_condition_genoIndex;
       	
-
     public:
       arma::mat m_XXVX_inv;
       arma::mat m_XV;
@@ -188,7 +186,6 @@ void scoreTestFast(arma::vec & t_GVec,
 				bool & t_isFirth,
                                 bool & t_isFirthConverge, 
 				bool t_isER);
-
 
     void getindices(arma::uvec & t_case_indices,
       arma::uvec & t_ctrl_indices);

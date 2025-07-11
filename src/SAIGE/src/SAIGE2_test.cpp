@@ -80,9 +80,11 @@ SAIGE2Class::SAIGE2Class(
     m_tauvec = t_tauvec;
     m_traitType = t_traitType;
     m_y = t_y;
-
     m_case_indices = arma::find(m_y == 1);
     m_ctrl_indices = arma::find(m_y == 0);
+
+    //std::cout << "m_varRatio_sparse: " << m_varRatio_sparse << std::endl;
+    //std::cout << "m_varRatio_null: " << m_varRatio_null << std::endl;
 
     m_n = t_y.size();
     m_p = t_XV.n_rows;
@@ -255,11 +257,11 @@ void SAIGE2Class::scoreTest(arma::vec & t_GVec,
 		     double& t_gy, 
 		     bool t_is_region,
 		     arma::uvec & t_indexForNonZero){
+
     arma::vec Sm, var2m;
     double S, var2;
     getadjGFast(t_GVec, t_gtilde, t_indexForNonZero);
     //getadjG(t_GVec, t_gtilde);
-
 
     if(t_is_region && m_traitType == "binary"){
       t_gy = dot(t_gtilde, m_y);
@@ -365,7 +367,6 @@ void SAIGE2Class::scoreTestFast(arma::vec & t_GVec,
     S2 = - arma::dot(S_a2,  Z);
     S = S1 + S2;
     S = S/m_tauvec[0];
-
     double stat = S*S/var1;
     if (var1 <= std::numeric_limits<double>::min()){
           t_pval = 1;
@@ -482,11 +483,10 @@ void SAIGE2Class::getMarkerPval(arma::vec & t_GVec,
 			   	arma::rowvec & t_G1tilde_P_G2tilde, 
 				bool & t_isFirth,
 				bool & t_isFirthConverge, 
-				bool t_isER) 
+				bool t_isER)
 {
 
-
-
+  //std::cout << "Entering getMarkerPval" << std::endl;
   t_isFirth = false;
   //arma::vec adjGVec = getadjGFast(t_GVec);
   std::string t_pval_str;
@@ -497,7 +497,7 @@ void SAIGE2Class::getMarkerPval(arma::vec & t_GVec,
   if(m_flagSparseGRM_cur){
     isScoreFast = false;
   }
-
+  //std::cout << "Checked m_flagSparseGRM_cur" << std::endl;
  
   double pval_noadj, pval, t_qval_Firth; //can be log or not raw
   bool ispvallog;
@@ -543,7 +543,7 @@ if((StdStat > m_SPA_Cutoff || std::isnan(StdStat)) && m_traitType != "quantitati
 	t_isER = false;
 }
 
-
+//std::cout << "IAM HERE3" << std::endl;
 if(!t_isER){
 
 
@@ -636,7 +636,7 @@ if(!t_isER){
 		SPA(m_mu, t_gtilde, q, qinv, pval_noadj, tol1, ispvallog, m_traitType, t_SPApval, t_isSPAConverge);	
 	}
 
-
+//std::cout << "got out of either SPA" << std::endl;
     boost::math::normal ns;
     double t_qval;
 
@@ -915,6 +915,7 @@ if(!t_isER){
 
 
 bool SAIGE2Class::assignVarianceRatio(double MAC, bool issparseforVR){
+
     bool hasVarRatio = false;
     arma::vec m_varRatio;
     if(issparseforVR){
@@ -949,18 +950,24 @@ bool SAIGE2Class::assignVarianceRatio(double MAC, bool issparseforVR){
 }
 
 void SAIGE2Class::assignSingleVarianceRatio(bool issparseforVR){ 
+
     arma::vec m_varRatio;
+    //std::cout << "I am here" << std::endl;
     if(issparseforVR){
         m_varRatio = m_varRatio_sparse;
+    //std::cout << "I am here2" << std::endl;
     }else{
         m_varRatio = m_varRatio_null;
+        //std::cout << "I am here3" << std::endl;
     }	
     m_varRatioVal = m_varRatio(0);
+    //std::cout << "m_varRatio:" << m_varRatio << std::endl;
+    //std::cout << "m_varRatioVal:" << m_varRatioVal << std::endl;
 }
 
 
 void SAIGE2Class::assignSingleVarianceRatio_withinput(double t_varRatioVal){
-        m_varRatioVal = t_varRatioVal;
+    m_varRatioVal = t_varRatioVal;
 }
 
 
@@ -975,6 +982,7 @@ void SAIGE2Class::assignConditionFactors(
       arma::vec & t_gsum_cond,
       std::vector<std::string> & t_p_cond
       ){
+
 	m_P2Mat_cond = t_P2Mat_cond;
 	m_VarInvMat_cond = t_VarInvMat_cond;
 	m_VarMat_cond = t_VarMat_cond;
@@ -989,6 +997,7 @@ void SAIGE2Class::assignConditionFactors(
 void SAIGE2Class::assignConditionFactors_scalefactor(
 	arma::vec & t_scalefactor_G2_cond	
 		){
+
 	m_scalefactor_G2_cond = t_scalefactor_G2_cond;
 	arma::mat scalefactor_G2_cond_Mat = arma::diagmat(arma::sqrt(m_scalefactor_G2_cond));
 	arma::mat weightMat_G2_G2 = m_G2_Weight_cond * m_G2_Weight_cond.t(); 

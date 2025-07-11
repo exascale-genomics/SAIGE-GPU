@@ -104,7 +104,8 @@ void Unified_getMarkerPval(
 			   arma::rowvec & t_G1tilde_P_G2tilde_Vec,
 			    bool & t_isFirth,
 			   bool & t_isFirthConverge,
-			   bool t_isER);
+			   bool t_isER,
+			   uint64_t t_objIndex);
 
 
 Rcpp::List mainRegionInCPP(
