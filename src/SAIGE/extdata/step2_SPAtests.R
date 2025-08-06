@@ -2,13 +2,87 @@
 
 #options(stringsAsFactors=F, scipen = 999)
 options(stringsAsFactors=F)
-.libPaths(c(.libPaths(), "/gpfs/alpine/proj-shared/med112/task0101113/tools/R-2/R-4.0.3/library/"))
+.libPaths(c(.libPaths(), "/lustre/orion/bif154/proj-shared/arodriguez/tools/conda_envs/RSAIGE_1.3.3_amd_gpu/lib/R/library/"))
+#.libPaths(c(.libPaths(), "/gpfs/alpine/proj-shared/med112/task0101113/tools/R-2/R-4.0.3/library/"))
 library(SAIGE)
 BLASctl_installed <- require(RhpcBLASctl)
 library(optparse)
 library(data.table)
 library(methods)
+library(parallel)
 print(sessionInfo())
+
+
+# Function to read and process manifest file
+read_manifest_file <- function(manifest_file_path) {
+  # Check if manifest file exists
+  if (!file.exists(manifest_file_path)) {
+    stop(paste("Manifest file does not exist:", manifest_file_path))
+  }
+
+  # Read the manifest file
+  tryCatch({
+    manifestData <- read.table(manifest_file_path, header = FALSE, sep = "\t",
+                              stringsAsFactors = FALSE, comment.char = "", quote = "")
+
+    # Check if the file has exactly 3 columns
+    if (ncol(manifestData) != 3) {
+      stop(paste("Manifest file must have exactly 3 columns. Found:", ncol(manifestData), "columns"))
+    }
+
+    # Check if the file has at least one row
+    if (nrow(manifestData) == 0) {
+      stop("Manifest file is empty")
+    }
+
+    # Extract the columns
+    GMMATmodelFiles <- manifestData[, 1]
+    varianceRatioFiles <- manifestData[, 2]
+    SAIGEOutputFiles <- manifestData[, 3]
+
+    # Remove any leading/trailing whitespace
+    GMMATmodelFiles <- trimws(GMMATmodelFiles)
+    varianceRatioFiles <- trimws(varianceRatioFiles)
+    SAIGEOutputFiles <- trimws(SAIGEOutputFiles)
+
+    # Check for empty entries
+    if (any(GMMATmodelFiles == "" | is.na(GMMATmodelFiles))) {
+      stop("Found empty or NA values in GMMATmodelFiles column (column 1)")
+    }
+    if (any(varianceRatioFiles == "" | is.na(varianceRatioFiles))) {
+      stop("Found empty or NA values in varianceRatioFiles column (column 2)")
+    }
+    if (any(SAIGEOutputFiles == "" | is.na(SAIGEOutputFiles))) {
+      stop("Found empty or NA values in SAIGEOutputFiles column (column 3)")
+    }
+
+    # Optional: Check if the files exist (you can comment this out if not needed)
+    missing_gmmat <- GMMATmodelFiles[!file.exists(GMMATmodelFiles)]
+    if (length(missing_gmmat) > 0) {
+      warning(paste("The following GMMATmodelFiles do not exist:", paste(missing_gmmat, collapse = ", ")))
+    }
+
+    missing_variance <- varianceRatioFiles[!file.exists(varianceRatioFiles)]
+    if (length(missing_variance) > 0) {
+      warning(paste("The following varianceRatioFiles do not exist:", paste(missing_variance, collapse = ", ")))
+    }
+
+    cat("Successfully read manifest file with", nrow(manifestData), "traits\n")
+
+    # Return the three vectors as a named list
+    return(list(
+      GMMATmodelFiles = GMMATmodelFiles,
+      varianceRatioFiles = varianceRatioFiles,
+      SAIGEOutputFiles = SAIGEOutputFiles
+    ))
+
+  }, error = function(e) {
+    stop(paste("Error reading manifest file:", e$message))
+  })
+}
+
+
+start_time <- proc.time()
 
 option_list <- list(
   make_option("--vcfFile", type="character",default="",
@@ -60,11 +134,11 @@ option_list <- list(
 
 
   make_option("--GMMATmodelFile", type="character",default="",
-    help="Path to the input file containing the glmm model, which is output from previous step. Will be used by load()"),
+    help="Path to the input file containing the glmm model, which is output from previous step.  Can be a comma-separated list for multiple traits. Will be used by load()"),
   make_option("--varianceRatioFile", type="character",default="",
-    help="Path to the input file containing the variance ratio, which is output from the previous step"),
+    help="Path to the input file containing the variance ratio, which is output from the previous step.  Can be a comma-separated list for multiple traits."),
   make_option("--SAIGEOutputFile", type="character", default="",
-    help="Path to the output file containing assoc test results"),
+    help="Path to the output file containing assoc test results. Can be a comma-separated list for multiple traits."),
   make_option("--markers_per_chunk", type="numeric",default=10000,
     help="Number of markers to be tested and output in each chunk in the single-variant assoc tests [default=10000]"),
   make_option("--groups_per_chunk", type="numeric",default=100,
@@ -133,9 +207,12 @@ mean, p-value based on traditional score test is returned. Default value is 2.")
     help="p-values of genetic variants with MAC <= max_MAC_for_ER will be calculated via efficient resampling. [default=4]"),
 
  make_option("--subSampleFile", type="character",default="",
-    help="Path to the file that contains one column for IDs of samples that are included in Step 1 and will be also included in Step 2. This option is used when any sample included in Step 1 but does not have dosages/genotypes for Step 2. Please make sure it contains one column of sample IDs that will be used for subsetting samples from the Step 1 results for Step 2 jobs. Note: Thi option has not been fully evaluated. If more than 5% of the samples in Step 1 are missing in Step 2, please consider re-run Step 1. ")
+    help="Path to the file that contains one column for IDs of samples that are included in Step 1 and will be also included in Step 2. This option is used when any sample included in Step 1 but does not have dosages/genotypes for Step 2. Please make sure it contains one column of sample IDs that will be used for subsetting samples from the Step 1 results for Step 2 jobs. Note: Thi option has not been fully evaluated. If more than 5% of the samples in Step 1 are missing in Step 2, please consider re-run Step 1. "),
+ make_option("--manifestFile", type="character", default="",
+    help="Path to the file that contains the information for the GMMATmodelFile, varianceRatioFile and SAIGEOutputFile for each trait that will be run. No header is needed and the order of columns should be GMMATmodelFile, varianceRatioFile and SAIGEOutputFile. Complete path should be provided. Each row is associated to a trait or result from step 1. If you provide this option, you won't need to provide the options for --GMMATmodelFile, --varianceRatioFile and --SAIGEOutputFile."),
+  make_option("--nThreads", type="integer", default=1,
+    help="Optional. Number of threads (CPUs) to use [default=1].")
 )
-
 
 parser <- OptionParser(usage="%prog [options]", option_list=option_list)
 
@@ -188,129 +265,33 @@ if (BLASctl_installed){
 print("opt$r.corr")
 print(opt$r.corr)
 
-if(packageVersion("SAIGE")<"1.1.3"){
-
-
-  SPAGMMATtest(vcfFile=opt$vcfFile,
-             vcfFileIndex=opt$vcfFileIndex,
-             vcfField=opt$vcfField,
-             savFile=opt$savFile,
-             savFileIndex=opt$savFileIndex,
-             bgenFile=opt$bgenFile,
-             bgenFileIndex=opt$bgenFileIndex,
-             sampleFile=opt$sampleFile,
-	     bedFile=opt$bedFile,
-	     bimFile=opt$bimFile,
-	     famFile=opt$famFile,
-	     AlleleOrder=opt$AlleleOrder,
-	     idstoIncludeFile = opt$idstoIncludeFile,
-	     rangestoIncludeFile = opt$rangestoIncludeFile,
-	     chrom=opt$chrom,
-             is_imputed_data=opt$is_imputed_data,
-             min_MAF = opt$minMAF,
-             min_MAC = opt$minMAC,
-             min_Info = opt$minInfo,
-             max_missing = opt$maxMissing,	
-	     impute_method = opt$impute_method,
-	     LOCO=opt$LOCO,
-             GMMATmodelFile=opt$GMMATmodelFile,
-             varianceRatioFile=opt$varianceRatioFile,
-             SAIGEOutputFile=opt$SAIGEOutputFile,	
-	     markers_per_chunk=opt$markers_per_chunk,
-	     groups_per_chunk=opt$groups_per_chunk,
-             markers_per_chunk_in_groupTest=opt$markers_per_chunk_in_groupTest,
-	     is_output_moreDetails =opt$is_output_moreDetails,
-	     is_overwrite_output = opt$is_overwrite_output,
-	     maxMAF_in_groupTest = maxMAF_in_groupTest,
-	     maxMAC_in_groupTest = maxMAC_in_groupTest,
-	     minGroupMAC_in_BurdenTest = opt$minGroupMAC_in_BurdenTest,
-	     annotation_in_groupTest = annotation_in_groupTest,
-	     groupFile = opt$groupFile,
-	     sparseGRMFile=opt$sparseGRMFile,
-             sparseGRMSampleIDFile=opt$sparseGRMSampleIDFile,
-	     relatednessCutoff=opt$relatednessCutoff,	
-	     MACCutoff_to_CollapseUltraRare = opt$MACCutoff_to_CollapseUltraRare,	
-	     cateVarRatioMinMACVecExclude = cateVarRatioMinMACVecExclude,
-             cateVarRatioMaxMACVecInclude = cateVarRatioMaxMACVecInclude,
-	     weights.beta = weights.beta,
-	     r.corr = opt$r.corr,
-	     condition = opt$condition,
-	     weights_for_condition = weights_for_condition, 
-	     SPAcutoff = opt$SPAcutoff,
-	     dosage_zerod_cutoff = opt$dosage_zerod_cutoff,
-	     dosage_zerod_MAC_cutoff = opt$dosage_zerod_MAC_cutoff,
-	     is_Firth_beta = opt$is_Firth_beta,
-	     pCutoffforFirth = opt$pCutoffforFirth,
-	     is_single_in_groupTest = opt$is_single_in_groupTest,
-             is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
-	     is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
-	     is_fastTest = opt$is_fastTest
-)
+if (opt$manifestFile == ""){
+    GMMATmodelFiles <- strsplit(opt$GMMATmodelFile, ",")[[1]]
+    varianceRatioFiles <- strsplit(opt$varianceRatioFile, ",")[[1]]
+    SAIGEOutputFiles <- strsplit(opt$SAIGEOutputFile, ",")[[1]]
 }else{
+    # Read manifest file and extract the file lists
+    manifest_result <- read_manifest_file(opt$manifestFile)
+    GMMATmodelFiles <- manifest_result$GMMATmodelFiles
+    varianceRatioFiles <- manifest_result$varianceRatioFiles
+    SAIGEOutputFiles <- manifest_result$SAIGEOutputFiles
+}
 
-if(packageVersion("SAIGE")>"1.1.4"){	
-  SPAGMMATtest(vcfFile=opt$vcfFile,
-             vcfFileIndex=opt$vcfFileIndex,
-             vcfField=opt$vcfField,
-             savFile=opt$savFile,
-             savFileIndex=opt$savFileIndex,
-             bgenFile=opt$bgenFile,
-             bgenFileIndex=opt$bgenFileIndex,
-             sampleFile=opt$sampleFile,
-             bedFile=opt$bedFile,
-             bimFile=opt$bimFile,
-             famFile=opt$famFile,
-             AlleleOrder=opt$AlleleOrder,
-             idstoIncludeFile = opt$idstoIncludeFile,
-             rangestoIncludeFile = opt$rangestoIncludeFile,
-             chrom=opt$chrom,
-             is_imputed_data=opt$is_imputed_data,
-             min_MAF = opt$minMAF,
-             min_MAC = opt$minMAC,
-             min_Info = opt$minInfo,
-             max_missing = opt$maxMissing,
-             impute_method = opt$impute_method,
-             LOCO=opt$LOCO,
-             GMMATmodelFile=opt$GMMATmodelFile,
-             varianceRatioFile=opt$varianceRatioFile,
-             SAIGEOutputFile=opt$SAIGEOutputFile,
-             markers_per_chunk=opt$markers_per_chunk,
-             groups_per_chunk=opt$groups_per_chunk,
-             markers_per_chunk_in_groupTest=opt$markers_per_chunk_in_groupTest,
-             is_output_moreDetails =opt$is_output_moreDetails,
-             is_overwrite_output = opt$is_overwrite_output,
-             maxMAF_in_groupTest = maxMAF_in_groupTest,
-             maxMAC_in_groupTest = maxMAC_in_groupTest,
-             minGroupMAC_in_BurdenTest = opt$minGroupMAC_in_BurdenTest,
-             annotation_in_groupTest = annotation_in_groupTest,
-             groupFile = opt$groupFile,
-             sparseGRMFile=opt$sparseGRMFile,
-             sparseGRMSampleIDFile=opt$sparseGRMSampleIDFile,
-             relatednessCutoff=opt$relatednessCutoff,
-             sampleFile_male=opt$sampleFile_male,
-             is_rewrite_XnonPAR_forMales=opt$is_rewrite_XnonPAR_forMales,
-             X_PARregion=opt$X_PARregion,
-             MACCutoff_to_CollapseUltraRare = opt$MACCutoff_to_CollapseUltraRare,
-             cateVarRatioMinMACVecExclude = cateVarRatioMinMACVecExclude,
-             cateVarRatioMaxMACVecInclude = cateVarRatioMaxMACVecInclude,
-             weights.beta = weights.beta,
-             r.corr = opt$r.corr,
-             condition = opt$condition,
-             weights_for_condition = weights_for_condition,
-             SPAcutoff = opt$SPAcutoff,
-             dosage_zerod_cutoff = opt$dosage_zerod_cutoff,
-             dosage_zerod_MAC_cutoff = opt$dosage_zerod_MAC_cutoff,
-             is_Firth_beta = opt$is_Firth_beta,
-             pCutoffforFirth = opt$pCutoffforFirth,
-             is_single_in_groupTest = opt$is_single_in_groupTest,
-             is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
-             is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
-             is_fastTest = opt$is_fastTest,
-	     max_MAC_use_ER = opt$max_MAC_for_ER,
-	     subSampleFile = opt$subSampleFile
-)
-  }else{
 
+if (length(GMMATmodelFiles) != length(varianceRatioFiles)) {
+  stop("Number of GMMAT model files must equal the number of variance ratio files.")
+}
+
+num_traits <- length(GMMATmodelFiles) # Number of traits
+
+print("$num_traits")
+print(num_traits)
+
+nThreads = opt$nThreads
+print("num_threads:")
+print(nThreads)
+if(nThreads == 1){
+	print ("AM I HERE:::???")
 	SPAGMMATtest(vcfFile=opt$vcfFile,
              vcfFileIndex=opt$vcfFileIndex,
              vcfField=opt$vcfField,
@@ -333,9 +314,9 @@ if(packageVersion("SAIGE")>"1.1.4"){
              max_missing = opt$maxMissing,
              impute_method = opt$impute_method,
              LOCO=opt$LOCO,
-             GMMATmodelFile=opt$GMMATmodelFile,
-             varianceRatioFile=opt$varianceRatioFile,
-             SAIGEOutputFile=opt$SAIGEOutputFile,
+             GMMATmodelFile=GMMATmodelFiles,
+             varianceRatioFile=varianceRatioFiles,
+             SAIGEOutputFile=SAIGEOutputFiles,
              markers_per_chunk=opt$markers_per_chunk,
              groups_per_chunk=opt$groups_per_chunk,
              markers_per_chunk_in_groupTest=opt$markers_per_chunk_in_groupTest,
@@ -365,15 +346,140 @@ if(packageVersion("SAIGE")>"1.1.4"){
              is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
              is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
              is_fastTest = opt$is_fastTest,
-             max_MAC_use_ER = opt$max_MAC_for_ER
-)
+             max_MAC_use_ER = opt$max_MAC_for_ER)
+}else{ #if(nThreads > 1)
+  print("I am here")
+  if(opt$idstoIncludeFile != ""){
+    print("Now here")
+    Check_File_Exist(opt$idstoIncludeFile, "idstoIncludeFile")
+    total_lines <- as.numeric(system(paste("wc -l < ", opt$idstoIncludeFile), intern = TRUE))
+    print("total_lines:")
+    print(total_lines)
+    lines_per_chunk <- total_lines %/% opt$nThreads
+    # Calculate the number of digits needed for the suffix
+    num_digits <- ceiling(log10(nThreads))  # Calculate the required number of digits
+    # Create the split command with dynamic numeric suffixes
+    file_name <- basename(opt$idstoIncludeFile)
+    dir_path <- dirname(SAIGEOutputFiles[1])
+    print("dir_path:")
+    print(dir_path)
+    split_command <- sprintf("split -n l/%d -a %d -d %s %s/%s_",
+                         opt$nThreads,
+                         num_digits,
+                         opt$idstoIncludeFile,
+                         dir_path,
+                         file_name)
+    #split_command <- paste("split -l", lines_per_chunk, paste("-a", num_digits, sep=""), "-d", opt$idstoIncludeFile, paste(dir_path, "/", file_name,"_", sep = ""))
+    print(split_command)
+    # Execute the command
+    system(split_command)
+    split_files <- list.files(path = dir_path, pattern = paste("^", file_name, "_", sep = ""), full.names = TRUE)
+    suffixes <- sapply(basename(split_files), function(file) {
+  	sub("^.*_(.*)$", "\\1", file)  # Extract the suffix part after the last underscore
+    })
+
+    #output_files = paste0(opt$SAIGEOutputFile, suffixes)
+    output_files <- lapply(SAIGEOutputFiles, function(file_prefix) {
+      paste0(file_prefix, suffixes)
+    })
+    output_files_grouped <- as.list(as.data.frame(t(sapply(output_files, unlist))))
+    names(output_files_grouped) <- suffixes
+
+    fixed_params <- list(vcfFile=opt$vcfFile,
+             vcfFileIndex=opt$vcfFileIndex,
+             vcfField=opt$vcfField,
+             savFile=opt$savFile,
+             savFileIndex=opt$savFileIndex,
+             bgenFile=opt$bgenFile,
+             bgenFileIndex=opt$bgenFileIndex,
+             sampleFile=opt$sampleFile,
+             bedFile=opt$bedFile,
+             bimFile=opt$bimFile,
+             famFile=opt$famFile,
+             AlleleOrder=opt$AlleleOrder,
+             rangestoIncludeFile = opt$rangestoIncludeFile,
+             chrom=opt$chrom,
+             is_imputed_data=opt$is_imputed_data,
+             min_MAF = opt$minMAF,
+             min_MAC = opt$minMAC,
+             min_Info = opt$minInfo,
+             max_missing = opt$maxMissing,
+             impute_method = opt$impute_method,
+             LOCO=opt$LOCO,
+             GMMATmodelFile=GMMATmodelFiles,
+             varianceRatioFile=varianceRatioFiles,
+             markers_per_chunk=opt$markers_per_chunk,
+             groups_per_chunk=opt$groups_per_chunk,
+             markers_per_chunk_in_groupTest=opt$markers_per_chunk_in_groupTest,
+             is_output_moreDetails =opt$is_output_moreDetails,
+             is_overwrite_output = opt$is_overwrite_output,
+             maxMAF_in_groupTest = maxMAF_in_groupTest,
+             maxMAC_in_groupTest = maxMAC_in_groupTest,
+             minGroupMAC_in_BurdenTest = opt$minGroupMAC_in_BurdenTest,
+             annotation_in_groupTest = annotation_in_groupTest,
+             groupFile = opt$groupFile,
+             sparseGRMFile=opt$sparseGRMFile,
+             sparseGRMSampleIDFile=opt$sparseGRMSampleIDFile,
+             relatednessCutoff=opt$relatednessCutoff,
+             MACCutoff_to_CollapseUltraRare = opt$MACCutoff_to_CollapseUltraRare,
+             cateVarRatioMinMACVecExclude = cateVarRatioMinMACVecExclude,
+             cateVarRatioMaxMACVecInclude = cateVarRatioMaxMACVecInclude,
+             weights.beta = weights.beta,
+             r.corr = opt$r.corr,
+             condition = opt$condition,
+             weights_for_condition = weights_for_condition,
+             SPAcutoff = opt$SPAcutoff,
+             dosage_zerod_cutoff = opt$dosage_zerod_cutoff,
+             dosage_zerod_MAC_cutoff = opt$dosage_zerod_MAC_cutoff,
+             is_Firth_beta = opt$is_Firth_beta,
+             pCutoffforFirth = opt$pCutoffforFirth,
+             is_single_in_groupTest = opt$is_single_in_groupTest,
+             is_no_weight_in_groupTest = opt$is_no_weight_in_groupTest,
+             is_output_markerList_in_groupTest = opt$is_output_markerList_in_groupTest,
+             is_fastTest = opt$is_fastTest,
+             max_MAC_use_ER = opt$max_MAC_for_ER)
 
 
+    param_list <- mapply(function(SAIGEOutputFiles, idstoIncludeFile) {
+      c(fixed_params, list(SAIGEOutputFile = SAIGEOutputFiles, idstoIncludeFile = idstoIncludeFile))  # Combine fixed and variable params
+    }, output_files_grouped, split_files, SIMPLIFY = FALSE)
 
-}	
+    #print("PARAMS:")
+    #print(param_list)
+    mclapply(param_list, function(params) {
+      do.call(SPAGMMATtest, params)  # Unpack the parameters and call the function
+    }, mc.cores = nThreads)
 
-}	
+    for (i in 1:num_traits) {
+        sorted_files <- sort(output_files[[i]])
+        system(paste0("cat ", sorted_files[1], " > ", SAIGEOutputFiles[i]))
+        for(j in 2:length(sorted_files)){
+            system(paste0("tail -n +2 ", sorted_files[j], ">> ", SAIGEOutputFiles[i]))
+        }
+    }
+    # Clean up all temporary partial files
+    for (i in seq_len(num_traits)) {
+      files_to_delete <- output_files[[i]]
+      file.remove(files_to_delete)
+    }
+    invisible(file.remove(split_files))
+    output_dir <- dirname(SAIGEOutputFiles[[1]])
+    index_files <- list.files(path = output_dir, pattern = "\\.index$", full.names = TRUE)
+    invisible(file.remove(index_files))
+
+  } # if(opt$idstoIncludeFile != ""){
+}
+
 if(BLASctl_installed){
   # Restore originally configured BLAS thread count
   blas_set_num_threads(original_num_threads)
 }
+
+end_time <- proc.time()
+time_diff <- end_time - start_time
+
+cat("\n========== TIME REPORT ==========\n")
+cat(sprintf("Wall time (elapsed): %.2f seconds\n", time_diff["elapsed"]))
+cat(sprintf("User CPU time: %.2f seconds\n", time_diff["user.self"]))
+cat(sprintf("System CPU time: %.2f seconds\n", time_diff["sys.self"]))
+cat("==================================\n")
